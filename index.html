@@ -7,7 +7,7 @@
 <meta name="google-site-verification" content="vujjrzoxSff_UPdH9HGATcSiqrqoDrhxVK0fs48IGuM" />
 <title>Raksa Travel — Agent Tiket Pesawat & Kapal Terpercaya</title>
 <meta name="description"
-      content="Raksa Travel melayani pemesanan tiket pesawat, kapal laut, open trip, dan booking rombongan dengan pelayanan cepat dan terpercaya.">
+      content="Raksa Travel melayani pemesanan tiket pesawat, kapal laut, dan booking rombongan dengan pelayanan cepat dan terpercaya.">
 
 <meta name="robots" content="index, follow">
 <!-- Google tag (gtag.js) -->
@@ -26,7 +26,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-MK4N3C6C');</script>
 <!-- End Google Tag Manager -->
-<link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" type="image/jpeg" href="logo.jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -38,19 +38,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <header id="siteHeader">
   <div class="wrap nav">
     <div class="logo"><img src="logo.jpeg" alt="Raksa Travel" class="logo-img"></div>
-    <ul class="nav-links">
+    <ul class="nav-links" id="mainNav">
       <li><a href="#beranda">Beranda</a></li>
       <li><a href="#tentang">Tentang</a></li>
       <li><a href="#layanan">Layanan</a></li>
       <li><a href="#destinasi">Destinasi</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#testimoni">Testimoni</a></li>
       <li><a href="#kontak">Kontak</a></li>
     </ul>
     <div class="nav-right">
       <a href="#" data-cfg-href="whatsapp" class="btn btn-primary" style="padding:10px 20px; font-size:13.5px;">Chat WhatsApp</a>
-      <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
-      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Ganti tema">
-      🌙
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Ganti tema">🌙</button>
+      <button id="menuToggle" class="menu-toggle" type="button" aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </div>
@@ -65,11 +66,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap hero-grid">
     <div class="hero-text">
       <div class="eyebrow">Agent Tiket Resmi · Pesawat & Kapal</div>
-      <h1>Kenalan dengan<br><span data-cfg="name">  RAKSA TRAVEL  </span>.</h1>
+      <h1>Kenalan dengan<br><span data-cfg="name">RAKSA TRAVEL</span>.</h1>
       <p class="hero-tagline" data-cfg="tagline">Tagline personal branding agent akan tampil di sini.</p>
       <p class="hero-desc">Saya membantu perjalanan Anda ke seluruh penjuru Indonesia — mulai dari tiket pesawat, kapal laut, hingga rombongan grup — dengan layanan personal, cepat, dan tanpa drama.</p>
       <div class="hero-cta">
-        <a href="#" data-cfg-href="whatsapp" class="btn btn-primary">Konsultasi Gratis via WhatsApp</a>
+        <a href="#" data-cfg-href="whatsapp" data-service="konsultasi perjalanan" class="btn btn-primary">Konsultasi Gratis via WhatsApp</a>
         <a href="#layanan" class="btn btn-ghost-dark">Lihat Layanan</a>
       </div>
       <div class="hero-badges">
@@ -81,7 +82,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="hero-card">
       <div class="agent-photo">
-        <img src="logo.jpeg" alt="Raksa Travel" class="agent-avatar" id="agentInitials">
+        <img src="logo.jpeg" alt="Raksa Travel" class="agent-avatar">
         <span class="float-badge float-badge-1">✈️</span>
         <span class="float-badge float-badge-2">🚢</span>
       </div>
@@ -95,6 +96,61 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
+
+<!-- ====== CEK TIKET CEPAT ====== -->
+<div class="wrap">
+  <form class="quick-quote reveal" id="quickQuoteForm">
+    <div class="trip-tabs">
+      <input type="radio" name="quickTrip" id="tripPesawat" value="Tiket Pesawat" checked>
+      <label for="tripPesawat">✈️ Pesawat</label>
+      <input type="radio" name="quickTrip" id="tripKapal" value="Tiket Kapal Laut">
+      <label for="tripKapal">🚢 Kapal Laut</label>
+    </div>
+    <div class="quick-quote-grid">
+      <div class="field">
+        <label for="quickFrom">Dari</label>
+        <input type="text" id="quickFrom" placeholder="Contoh: Jayapura" required>
+      </div>
+      <div class="field">
+        <label for="quickTo">Ke</label>
+        <input type="text" id="quickTo" placeholder="Contoh: Jakarta" required>
+      </div>
+      <div class="field">
+        <label for="quickDate">Tanggal</label>
+        <input type="date" id="quickDate" required>
+      </div>
+      <div class="field passenger-field">
+        <label for="quickPassengers">Penumpang</label>
+
+        <!-- Dropdown custom agar tampilannya seperti desain pada gambar -->
+        <div class="passenger-dropdown" id="passengerDropdown">
+          <button
+            type="button"
+            class="passenger-trigger"
+            id="passengerTrigger"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+          >
+            <span id="passengerValue">1 orang</span>
+            <span class="passenger-chevron" aria-hidden="true"></span>
+          </button>
+
+          <div class="passenger-menu" id="passengerMenu" role="listbox" aria-label="Jumlah penumpang">
+            <button type="button" class="passenger-option is-selected" data-value="1 orang" role="option" aria-selected="true">1 orang</button>
+            <button type="button" class="passenger-option" data-value="2 orang" role="option" aria-selected="false">2 orang</button>
+            <button type="button" class="passenger-option" data-value="3–5 orang" role="option" aria-selected="false">3–5 orang</button>
+            <button type="button" class="passenger-option" data-value="6+ orang" role="option" aria-selected="false">6+ orang</button>
+          </div>
+
+          <!-- Nilai ini tetap dibaca oleh JavaScript form yang sudah ada -->
+          <input type="hidden" id="quickPassengers" value="1 orang">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary quick-quote-submit">Cek via WhatsApp</button>
+    </div>
+  </form>
+</div>
+
 
 <!-- ====== TENTANG ====== -->
 <section class="pad" id="tentang">
@@ -140,21 +196,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="service-icon">✈️</div>
         <h4>Tiket Pesawat</h4>
         <p>Domestik & internasional, semua kelas maskapai, jadwal fleksibel sesuai kebutuhan Anda.</p>
+        <a href="#" class="service-link" data-cfg-href="whatsapp" data-service="tiket pesawat">Tanya via WhatsApp →</a>
       </div>
       <div class="service-card reveal">
         <div class="service-icon">🚢</div>
         <h4>Tiket Kapal Laut</h4>
         <p>Kapal Pelni, ferry ASDP, hingga kapal cepat antar pulau — termasuk rute-rute yang jarang tersedia online.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">🧳</div>
-        <h4>Paket Open Trip</h4>
-        <p>Kombinasi pesawat + kapal + akomodasi untuk perjalanan ke pulau-pulau favorit, diatur dari awal sampai akhir.</p>
+        <a href="#" class="service-link" data-cfg-href="whatsapp" data-service="tiket kapal laut">Tanya via WhatsApp →</a>
       </div>
       <div class="service-card reveal">
         <div class="service-icon">👥</div>
         <h4>Booking Rombongan</h4>
         <p>Untuk keluarga besar, kantor, atau study tour — harga khusus dan pengaturan grup lebih mudah.</p>
+        <a href="#" class="service-link" data-cfg-href="whatsapp" data-service="booking rombongan">Tanya via WhatsApp →</a>
       </div>
     </div>
   </div>
@@ -185,7 +239,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="dest-overlay">
           <span class="dest-tag">DKI Jakarta</span>
           <h3>Jakarta</h3>
-          <p>Monumen Nasional (FMonas), simbol perjuangan kemerdekaan dengan lidah api emas di puncaknya.</p>
+          <p>Monumen Nasional (Monas), simbol perjuangan kemerdekaan dengan lidah api emas di puncaknya.</p>
           <span class="dest-cta">Tanya Tiket →</span>
         </div>
       </a>
@@ -282,6 +336,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+<!-- ====== FAQ ====== -->
+<section class="pad" id="faq" style="background:var(--paper);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">FAQ</div>
+        <h2>Pertanyaan yang<br>sering ditanyakan.</h2>
+      </div>
+    </div>
+    <div class="faq-list reveal">
+      <details>
+        <summary>Bagaimana cara memesan tiket lewat Raksa Travel?</summary>
+        <p>Cukup chat via WhatsApp dan ceritakan tujuan, tanggal, serta jumlah penumpang. Saya akan carikan beberapa opsi jadwal & harga, lalu Anda tinggal pilih dan bayar sesuai instruksi. E-tiket dikirim langsung setelah pembayaran dikonfirmasi.</p>
+      </details>
+      <details>
+        <summary>Apakah harga yang diberikan sudah termasuk semua biaya?</summary>
+        <p>Ya. Semua rincian biaya disampaikan jujur di awal sebelum Anda membayar, tanpa biaya tersembunyi yang muncul belakangan.</p>
+      </details>
+      <details>
+        <summary>Bagaimana jika jadwal pesawat/kapal berubah mendadak?</summary>
+        <p>Segera hubungi saya via WhatsApp. Saya akan bantu proses reschedule atau cari alternatif jadwal terdekat sesuai kebijakan maskapai/operator kapal terkait.</p>
+      </details>
+      <details>
+        <summary>Metode pembayaran apa saja yang tersedia?</summary>
+        <p>Transfer bank dan e-wallet. Detail rekening/nomor tujuan akan diberikan langsung saat Anda sudah fix dengan jadwal yang dipilih.</p>
+      </details>
+      <details>
+        <summary>Apakah bisa pesan tiket untuk rombongan atau grup besar?</summary>
+        <p>Bisa. Untuk keluarga besar, kantor, atau study tour, tersedia harga khusus dan pengaturan yang lebih mudah — cukup sebutkan jumlah orangnya saat konsultasi.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- ====== PARTNER / SERTIFIKASI ====== -->
 <section class="partner-strip">
   <div class="wrap">
@@ -372,6 +460,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li><a href="#tentang">Tentang</a></li>
           <li><a href="#layanan">Layanan</a></li>
           <li><a href="#destinasi">Destinasi</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#testimoni">Testimoni</a></li>
           <li><a href="#kontak">Kontak</a></li>
         </ul>
@@ -387,7 +476,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 Raksa Travel. Seluruh hak cipta dilindungi.</span>
+      <span>© <span id="currentYear">2026</span> Raksa Travel. Seluruh hak cipta dilindungi.</span>
       <span data-cfg="name">RAKSA TRAVEL</span>
       <span>© WEBSITE by Raihan</span>
     </div>
@@ -397,5 +486,4 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="RAKSATRAVEL.js"></script>
 
 </body>
-
 </html>
