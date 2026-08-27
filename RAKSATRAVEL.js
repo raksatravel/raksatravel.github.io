@@ -11,7 +11,7 @@
 const AGENT_CONFIG = {
   name: "RAKSA TRAVEL",
   title: "Travel Agent Tiket Pesawat & Kapal",
-  tagline: "100% Amanah, Pelayanan Ramah, Harga Termurah — untuk setiap langkah perjalanan Anda.",
+  tagline: "100% Amanah, Pelayanan Ramah, Harga Termurah untuk setiap langkah perjalanan Anda.",
   experience: "10+ Tahun",
 
   whatsapp: "6282153043601",
@@ -21,7 +21,7 @@ const AGENT_CONFIG = {
   facebook: "https://www.facebook.com/share/1D4YpqqqUg/",
   facebookDisplay: "@RaksaTravel",
   address: "JL. TERMINAL LAMA EXPO WAENA, KEC HERAM JAYAPURA",
-  hours: "Setiap hari, 08.00 – 21.00 WIT",
+  hours: "Setiap hari, 08.00 - 21.00 WIT",
 
   clients: 1000,
   rating: 4.9
@@ -125,7 +125,7 @@ function applyConfig() {
     if (key === "address") {
 
       href =
-        `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        `https://www.google.com/maps/place/Kompleks+Asri+Residence/@-2.5960943,140.6293589,21z/data=!4m6!3m5!1s0x686cf59ac6da1065:0x11881a1f2d0d7adb!8m2!3d-2.5960774!4d140.6294117!16s%2Fg%2F11j7vj_dj_!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDgxOS4wIKXMDSoASAFQAw%3D%3D${encodeURIComponent(
           AGENT_CONFIG.address
         )}`;
 
