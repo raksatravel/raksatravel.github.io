@@ -3,6 +3,19 @@
    Bilingual System (ID/EN) + Dark/Light Theme + Interactions
    =================================================== */
 
+// ================= Clean URL Engine =================
+// Strips trailing .html from browser address bar smoothly without reloading
+(function() {
+  try {
+    const path = window.location.pathname;
+    if (path.endsWith('.html')) {
+      let clean = path.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
+      if (!clean) clean = '/';
+      window.history.replaceState(null, '', clean + window.location.search + window.location.hash);
+    }
+  } catch (e) {}
+})();
+
 /* ===== COMPLETE TRANSLATION DICTIONARY ===== */
 const T = {
   // Navigation
@@ -541,7 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3D Interactive Hologram Logo Physics Engine (Hero Section - 100% Glitch-Free)
+  // 3D Interactive Hologram Logo Physics Engine (Hero Section - Lightweight & Battery-Friendly)
   const hero3DStage = document.getElementById('hero3DStage');
   const hero3DCard = document.getElementById('hero3DCard');
   const heroLogoShine = document.getElementById('heroLogoShine');
@@ -552,86 +565,116 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentZ = 0, targetZ = 0;
     let isHovered = false;
     let idleAngle = 0;
+    let isStageInView = true;
+    let animationFrameId = null;
+
+    // Viewport Liveness Observer (Zero CPU consumption when scrolled away)
+    if ('IntersectionObserver' in window) {
+      const stageObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            isStageInView = entry.isIntersecting;
+            if (isStageInView && !animationFrameId) {
+              animate3D();
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      stageObserver.observe(hero3DStage);
+    }
+
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 768);
 
     const handlePointerMove = (clientX, clientY) => {
       const rect = hero3DStage.getBoundingClientRect();
       const x = clientX - (rect.left + rect.width / 2);
       const y = clientY - (rect.top + rect.height / 2);
-      targetX = Math.max(Math.min((y / (rect.height / 2)) * -22, 22), -22);
-      targetY = Math.max(Math.min((x / (rect.width / 2)) * 22, 22), -22);
-      targetZ = 20; // 3D Elevation lift on hover
+      targetX = Math.max(Math.min((y / (rect.height / 2)) * -18, 18), -18);
+      targetY = Math.max(Math.min((x / (rect.width / 2)) * 18, 18), -18);
+      targetZ = isTouchDevice ? 10 : 20;
 
-      // Dynamic Specular Light Glare Follower
-      if (heroLogoShine) {
+      if (heroLogoShine && !isTouchDevice) {
         const shineX = 50 + (x / (rect.width / 2)) * 35;
         const shineY = 50 + (y / (rect.height / 2)) * 35;
         heroLogoShine.style.background = `radial-gradient(circle at ${shineX.toFixed(1)}% ${shineY.toFixed(1)}%, rgba(255, 255, 255, 0.6) 0%, transparent 65%)`;
       }
     };
 
-    const heroSection = document.querySelector('.hero');
-    if (heroSection) {
-      heroSection.addEventListener('mousemove', (e) => {
-        const rect = hero3DStage.getBoundingClientRect();
-        if (
-          e.clientX >= rect.left - 180 &&
-          e.clientX <= rect.right + 180 &&
-          e.clientY >= rect.top - 180 &&
-          e.clientY <= rect.bottom + 180
-        ) {
-          isHovered = true;
-          handlePointerMove(e.clientX, e.clientY);
-        } else {
+    if (!isTouchDevice) {
+      const heroSection = document.querySelector('.hero');
+      if (heroSection) {
+        heroSection.addEventListener('mousemove', (e) => {
+          const rect = hero3DStage.getBoundingClientRect();
+          if (
+            e.clientX >= rect.left - 150 &&
+            e.clientX <= rect.right + 150 &&
+            e.clientY >= rect.top - 150 &&
+            e.clientY <= rect.bottom + 150
+          ) {
+            isHovered = true;
+            handlePointerMove(e.clientX, e.clientY);
+          } else {
+            isHovered = false;
+            targetZ = 0;
+          }
+        }, { passive: true });
+
+        heroSection.addEventListener('mouseleave', () => {
           isHovered = false;
           targetZ = 0;
-        }
-      });
+        });
+      }
 
-      heroSection.addEventListener('mouseleave', () => {
+      hero3DStage.addEventListener('mousedown', () => { targetZ = -10; });
+      window.addEventListener('mouseup', () => { if (isHovered) targetZ = 20; });
+    } else {
+      // Lightweight touch interaction on mobile
+      hero3DStage.addEventListener('touchstart', (e) => {
+        if (e.touches.length > 0) {
+          isHovered = true;
+          handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      hero3DStage.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+          handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      hero3DStage.addEventListener('touchend', () => {
         isHovered = false;
+        targetX = 0;
+        targetY = 0;
         targetZ = 0;
-      });
+      }, { passive: true });
     }
 
-    // Interactive Click / Tap Spring Pulse
-    hero3DStage.addEventListener('mousedown', () => {
-      targetZ = -15; // Press down
-    });
-    window.addEventListener('mouseup', () => {
-      if (isHovered) targetZ = 20;
-    });
-
-    // Touch support for Mobile
-    hero3DStage.addEventListener('touchmove', (e) => {
-      if (e.touches.length > 0) {
-        isHovered = true;
-        handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
-      }
-    }, { passive: true });
-
-    hero3DStage.addEventListener('touchend', () => {
-      isHovered = false;
-      targetZ = 0;
-    });
-
-    // 60FPS Smooth Inertia, Depth Lift, & Idle Floating Loop
+    // High performance smooth render loop
     const animate3D = () => {
+      if (!isStageInView) {
+        animationFrameId = null;
+        return;
+      }
+
       if (isHovered) {
-        currentX += (targetX - currentX) * 0.09;
-        currentY += (targetY - currentY) * 0.09;
+        currentX += (targetX - currentX) * 0.1;
+        currentY += (targetY - currentY) * 0.1;
         currentZ += (targetZ - currentZ) * 0.1;
       } else {
-        idleAngle += 0.022;
-        const idleTiltX = Math.sin(idleAngle) * 6;
-        const idleTiltY = Math.cos(idleAngle * 0.7) * 9;
-        currentX += (idleTiltX - currentX) * 0.045;
-        currentY += (idleTiltY - currentY) * 0.045;
-        currentZ += (0 - currentZ) * 0.06;
+        idleAngle += 0.02;
+        const idleTiltX = Math.sin(idleAngle) * 4.5;
+        const idleTiltY = Math.cos(idleAngle * 0.7) * 6;
+        currentX += (idleTiltX - currentX) * 0.04;
+        currentY += (idleTiltY - currentY) * 0.04;
+        currentZ += (0 - currentZ) * 0.05;
       }
 
       hero3DCard.style.transform = `rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg) translateZ(${currentZ.toFixed(1)}px)`;
-      requestAnimationFrame(animate3D);
+      animationFrameId = requestAnimationFrame(animate3D);
     };
+
     animate3D();
   }
 
@@ -800,17 +843,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 10. Mark Active Nav Item
-  const currentPage = window.location.pathname.split('/').pop() || '';
+  // 10. Mark Active Nav Item (Supports Clean URL and .html)
+  const currentCleanPath = window.location.pathname.split('/').pop().replace(/\.html$/, '') || '';
   document.querySelectorAll('#navLinks > a').forEach((link) => {
-    const href = link.getAttribute('href');
+    const hrefClean = (link.getAttribute('href') || '').replace(/^\.\//, '').replace(/\.html$/, '');
     if (
-      href === currentPage ||
-      ((currentPage === '' || currentPage === 'index.html') && (href === './' || href === 'index.html'))
+      (currentCleanPath === '' && (hrefClean === '' || hrefClean === '.' || hrefClean === 'index')) ||
+      (currentCleanPath !== '' && hrefClean === currentCleanPath)
     ) {
       link.classList.add('active');
     }
   });
+
+  // Mobile Bottom Bar Clean Link
+  const mobileCheckLink = document.querySelector('.mobile-bar-tickets');
+  if (mobileCheckLink) {
+    mobileCheckLink.setAttribute('href', 'cek-tiket');
+  }
 
   // 11. Live Social Proof Booking Toast Notification (High Conversion)
   const recentBookings = [

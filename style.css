@@ -2863,15 +2863,33 @@ p { margin-bottom: 1rem; color: var(--text-body); transition: color var(--transi
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
 
-  .hero { min-height: auto; padding: 7.5rem 0 4rem; }
+  .hero { min-height: auto; padding: 7rem 0 3.5rem; }
   .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
   .hero-content p { font-size: 1.05rem; }
-  .hero-3d-stage { width: 270px; height: 270px; }
-  .hero-3d-card { width: 220px; height: 220px; }
-  .hero-logo-frame { width: 200px; height: 200px; }
-  .orbit-ring-1 { width: 260px; height: 260px; }
-  .orbit-ring-2 { width: 290px; height: 290px; }
-  .orbit-ring-3 { width: 240px; height: 240px; }
+
+  /* Mobile Compressed 3D Model (Fast, Battery-Friendly & Silky Smooth) */
+  .hero-3d-stage {
+    width: 260px;
+    height: 260px;
+    perspective: 800px;
+    contain: layout paint;
+  }
+  .hero-3d-card {
+    width: 210px;
+    height: 210px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+  }
+  .hero-logo-frame {
+    width: 185px;
+    height: 185px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+  .hero-3d-sparkle { display: none !important; }
+  .orbit-ring-1 { width: 250px; height: 250px; opacity: 0.6; animation-duration: 25s; }
+  .orbit-ring-2 { display: none; }
+  .orbit-ring-3 { width: 230px; height: 230px; opacity: 0.5; animation-duration: 20s; }
+  .hero-3d-pedestal { width: 140px; height: 18px; filter: blur(16px); }
+
   .page-hero { padding: 7.5rem 0 3.5rem; }
 
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -2886,7 +2904,7 @@ p { margin-bottom: 1rem; color: var(--text-body); transition: color var(--transi
   .dest-showcase-header { grid-template-columns: 1fr; gap: 1.5rem; }
   .dest-showcase-grid { grid-template-columns: 1fr; }
   .dest-showcase-card { height: 300px; }
-  .live-booking-toast { left: 1rem; right: 1rem; bottom: 5rem; max-width: none; }
+  .live-booking-toast { left: 1rem; right: 1rem; bottom: 4.8rem; max-width: none; }
 }
 
 @media (max-width: 480px) {
@@ -2903,12 +2921,12 @@ p { margin-bottom: 1rem; color: var(--text-body); transition: color var(--transi
   .hero-buttons .btn { width: 100%; }
   .hero-stat h3 { font-size: 1.6rem; }
   .stat-item h3 { font-size: 2rem; }
-  .hero-3d-stage { width: 240px; height: 240px; }
-  .hero-3d-card { width: 195px; height: 195px; }
-  .hero-logo-frame { width: 175px; height: 175px; }
-  .hero-floating-chip { width: 44px; height: 44px; font-size: 1.1rem; }
-  .chip-shield { width: 38px; height: 38px; font-size: 0.95rem; left: -10px; }
-  .wa-float { bottom: 1.25rem; right: 1.25rem; width: 3.2rem; height: 3.2rem; font-size: 1.4rem; }
+  .hero-3d-stage { width: 230px; height: 230px; }
+  .hero-3d-card { width: 185px; height: 185px; }
+  .hero-logo-frame { width: 165px; height: 165px; }
+  .hero-floating-chip { width: 42px; height: 42px; font-size: 1rem; }
+  .chip-shield { width: 36px; height: 36px; font-size: 0.9rem; left: -8px; }
+  .wa-float { bottom: 4.8rem; right: 1.25rem; width: 3.2rem; height: 3.2rem; font-size: 1.4rem; }
 }
 
 @media (max-width: 360px) {
