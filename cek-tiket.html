@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id" data-lang="id" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="google8d0328892dd7ef5c">
+  <meta name="google-site-verification" content="vujjrzoxSff_UPdH9HGATcSiqrqoDrhxVK0fs48IGuM" />
+  <link rel="icon" type="image/png" href="logo.png">
+  <title>Cek &amp; Pesan Tiket — RaksaTravel</title>
+  <meta name="description"
+    content="Cari dan pesan tiket pesawat dan kapal laut ke berbagai tujuan di Indonesia. Dapatkan konfirmasi cepat via WhatsApp.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">
+          <img src="logo.png" alt="RaksaTravel Logo">
+        </div>
+        Raksa<span>Travel</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" data-i18n="nav_home">Beranda</a>
+        <a href="cek-tiket.html" class="active" data-i18n="nav_tickets">Cek Tiket</a>
+        <a href="tentang.html" data-i18n="nav_about">Tentang</a>
+        <a href="layanan.html" data-i18n="nav_services">Layanan</a>
+        <a href="faq.html" data-i18n="nav_faq">FAQ</a>
+        <a href="testimoni.html" data-i18n="nav_testimonials">Testimoni</a>
+        <a href="kontak.html" data-i18n="nav_contact">Kontak</a>
+      </div>
+
+      <div class="nav-actions">
+        <!-- Language Switcher (EN | ID) -->
+        <button class="lang-toggle-btn" id="langToggle" aria-label="Ganti Bahasa">
+          <span class="lang-opt active" id="langOptId">ID</span>
+          <span class="lang-divider">|</span>
+          <span class="lang-opt" id="langOptEn">EN</span>
+        </button>
+
+        <!-- Dark / Light Mode Toggle -->
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Ganti Mode Tema">
+          <i class="fas fa-sun" id="themeIcon"></i>
+        </button>
+
+        <!-- CTA Button -->
+        <div class="nav-cta">
+          <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20dan%20pesan%20tiket"
+            class="btn btn-primary btn-sm" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> <span data-i18n="nav_book_now">Pesan Sekarang</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="nav-toggle" id="navToggle" aria-label="Buka Menu Navigasi">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-overlay" id="navOverlay"></div>
+  </nav>
+
+  <!-- Page Hero Header -->
+  <header class="page-hero page-hero--check">
+    <div class="hero-decor">
+      <div class="hero-circle hero-circle-1"></div>
+      <div class="hero-circle hero-circle-2"></div>
+      <div class="hero-gradient-orb hero-gradient-orb-1"></div>
+    </div>
+    <div class="container">
+      <div class="breadcrumb reveal">
+        <a href="index.html" data-i18n="nav_home">Beranda</a>
+        <span class="separator"><i class="fas fa-chevron-right"></i></span>
+        <span data-i18n="check_breadcrumb">Cek Tiket</span>
+      </div>
+      <h1 class="reveal delay-1" data-i18n="check_hero_title">Cari &amp; Pesan Tiket Perjalanan</h1>
+      <p class="reveal delay-2" data-i18n="check_hero_desc">Pilih moda transportasi yang Anda inginkan, tentukan kota
+        asal dan tujuan, lalu dapatkan konfirmasi jadwal tercepat via WhatsApp.</p>
+    </div>
+    <div class="wave-divider">
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path
+          d="M0,24L48,29.3C96,35,192,45,288,50.7C384,56,480,56,576,45.3C672,35,768,13,864,10.7C960,8,1056,24,1152,32C1248,40,1344,40,1392,40L1440,40L1440,80L1392,80C1344,80,1248,80,1152,80C1056,80,960,80,864,80C768,80,672,80,576,80C480,80,384,80,288,80C192,80,96,80,48,80L0,80Z">
+        </path>
+      </svg>
+    </div>
+  </header>
+
+  <!-- Search Ticket Form -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="search-form reveal-scale">
+        <form id="ticketForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="ticketType" data-i18n="check_form_type">Jenis Tiket</label>
+              <select id="ticketType" class="form-select" required>
+                <option value="Pesawat Terbang" data-i18n="check_form_type_plane">Tiket Pesawat (Domestik /
+                  Internasional)</option>
+                <option value="Kapal Laut / Feri" data-i18n="check_form_type_ship">Tiket Kapal Laut / Feri (PELNI /
+                  ASDP)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="departure" data-i18n="check_form_from">Kota Asal</label>
+              <input type="text" id="departure" class="form-input" placeholder="Contoh: Jakarta"
+                data-i18n-ph="check_form_from_ph" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="destination" data-i18n="check_form_to">Kota Tujuan</label>
+              <input type="text" id="destination" class="form-input" placeholder="Contoh: Surabaya"
+                data-i18n-ph="check_form_to_ph" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="travelDate" data-i18n="check_form_date">Tanggal Berangkat</label>
+              <input type="date" id="travelDate" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="passengers" data-i18n="check_form_pax">Jumlah Penumpang</label>
+              <input type="number" id="passengers" class="form-input" min="1" max="50" value="1" required>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                <i class="fab fa-whatsapp"></i> <span data-i18n="check_form_submit">Cari Jadwal via WhatsApp</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       DESTINASI FAVORIT SECTION (Replaces Image 2 with Image 3)
+       =================================================== -->
+  <section class="dest-showcase">
+    <div class="container">
+      <div class="dest-showcase-header reveal">
+        <div>
+          <span class="section-label" data-i18n="check_showcase_label">DESTINASI FAVORIT</span>
+          <h2 data-i18n="check_showcase_title">Rute yang paling banyak dipesan lewat Raksa Travel.</h2>
+        </div>
+        <div>
+          <p data-i18n="check_showcase_desc">Arahkan kursor untuk lihat sekilas ceritanya, klik untuk langsung tanya
+            jadwal &amp; harga tiketnya.</p>
+        </div>
+      </div>
+
+      <div class="dest-showcase-grid">
+        <!-- 1. Surabaya (Jawa Timur) -->
+        <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20tiket%20perjalanan%20ke%20Surabaya.%20Apakah%20tersedia%3F"
+          class="dest-showcase-card reveal delay-1" target="_blank" rel="noopener">
+          <img src="surabaya_1.jpeg" alt="Monumen Sura dan Baya di Kota Surabaya Jawa Timur" loading="lazy">
+          <div class="dest-showcase-card-overlay">
+            <span class="dest-showcase-region" data-i18n="check_reg_jatim">JAWA TIMUR</span>
+            <span class="dest-showcase-name" data-i18n="check_dest_sby">Surabaya</span>
+            <span class="dest-hover-action" data-i18n="check_card_action">Tanya Jadwal &amp; Harga Tiket &rarr;</span>
+          </div>
+        </a>
+
+        <!-- 2. Jakarta (DKI Jakarta) -->
+        <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20tiket%20perjalanan%20ke%20Jakarta.%20Apakah%20tersedia%3F"
+          class="dest-showcase-card reveal delay-2" target="_blank" rel="noopener">
+          <img src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?auto=format&fit=crop&w=800&q=80"
+            alt="Monumen Nasional Monas di Jakarta" loading="lazy">
+          <div class="dest-showcase-card-overlay">
+            <span class="dest-showcase-region" data-i18n="check_reg_dki">DKI JAKARTA</span>
+            <span class="dest-showcase-name" data-i18n="check_dest_jkt">Jakarta</span>
+            <span class="dest-hover-action" data-i18n="check_card_action">Tanya Jadwal &amp; Harga Tiket &rarr;</span>
+          </div>
+        </a>
+
+        <!-- 3. Makassar (Sulawesi Selatan) -->
+        <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20tiket%20perjalanan%20ke%20Makassar.%20Apakah%20tersedia%3F"
+          class="dest-showcase-card reveal delay-3" target="_blank" rel="noopener">
+          <img src="masjid1000kuba.jpeg" alt="Masjid 99 Kubah di Kota Makassar Sulawesi Selatan" loading="lazy">
+          <div class="dest-showcase-card-overlay">
+            <span class="dest-showcase-region" data-i18n="check_reg_sulsel">SULAWESI SELATAN</span>
+            <span class="dest-showcase-name" data-i18n="check_dest_mks">Makassar</span>
+            <span class="dest-hover-action" data-i18n="check_card_action">Tanya Jadwal &amp; Harga Tiket &rarr;</span>
+          </div>
+        </a>
+
+        <!-- 4. Jayapura (Papua) -->
+        <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20tiket%20perjalanan%20ke%20Jayapura.%20Apakah%20tersedia%3F"
+          class="dest-showcase-card reveal delay-4" target="_blank" rel="noopener">
+          <img src="danausentani.jpeg" alt="Pemandangan Danau Sentani dan Perbukitan Jayapura Papua" loading="lazy">
+          <div class="dest-showcase-card-overlay">
+            <span class="dest-showcase-region" data-i18n="check_reg_papua">PAPUA</span>
+            <span class="dest-showcase-name" data-i18n="check_dest_jayapura">Jayapura</span>
+            <span class="dest-hover-action" data-i18n="check_card_action">Tanya Jadwal &amp; Harga Tiket &rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Book Steps -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label" data-i18n="check_steps_label">Alur Pemesanan</span>
+        <h2 class="section-title" data-i18n="check_steps_title">4 Langkah Mudah Mendapatkan Tiket</h2>
+      </div>
+
+      <div class="grid grid-4">
+        <div class="step-card reveal delay-1">
+          <div class="step-number">1</div>
+          <h3 data-i18n="check_step1_title">1. Tentukan Rute</h3>
+          <p data-i18n="check_step1_desc">Pilih kota keberangkatan dan tujuan yang Anda tuju.</p>
+        </div>
+
+        <div class="step-card reveal delay-2">
+          <div class="step-number">2</div>
+          <h3 data-i18n="check_step2_title">2. Tentukan Tanggal</h3>
+          <p data-i18n="check_step2_desc">Beri tahu kami perkiraan tanggal bepergian dan jumlah orang.</p>
+        </div>
+
+        <div class="step-card reveal delay-3">
+          <div class="step-number">3</div>
+          <h3 data-i18n="check_step3_title">3. Konfirmasi via WA</h3>
+          <p data-i18n="check_step3_desc">Tim kami berikan opsi jadwal dan tarif terbaik yang tersedia.</p>
+        </div>
+
+        <div class="step-card reveal delay-4">
+          <div class="step-number">4</div>
+          <h3 data-i18n="check_step4_title">4. E-Ticket Diterbitkan</h3>
+          <p data-i18n="check_step4_desc">Lakukan pembayaran aman dan e-ticket resmi dikirim ke WhatsApp Anda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="reveal">
+        <h2 data-i18n="check_cta_title">Punya Rute Khusus atau Tiket Rombongan?</h2>
+        <p data-i18n="check_cta_desc">Kami siap melayani kebutuhan tiket rombongan, keluarga, atau instansi dengan
+          penawaran khusus.</p>
+        <div class="cta-buttons">
+          <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20tiket%20rombongan%20khusus"
+            class="btn btn-secondary btn-lg" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp" style="color: #25D366;"></i> <span data-i18n="check_cta_btn_wa">Hubungi Customer
+              Care</span>
+          </a>
+          <a href="kontak.html" class="btn btn-outline btn-lg">
+            <i class="fas fa-address-book"></i> <span data-i18n="check_cta_btn_contact">Lihat Info Kontak</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <div class="nav-logo-icon">
+              <img src="logo.png" alt="RaksaTravel Logo">
+            </div>
+            Raksa<span>Travel</span>
+          </a>
+          <p data-i18n="footer_desc">Mitra perjalanan terpercaya untuk pemesanan tiket pesawat dan kapal laut ke seluruh
+            pelosok Nusantara. Pelayanan cepat, ramah, dan harga transparan.</p>
+          <div class="footer-socials">
+            <a href="https://instagram.com/raksatraveljayapura" class="footer-social-link" target="_blank" rel="noopener"
+              aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/raksa.pasae.5" class="footer-social-link" target="_blank" rel="noopener"
+              aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/6282153043601" class="footer-social-link" target="_blank" rel="noopener"
+              aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title" data-i18n="footer_quick_links">Menu Cepat</h4>
+          <div class="footer-links">
+            <a href="index.html" data-i18n="nav_home">Beranda</a>
+            <a href="cek-tiket.html" data-i18n="nav_tickets">Cek Tiket</a>
+            <a href="layanan.html" data-i18n="nav_services">Layanan</a>
+            <a href="tentang.html" data-i18n="nav_about">Tentang</a>
+            <a href="testimoni.html" data-i18n="nav_testimonials">Testimoni</a>
+            <a href="faq.html" data-i18n="nav_faq">FAQ</a>
+            <a href="kontak.html" data-i18n="nav_contact">Kontak</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title" data-i18n="footer_support">Bantuan &amp; Layanan</h4>
+          <div class="footer-links">
+            <a href="faq.html" data-i18n="nav_faq">FAQ</a>
+            <a href="testimoni.html" data-i18n="nav_testimonials">Testimoni</a>
+            <a href="kontak.html" data-i18n="nav_contact">Kontak</a>
+            <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20butuh%20bantuan%20pemesanan%20tiket"
+              target="_blank" rel="noopener" data-i18n="footer_help_center">Pusat Bantuan WhatsApp</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title" data-i18n="footer_contact_title">Hubungi Kami</h4>
+          <div class="footer-links">
+            <a href="https://wa.me/6282153043601" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> <span>0821-5304-3601</span></a>
+            <a href="mailto:santisalmi1005@gmail.com"><i class="fas fa-envelope"></i> <span>santisalmi1005@gmail.com</span></a>
+            <a href="https://instagram.com/raksatraveljayapura" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> <span>@raksatraveljayapura</span></a>
+            <a href="https://www.facebook.com/raksa.pasae.5" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i> <span>RaksaTravelJayapura</span></a>
+            <a href="https://www.google.com/maps/place/RAKSA+TRAVEL/@-2.5960943,140.6293589,21z/data=!4m6!3m5!1s0x686cf5018fe52181:0x1e714f7b2df805ea!8m2!3d-2.5959088!4d140.629662!16s%2Fg%2F11sxwmz80n!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDgyNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> <span>Kompleks Asri Residence, Jayapura</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p data-i18n="footer_rights">&copy; 2026 RaksaTravel. Hak cipta dilindungi undang-undang.</p>
+        <p><span data-i18n="footer_built_with">Website by Raihan</span> <i class="fas fa-heart"
+            style="color: #ffffff;"></i></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Action -->
+  <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20ketersediaan%20tiket"
+    class="wa-float" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+
+</html>
