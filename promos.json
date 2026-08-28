@@ -1,5 +1,20 @@
 [
   {
+    "id": "promo-1787938110753",
+    "badge": "TIKET PROMO",
+    "badgeType": "airline",
+    "airlineLogo": "plane",
+    "origin": "Jayapura",
+    "originCode": "DJJ",
+    "destination": "Makassar",
+    "destinationCode": "UPG",
+    "transit": "Penerbangan Langsung",
+    "price": "1.950.000",
+    "date": "Keberangkatan Terdekat",
+    "baggage": "Bagasi Standar",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20TIKET%20PROMO%20Jayapura%20-%20Makassar%20Rp%201.950.000%20(Keberangkatan%20Terdekat)"
+  },
+  {
     "id": "promo-1",
     "badge": "SRIWIJAYA TRANSIT",
     "badgeType": "airline",
@@ -28,20 +43,5 @@
     "date": "Tgl 30 Agustus",
     "baggage": "Bagasi 10 KG",
     "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Lion%20Air%20Langsung%20Jayapura%20-%20Makassar%20Rp%201.960.000%20tgl%2030%20Agustus"
-  },
-  {
-    "id": "promo-3",
-    "badge": "KAPAL PELNI RESMI",
-    "badgeType": "ship",
-    "airlineLogo": "ship",
-    "origin": "Jayapura",
-    "originCode": "Pelabuhan Jayapura",
-    "destination": "Surabaya / Makassar",
-    "destinationCode": "Tanjung Perak / Soekarno-Hatta",
-    "transit": "Pelayaran Langsung",
-    "price": "Tarif Resmi Termurah",
-    "date": "Jadwal Terdekat KM Labobar / KM Dobonsolo",
-    "baggage": "Bagasi Kapal + Kasur",
-    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20tanya%20jadwal%20dan%20harga%20promo%20kapal%20PELNI%20keberangkatan%20terdekat"
   }
 ]
