@@ -801,10 +801,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 10. Mark Active Nav Item
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const currentPage = window.location.pathname.split('/').pop() || '';
   document.querySelectorAll('#navLinks > a').forEach((link) => {
     const href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+    if (
+      href === currentPage ||
+      ((currentPage === '' || currentPage === 'index.html') && (href === './' || href === 'index.html'))
+    ) {
       link.classList.add('active');
     }
   });
