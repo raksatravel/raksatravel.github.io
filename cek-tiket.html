@@ -92,9 +92,8 @@
         <span class="separator"><i class="fas fa-chevron-right"></i></span>
         <span data-i18n="check_breadcrumb">Cek Tiket</span>
       </div>
-      <h1 class="reveal delay-1" data-i18n="check_hero_title">Cari &amp; Pesan Tiket Perjalanan</h1>
-      <p class="reveal delay-2" data-i18n="check_hero_desc">Pilih moda transportasi yang Anda inginkan, tentukan kota
-        asal dan tujuan, lalu dapatkan konfirmasi jadwal tercepat via WhatsApp.</p>
+      <h1 class="reveal delay-1" data-i18n="check_hero_title">Cek Jadwal &amp; Harga Tiket Perjalanan</h1>
+      <p class="reveal delay-2" data-i18n="check_hero_desc">Pilih jenis tiket pesawat atau kapal laut, isi kota asal dan tujuan, lalu klik cari. Tim kami segera kirimkan daftar jam keberangkatan dan harga terbarunya.</p>
     </div>
     <div class="wave-divider">
       <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
@@ -112,7 +111,7 @@
         <form id="ticketForm">
           <div class="form-grid">
             <div class="form-group">
-              <label class="form-label" for="ticketType" data-i18n="check_form_type">Jenis Tiket</label>
+              <label class="form-label" for="ticketType" data-i18n="check_form_type">Jenis Moda Transportasi</label>
               <select id="ticketType" class="form-select" required>
                 <option value="Pesawat Terbang" data-i18n="check_form_type_plane">Tiket Pesawat (Domestik /
                   Internasional)</option>
@@ -122,19 +121,19 @@
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="departure" data-i18n="check_form_from">Kota Asal</label>
-              <input type="text" id="departure" class="form-input" placeholder="Contoh: Jakarta"
+              <label class="form-label" for="departure" data-i18n="check_form_from">Kota Keberangkatan</label>
+              <input type="text" id="departure" class="form-input" placeholder="Contoh: Jayapura (DJJ)"
                 data-i18n-ph="check_form_from_ph" required>
             </div>
 
             <div class="form-group">
               <label class="form-label" for="destination" data-i18n="check_form_to">Kota Tujuan</label>
-              <input type="text" id="destination" class="form-input" placeholder="Contoh: Surabaya"
+              <input type="text" id="destination" class="form-input" placeholder="Contoh: Surabaya (SUB)"
                 data-i18n-ph="check_form_to_ph" required>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="travelDate" data-i18n="check_form_date">Tanggal Berangkat</label>
+              <label class="form-label" for="travelDate" data-i18n="check_form_date">Tanggal Rencana Berangkat</label>
               <input type="date" id="travelDate" class="form-input" required>
             </div>
 
@@ -155,18 +154,158 @@
   </section>
 
   <!-- ===================================================
+       LIVE PROMO FROM WHATSAPP CHANNEL SECTION
+       =================================================== -->
+  <section class="promo-section">
+    <div class="container">
+      <!-- WhatsApp Channel Invite Banner -->
+      <div class="promo-channel-banner reveal">
+        <div class="promo-channel-info">
+          <div class="promo-channel-avatar">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <div class="promo-channel-text">
+            <h3><span class="promo-live-dot"></span> Saluran WhatsApp Resmi Raksa Travel</h3>
+            <p>Update tiket promo penerbangan &amp; kapal laut terbit setiap hari. Kuota kursi terbatas!</p>
+          </div>
+        </div>
+        <a href="https://whatsapp.com/channel/0029VbCYmHQ9WtBxoi1pjH0f" class="btn-channel-follow" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i> Gabung Saluran WA <i class="fas fa-arrow-up-right-from-square" style="font-size: 0.8rem;"></i>
+        </a>
+      </div>
+
+      <div class="section-header reveal" style="text-align: left; margin-bottom: 1.75rem;">
+        <span class="section-label" style="background: rgba(249, 115, 22, 0.15); color: #F97316; border-color: rgba(249, 115, 22, 0.3);">
+          <i class="fas fa-fire"></i> PROMO TERBARU
+        </span>
+        <h2 class="section-title">Tiket Promo Pilihan Hari Ini</h2>
+        <p class="section-desc" style="margin-left: 0;">Dipilih langsung dari update Saluran WhatsApp. Klik tombol untuk langsung amankan tiketnya ke admin:</p>
+      </div>
+
+      <div class="promo-grid" id="promoGrid">
+        <!-- Card 1: Sriwijaya Transit Makassar - Jayapura (Sesuai Gambar Saluran WA) -->
+        <div class="promo-card card-purple">
+          <div class="promo-card-top">
+            <span class="promo-badge airline-purple">Sriwijaya Air</span>
+            <span class="promo-transit-tag"><i class="fas fa-route"></i> Transit Makassar</span>
+          </div>
+          <div class="promo-route">
+            <div class="promo-city">
+              <span class="promo-city-name">Makassar</span>
+              <span class="promo-city-code">UPG</span>
+            </div>
+            <div class="promo-route-icon">
+              <i class="fas fa-plane"></i>
+            </div>
+            <div class="promo-city" style="text-align: right;">
+              <span class="promo-city-name">Jayapura</span>
+              <span class="promo-city-code">DJJ</span>
+            </div>
+          </div>
+          <div class="promo-details">
+            <div class="promo-meta-item">
+              <i class="fas fa-calendar-day"></i> <span>Tgl 3, 4, 5 September</span>
+            </div>
+            <div class="promo-meta-item">
+              <i class="fas fa-suitcase-rolling"></i> <span>Termasuk Bagasi 15 KG</span>
+            </div>
+          </div>
+          <div class="promo-price-wrapper">
+            <span class="promo-price-label">Tarif Promo:</span>
+            <span class="promo-price-value"><span class="promo-price-prefix">Rp </span>2.780.000</span>
+          </div>
+          <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Sriwijaya%20Transit%20Makassar%20-%20Jayapura%20Rp%202.780.000%20tgl%203%2C4%2C5%20September" class="btn-promo-wa" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Ambil Promo Ini
+          </a>
+        </div>
+
+        <!-- Card 2: Lion Air Langsung Jayapura - Makassar (Sesuai Gambar Saluran WA) -->
+        <div class="promo-card card-cyan">
+          <div class="promo-card-top">
+            <span class="promo-badge airline-cyan">Lion Air</span>
+            <span class="promo-transit-tag"><i class="fas fa-bolt"></i> Penerbangan Langsung</span>
+          </div>
+          <div class="promo-route">
+            <div class="promo-city">
+              <span class="promo-city-name">Jayapura</span>
+              <span class="promo-city-code">DJJ</span>
+            </div>
+            <div class="promo-route-icon">
+              <i class="fas fa-plane"></i>
+            </div>
+            <div class="promo-city" style="text-align: right;">
+              <span class="promo-city-name">Makassar</span>
+              <span class="promo-city-code">UPG</span>
+            </div>
+          </div>
+          <div class="promo-details">
+            <div class="promo-meta-item">
+              <i class="fas fa-calendar-day"></i> <span>Tgl 30 Agustus</span>
+            </div>
+            <div class="promo-meta-item">
+              <i class="fas fa-suitcase-rolling"></i> <span>Termasuk Bagasi 10 KG</span>
+            </div>
+          </div>
+          <div class="promo-price-wrapper">
+            <span class="promo-price-label">Tarif Promo:</span>
+            <span class="promo-price-value"><span class="promo-price-prefix">Rp </span>1.960.000</span>
+          </div>
+          <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Lion%20Air%20Langsung%20Jayapura%20-%20Makassar%20Rp%201.960.000%20tgl%2030%20Agustus" class="btn-promo-wa" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Ambil Promo Ini
+          </a>
+        </div>
+
+        <!-- Card 3: Kapal PELNI Rute Jayapura -->
+        <div class="promo-card card-teal">
+          <div class="promo-card-top">
+            <span class="promo-badge ship-teal">Kapal PELNI</span>
+            <span class="promo-transit-tag"><i class="fas fa-anchor"></i> KM Labobar / Dobonsolo</span>
+          </div>
+          <div class="promo-route">
+            <div class="promo-city">
+              <span class="promo-city-name">Jayapura</span>
+              <span class="promo-city-code">Pelabuhan DJJ</span>
+            </div>
+            <div class="promo-route-icon">
+              <i class="fas fa-ship"></i>
+            </div>
+            <div class="promo-city" style="text-align: right;">
+              <span class="promo-city-name">Surabaya/Mks</span>
+              <span class="promo-city-code">Tanjung Perak</span>
+            </div>
+          </div>
+          <div class="promo-details">
+            <div class="promo-meta-item">
+              <i class="fas fa-calendar-day"></i> <span>Jadwal Pelayaran Terdekat</span>
+            </div>
+            <div class="promo-meta-item">
+              <i class="fas fa-suitcase-rolling"></i> <span>Bagasi Kapal + Kasur</span>
+            </div>
+          </div>
+          <div class="promo-price-wrapper">
+            <span class="promo-price-label">Tarif Tiket:</span>
+            <span class="promo-price-value" style="font-size: 1.15rem;">Tarif Resmi Termurah</span>
+          </div>
+          <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20mau%20tanya%20jadwal%20dan%20harga%20promo%20kapal%20PELNI%20keberangkatan%20terdekat" class="btn-promo-wa" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Tanya Jadwal &amp; Promo
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
        DESTINASI FAVORIT SECTION (Replaces Image 2 with Image 3)
        =================================================== -->
   <section class="dest-showcase">
     <div class="container">
       <div class="dest-showcase-header reveal">
         <div>
-          <span class="section-label" data-i18n="check_showcase_label">DESTINASI FAVORIT</span>
-          <h2 data-i18n="check_showcase_title">Rute yang paling banyak dipesan lewat Raksa Travel.</h2>
+          <span class="section-label" data-i18n="check_showcase_label">RUTE PILIHAN</span>
+          <h2 data-i18n="check_showcase_title">Rute yang Paling Sering Dipesan Minggu Ini</h2>
         </div>
         <div>
-          <p data-i18n="check_showcase_desc">Arahkan kursor untuk lihat sekilas ceritanya, klik untuk langsung tanya
-            jadwal &amp; harga tiketnya.</p>
+          <p data-i18n="check_showcase_desc">Pilih salah satu kota di bawah untuk langsung menanyakan ketersediaan kursi dan harga tiket ke admin kami.</p>
         </div>
       </div>
 
@@ -174,7 +313,7 @@
         <!-- 1. Surabaya (Jawa Timur) -->
         <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20tiket%20perjalanan%20ke%20Surabaya.%20Apakah%20tersedia%3F"
           class="dest-showcase-card reveal delay-1" target="_blank" rel="noopener">
-          <img src="surabaya_1.jpeg" alt="Monumen Sura dan Baya di Kota Surabaya Jawa Timur" loading="lazy">
+          <img src="surabaya_1.jpeg" alt="Monumen Sura dan Baya di Kota Surabaya Jawa Timur" loading="lazy" decoding="async">
           <div class="dest-showcase-card-overlay">
             <span class="dest-showcase-region" data-i18n="check_reg_jatim">JAWA TIMUR</span>
             <span class="dest-showcase-name" data-i18n="check_dest_sby">Surabaya</span>
@@ -185,8 +324,7 @@
         <!-- 2. Jakarta (DKI Jakarta) -->
         <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20tiket%20perjalanan%20ke%20Jakarta.%20Apakah%20tersedia%3F"
           class="dest-showcase-card reveal delay-2" target="_blank" rel="noopener">
-          <img src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?auto=format&fit=crop&w=800&q=80"
-            alt="Monumen Nasional Monas di Jakarta" loading="lazy">
+          <img src="monas.jpeg" alt="Monumen Nasional Monas di Jakarta" loading="lazy" decoding="async">
           <div class="dest-showcase-card-overlay">
             <span class="dest-showcase-region" data-i18n="check_reg_dki">DKI JAKARTA</span>
             <span class="dest-showcase-name" data-i18n="check_dest_jkt">Jakarta</span>
@@ -197,7 +335,7 @@
         <!-- 3. Makassar (Sulawesi Selatan) -->
         <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20tiket%20perjalanan%20ke%20Makassar.%20Apakah%20tersedia%3F"
           class="dest-showcase-card reveal delay-3" target="_blank" rel="noopener">
-          <img src="masjid1000kuba.jpeg" alt="Masjid 99 Kubah di Kota Makassar Sulawesi Selatan" loading="lazy">
+          <img src="masjid1000kuba.jpeg" alt="Masjid 99 Kubah di Kota Makassar Sulawesi Selatan" loading="lazy" decoding="async">
           <div class="dest-showcase-card-overlay">
             <span class="dest-showcase-region" data-i18n="check_reg_sulsel">SULAWESI SELATAN</span>
             <span class="dest-showcase-name" data-i18n="check_dest_mks">Makassar</span>
@@ -208,7 +346,7 @@
         <!-- 4. Jayapura (Papua) -->
         <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20tiket%20perjalanan%20ke%20Jayapura.%20Apakah%20tersedia%3F"
           class="dest-showcase-card reveal delay-4" target="_blank" rel="noopener">
-          <img src="danausentani.jpeg" alt="Pemandangan Danau Sentani dan Perbukitan Jayapura Papua" loading="lazy">
+          <img src="danausentani.jpeg" alt="Pemandangan Danau Sentani dan Perbukitan Jayapura Papua" loading="lazy" decoding="async">
           <div class="dest-showcase-card-overlay">
             <span class="dest-showcase-region" data-i18n="check_reg_papua">PAPUA</span>
             <span class="dest-showcase-name" data-i18n="check_dest_jayapura">Jayapura</span>
@@ -223,33 +361,33 @@
   <section class="section">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label" data-i18n="check_steps_label">Alur Pemesanan</span>
-        <h2 class="section-title" data-i18n="check_steps_title">4 Langkah Mudah Mendapatkan Tiket</h2>
+        <span class="section-label" data-i18n="check_steps_label">Cara Pesan</span>
+        <h2 class="section-title" data-i18n="check_steps_title">4 Langkah Cepat Beli Tiket di RaksaTravel</h2>
       </div>
 
       <div class="grid grid-4">
         <div class="step-card reveal delay-1">
           <div class="step-number">1</div>
-          <h3 data-i18n="check_step1_title">1. Tentukan Rute</h3>
-          <p data-i18n="check_step1_desc">Pilih kota keberangkatan dan tujuan yang Anda tuju.</p>
+          <h3 data-i18n="check_step1_title">1. Kirim Rute &amp; Tanggal</h3>
+          <p data-i18n="check_step1_desc">Beri tahu kami kota asal, tujuan, dan perkiraan tanggal berangkat Anda lewat chat WhatsApp.</p>
         </div>
 
         <div class="step-card reveal delay-2">
           <div class="step-number">2</div>
-          <h3 data-i18n="check_step2_title">2. Tentukan Tanggal</h3>
-          <p data-i18n="check_step2_desc">Beri tahu kami perkiraan tanggal bepergian dan jumlah orang.</p>
+          <h3 data-i18n="check_step2_title">2. Pilih Jam &amp; Tarif</h3>
+          <p data-i18n="check_step2_desc">Admin kami kirimkan pilihan jadwal penerbangan atau kapal laut beserta harga termurah yang tersedia.</p>
         </div>
 
         <div class="step-card reveal delay-3">
           <div class="step-number">3</div>
-          <h3 data-i18n="check_step3_title">3. Konfirmasi via WA</h3>
-          <p data-i18n="check_step3_desc">Tim kami berikan opsi jadwal dan tarif terbaik yang tersedia.</p>
+          <h3 data-i18n="check_step3_title">3. Pembayaran Aman</h3>
+          <p data-i18n="check_step3_desc">Transfer via rekening resmi bank kami atau scan QRIS. Konfirmasi pembayaran diverifikasi dalam hitungan menit.</p>
         </div>
 
         <div class="step-card reveal delay-4">
           <div class="step-number">4</div>
-          <h3 data-i18n="check_step4_title">4. E-Ticket Diterbitkan</h3>
-          <p data-i18n="check_step4_desc">Lakukan pembayaran aman dan e-ticket resmi dikirim ke WhatsApp Anda.</p>
+          <h3 data-i18n="check_step4_title">4. E-Ticket Langsung Dikirim</h3>
+          <p data-i18n="check_step4_desc">File PDF tiket resmi dikirim ke WhatsApp Anda, lengkap dengan kode PNR untuk langsung check-in.</p>
         </div>
       </div>
     </div>
@@ -257,16 +395,18 @@
 
   <!-- CTA Section -->
   <section class="cta-section">
+    <div class="hero-decor">
+      <div class="hero-circle hero-circle-2"></div>
+      <div class="hero-circle hero-circle-3"></div>
+    </div>
     <div class="container">
       <div class="reveal">
-        <h2 data-i18n="check_cta_title">Punya Rute Khusus atau Tiket Rombongan?</h2>
-        <p data-i18n="check_cta_desc">Kami siap melayani kebutuhan tiket rombongan, keluarga, atau instansi dengan
-          penawaran khusus.</p>
+        <h2 data-i18n="check_cta_title">Butuh Tiket Rombongan Kantor atau Keluarga Besar?</h2>
+        <p data-i18n="check_cta_desc">Kami siap bantu carikan kuota kursi rombongan dengan pengaturan bagasi dan tarif spesial yang lebih hemat.</p>
         <div class="cta-buttons">
-          <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20tiket%20rombongan%20khusus"
+          <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20tiket%20rombongan"
             class="btn btn-secondary btn-lg" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp" style="color: #25D366;"></i> <span data-i18n="check_cta_btn_wa">Hubungi Customer
-              Care</span>
+            <i class="fab fa-whatsapp" style="color: #25D366;"></i> <span data-i18n="check_cta_btn_wa">Konsultasi Tiket Rombongan</span>
           </a>
           <a href="kontak" class="btn btn-outline btn-lg">
             <i class="fas fa-address-book"></i> <span data-i18n="check_cta_btn_contact">Lihat Info Kontak</span>

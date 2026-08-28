@@ -1,4 +1,9 @@
+node_modules/
+.wwebjs_auth/
+.wwebjs_cache/
+wa-bot/.wwebjs_auth/
+wa-bot/.wwebjs_cache/
+wa-bot/node_modules/
+wa-bot/qr.html
+*.log
 .agents/
-css/
-js/
-copy website raksa travel 3/

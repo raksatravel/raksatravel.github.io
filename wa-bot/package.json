@@ -1,0 +1,16 @@
+{
+  "name": "raksa-wa-bot",
+  "version": "1.0.0",
+  "description": "Real-time WhatsApp Channel Promo Listener for Raksa Travel",
+  "main": "bot.cjs",
+  "scripts": {
+    "start": "node bot.cjs"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0",
+    "tesseract.js": "^5.1.1",
+    "whatsapp-web.js": "^1.26.0"
+  }
+}

@@ -30,106 +30,106 @@ const T = {
 
   // Footer
   footer_desc: {
-    id: 'Mitra perjalanan terpercaya untuk pemesanan tiket pesawat dan kapal laut ke seluruh pelosok Nusantara. Pelayanan cepat, ramah, dan harga transparan.',
-    en: 'Your trusted travel partner for airplane and ship ticket booking across Indonesia. Fast service, friendly team, and transparent pricing.'
+    id: 'Agen tiket pesawat dan kapal laut di Jayapura, Papua. Melayani pembelian tiket, info jadwal keberangkatan, dan konsultasi rute perjalanan antar pulau.',
+    en: 'Flight and passenger ship ticketing agent based in Jayapura, Papua. Providing booking services, live schedule updates, and inter-island travel support.'
   },
   footer_quick_links: { id: 'Menu Cepat', en: 'Quick Links' },
-  footer_support: { id: 'Bantuan & Layanan', en: 'Support & Help' },
-  footer_contact_title: { id: 'Hubungi Kami', en: 'Contact Info' },
-  footer_help_center: { id: 'Pusat Bantuan WhatsApp', en: 'WhatsApp Help Center' },
+  footer_support: { id: 'Bantuan', en: 'Help & Support' },
+  footer_contact_title: { id: 'Kontak Admin', en: 'Contact Info' },
+  footer_help_center: { id: 'Chat WhatsApp Kami', en: 'WhatsApp Help Desk' },
   footer_rights: { id: '© 2026 RaksaTravel. Hak cipta dilindungi undang-undang.', en: '© 2026 RaksaTravel. All rights reserved.' },
   footer_built_with: { id: 'Website by Raihan ', en: 'Website by Raihan ' },
 
   // ================= HOME (index.html) =================
   hero_badge_text: {
-    id: 'Mitra Resmi Tiket Pesawat & PELNI Terpercaya',
-    en: 'Authorized Flight & Ferry Ticket Partner'
+    id: 'Tiket Maskapai & Pelni • Konfirmasi Cepat',
+    en: 'Airlines & PELNI Tickets • Fast Confirmation'
   },
-  popular_routes_label: { id: 'Rute Favorit:', en: 'Top Routes:' },
+  popular_routes_label: { id: 'Rute Populer:', en: 'Top Routes:' },
   home_hero_title: {
-    id: 'Perjalanan Nyaman Dimulai Bersama RaksaTravel',
-    en: 'Comfortable Journeys Begin With RaksaTravel'
+    id: 'Mau Bepergian Naik Pesawat atau Kapal? Kami Bantu Urus Tiketnya.',
+    en: 'Traveling by Flight or Ship? Let Us Handle Your Tickets.'
   },
   home_hero_desc: {
-    id: 'Pesan tiket pesawat dan kapal laut resmi dengan mudah. Kami bantu carikan rute terbaik dan harga bersahabat untuk liburan maupun urusan kerja Anda.',
-    en: 'Book official airplane and ship tickets with ease. We help you find the best routes and honest fares for vacations or business trips.'
+    id: 'Tinggal kirim rute dan tanggal keberangkatan ke WhatsApp. Kami carikan jadwal yang cocok dan langsung terbitkan tiket resminya tanpa ribet.',
+    en: 'Simply send your route and travel dates to WhatsApp. We will find matching schedules and issue official tickets quickly without hassle.'
   },
-  home_hero_cta_wa: { id: 'Pesan Tiket via WhatsApp', en: 'Book Tickets via WhatsApp' },
-  home_hero_cta_services: { id: 'Lihat Layanan', en: 'Explore Services' },
-  home_stat_customers: { id: 'Pelanggan Terlayani', en: 'Satisfied Travelers' },
-  home_stat_routes: { id: 'Pilihan Rute Perjalanan', en: 'Available Routes' },
-  home_stat_experience: { id: 'Tahun Pengalaman', en: 'Years Experience' },
-  hero_logo_tag: { id: 'Travel Agent Tiket Pesawat & Kapal', en: 'Flight & Ferry Ticket Travel Agent' },
+  home_hero_cta_wa: { id: 'Pesan Tiket via WhatsApp', en: 'Book via WhatsApp' },
+  home_hero_cta_services: { id: 'Lihat Pilihan Layanan', en: 'View Travel Services' },
+  home_stat_customers: { id: 'Tiket Diterbitkan', en: 'Tickets Issued' },
+  home_stat_routes: { id: 'Rute Pesawat & Laut', en: 'Air & Sea Routes' },
+  home_stat_experience: { id: 'Tahun di Jayapura', en: 'Years in Jayapura' },
+  hero_logo_tag: { id: 'Pemesanan Tiket Pesawat & Kapal Pelni', en: 'Flight & PELNI Ticket Booking' },
 
-  home_dest_label: { id: 'Destinasi Populer', en: 'Popular Destinations' },
-  home_dest_title: { id: 'Pilihan Rute Liburan Favorit', en: 'Favorite Holiday Destinations' },
+  home_dest_label: { id: 'Tujuan Favorit', en: 'Top Destinations' },
+  home_dest_title: { id: 'Rute yang Sering Dipesan Minggu Ini', en: 'Frequently Booked Routes' },
   home_dest_desc: {
-    id: 'Mulai dari pantai eksotis hingga pusat bisnis kota besar, temukan tujuan perjalanan impian Anda bersama kami.',
-    en: 'From exotic beaches to bustling business hubs, discover your dream travel destination with us.'
+    id: 'Beberapa kota tujuan penerbangan dan kapal yang paling ramai dipesan pelanggan kami:',
+    en: 'Popular destinations most frequently booked by our travelers this week:'
   },
-  home_dest_bali: { id: 'Denpasar, Bali', en: 'Denpasar, Bali' },
-  home_dest_bali_desc: { id: 'Wisata pantai, budaya memukau, dan relaksasi pulau dewata.', en: 'Tropical beaches, rich culture, and island relaxation.' },
-  home_dest_jakarta: { id: 'DKI Jakarta', en: 'DKI Jakarta' },
-  home_dest_jakarta_desc: { id: 'Pusat bisnis, kuliner nusantara, dan wisata belanja modern.', en: 'Business capital, diverse cuisine, and vibrant city life.' },
-  home_dest_surabaya: { id: 'Surabaya, Jawa Timur', en: 'Surabaya, East Java' },
-  home_dest_surabaya_desc: { id: 'Kota pahlawan, gerbang menuju Bromo dan wisata bahari.', en: 'City of heroes, gateway to Mount Bromo and marine travel.' },
-  home_dest_action: { id: 'Tanya Tiket', en: 'Ask for Tickets' },
+  home_dest_bali: { id: 'Denpasar (Bali)', en: 'Denpasar (Bali)' },
+  home_dest_bali_desc: { id: 'Penerbangan liburan dan wisata santai ke Pulau Dewata.', en: 'Leisure and holiday flights connecting directly to Bali.' },
+  home_dest_jakarta: { id: 'Jakarta (CGK/HLP)', en: 'Jakarta (CGK/HLP)' },
+  home_dest_jakarta_desc: { id: 'Penerbangan bisnis dan urusan dinas kantor ke Ibukota.', en: 'Business and official trips to the capital city hubs.' },
+  home_dest_surabaya: { id: 'Surabaya (SUB)', en: 'Surabaya (SUB)' },
+  home_dest_surabaya_desc: { id: 'Pintu masuk Jawa Timur dan transit kapal Tanjung Perak.', en: 'East Java gateway and Tanjung Perak maritime seaport route.' },
+  home_dest_action: { id: 'Tanya Jadwal', en: 'Ask Schedule' },
   home_price_from: { id: 'Mulai', en: 'From' },
 
-  home_why_label: { id: 'Keunggulan Kami', en: 'Why Choose Us' },
-  home_why_title: { id: 'Kenapa Memilih RaksaTravel?', en: 'Why Choose RaksaTravel?' },
+  home_why_label: { id: 'Kemudahan Layanan', en: 'Service Benefits' },
+  home_why_title: { id: 'Alasan Penumpang Nyaman Pesan di Raksa Travel', en: 'Why Travelers Book With Raksa Travel' },
   home_why_desc: {
-    id: 'Kami mengutamakan kejujuran, kecepatan tanggapan, dan kenyamanan pelanggan sejak awal bertanya hingga tiket terbit.',
-    en: 'We prioritize honesty, fast response, and customer comfort from your first inquiry until ticket issuance.'
+    id: 'Kami pastikan proses pembelian tiket Anda jelas, aman, dan langsung direspons staf kami:',
+    en: 'We ensure your booking process is clear, transparent, and assisted directly by staff:'
   },
-  home_why_card1_title: { id: 'Tiket Resmi & Valid', en: 'Official & Valid Tickets' },
-  home_why_card1_desc: { id: 'Bekerja sama langsung dengan maskapai penerbangan dan operator kapal laut terkemuka di Indonesia.', en: 'Direct partnerships with leading airlines and sea ferry operators across Indonesia.' },
-  home_why_card2_title: { id: 'Harga Jujur & Bersaing', en: 'Honest & Best Rates' },
-  home_why_card2_desc: { id: 'Tidak ada biaya tersembunyi. Rincian tarif dijelaskan terbuka sebelum Anda melakukan pembayaran.', en: 'No hidden fees. Full fare breakdown is explained clearly before you make any payment.' },
-  home_why_card3_title: { id: 'Layanan Cepat via WhatsApp', en: 'Fast WhatsApp Service' },
-  home_why_card3_desc: { id: 'Tidak perlu ribet mengisi formulir rumit. Konsultasikan jadwal dan kami siapkan tiketnya secara langsung.', en: 'No complicated registration needed. Chat with our team and we will arrange your tickets quickly.' },
+  home_why_card1_title: { id: 'Tiket Resmi Berkode PNR', en: 'Official PNR Booking Code' },
+  home_why_card1_desc: { id: 'Setiap tiket pesawat dan kapal langsung terdaftar di sistem maskapai atau Pelni. Anda bisa cek langsung di situs resmi maskapai.', en: 'Every ticket is registered in the airline or PELNI database with official PNR for direct validation.' },
+  home_why_card2_title: { id: 'Rincian Biaya Terbuka', en: 'Transparent Upfront Pricing' },
+  home_why_card2_desc: { id: 'Harga yang kami sampaikan di awal sudah termasuk pajak bandara dan bagasi. Tidak ada biaya tambahan yang disembunyikan.', en: 'Quoted prices include airport taxes and standard baggage with zero hidden charges.' },
+  home_why_card3_title: { id: 'Dibantu Staf Berpengalaman', en: 'Assisted by Real Staff' },
+  home_why_card3_desc: { id: 'Kalau butuh ubah tanggal keberangkatan, salah ketik nama, atau tambah bagasi, staf kami siap bantu sampai selesai.', en: 'Need reschedule, name fixes, or extra baggage? Our staff guides you until completed.' },
 
-  home_stat_travelers: { id: 'Pelanggan Puas', en: 'Happy Travelers' },
-  home_stat_total_routes: { id: 'Rute Pesawat & Kapal', en: 'Flight & Ferry Routes' },
-  home_stat_partners: { id: 'Mitra Transportasi', en: 'Transport Partners' },
-  home_stat_satisfaction: { id: 'Tingkat Kepuasan', en: 'Satisfaction Rate' },
+  home_stat_travelers: { id: 'Penumpang', en: 'Travelers' },
+  home_stat_total_routes: { id: 'Pilihan Rute', en: 'Route Options' },
+  home_stat_partners: { id: 'Maskapai & Kapal', en: 'Carriers & Lines' },
+  home_stat_satisfaction: { id: 'Kepuasan Penumpang', en: 'Satisfaction Rate' },
 
-  home_cta_title: { id: 'Sudah Punya Rencana Bepergian?', en: 'Planning Your Next Trip?' },
+  home_cta_title: { id: 'Sudah Tahu Mau Berangkat Kapan?', en: 'Ready to Plan Your Trip?' },
   home_cta_desc: {
-    id: 'Diskusikan rute, tanggal, dan jumlah penumpang bersama tim kami di WhatsApp. Kami siap bantu carikan harga terbaik.',
-    en: 'Discuss your routes, travel dates, and passenger details with our friendly team on WhatsApp today.'
+    id: 'Ketik kota asal, tujuan, dan perkiraan tanggal berangkat ke WhatsApp kami. Staf kami akan langsung infokan jam dan harga tiketnya.',
+    en: 'Send your departure city, destination, and dates to our WhatsApp. Our team will check schedules and prices immediately.'
   },
-  home_cta_btn_wa: { id: 'Chat WhatsApp Sekarang', en: 'Chat on WhatsApp Now' },
-  home_cta_btn_routes: { id: 'Cek Pilihan Tiket', en: 'Check Available Tickets' },
+  home_cta_btn_wa: { id: 'Chat Admin di WhatsApp', en: 'Chat with Admin on WhatsApp' },
+  home_cta_btn_routes: { id: 'Cek Pilihan Tiket', en: 'Check Available Routes' },
 
   // ================= CEK TIKET (cek-tiket.html) =================
-  check_hero_title: { id: 'Cari & Pesan Tiket Perjalanan', en: 'Search & Book Travel Tickets' },
+  check_hero_title: { id: 'Cek Jadwal & Harga Tiket Perjalanan', en: 'Check Travel Schedules & Fares' },
   check_hero_desc: {
-    id: 'Pilih moda transportasi yang Anda inginkan, tentukan kota asal dan tujuan, lalu dapatkan konfirmasi jadwal tercepat via WhatsApp.',
-    en: 'Choose your preferred mode of transport, select departure and destination, and get fast schedule confirmation via WhatsApp.'
+    id: 'Pilih jenis tiket pesawat atau kapal laut, isi kota asal dan tujuan, lalu klik cari. Tim kami segera kirimkan daftar jam keberangkatan dan harga terbarunya.',
+    en: 'Pick flights or sea ferries, fill in your origin and destination, and submit. Our staff will send available departure times and current fares via WhatsApp.'
   },
   check_breadcrumb: { id: 'Cek Tiket', en: 'Check Tickets' },
 
-  check_form_type: { id: 'Jenis Tiket', en: 'Ticket Type' },
-  check_form_type_plane: { id: 'Tiket Pesawat (Domestik / Internasional)', en: 'Airplane Ticket (Domestic / International)' },
+  check_form_type: { id: 'Jenis Moda Transportasi', en: 'Transport Mode' },
+  check_form_type_plane: { id: 'Tiket Pesawat (Domestik / Internasional)', en: 'Flight Ticket (Domestic / International)' },
   check_form_type_ship: { id: 'Tiket Kapal Laut / Feri (PELNI / ASDP)', en: 'Ship / Ferry Ticket (PELNI / ASDP)' },
-  check_form_from: { id: 'Kota Asal', en: 'Departure City' },
-  check_form_from_ph: { id: 'Contoh: Jakarta', en: 'e.g. Jakarta' },
+  check_form_from: { id: 'Kota Keberangkatan', en: 'Departure City' },
+  check_form_from_ph: { id: 'Contoh: Jayapura (DJJ)', en: 'e.g. Jayapura (DJJ)' },
   check_form_to: { id: 'Kota Tujuan', en: 'Destination City' },
-  check_form_to_ph: { id: 'Contoh: Surabaya', en: 'e.g. Surabaya' },
-  check_form_date: { id: 'Tanggal Berangkat', en: 'Travel Date' },
-  check_form_pax: { id: 'Jumlah Penumpang', en: 'Passengers' },
-  check_form_submit: { id: 'Cari Jadwal via WhatsApp', en: 'Check Schedule via WhatsApp' },
+  check_form_to_ph: { id: 'Contoh: Surabaya (SUB)', en: 'e.g. Surabaya (SUB)' },
+  check_form_date: { id: 'Tanggal Rencana Berangkat', en: 'Travel Date' },
+  check_form_pax: { id: 'Jumlah Penumpang', en: 'Passenger Count' },
+  check_form_submit: { id: 'Cari Jadwal via WhatsApp', en: 'Check Schedule on WhatsApp' },
 
   // Image 3 texts
-  check_showcase_label: { id: 'DESTINASI FAVORIT', en: 'FAVORITE DESTINATIONS' },
+  check_showcase_label: { id: 'RUTE PILIHAN', en: 'FEATURED ROUTES' },
   check_showcase_title: {
-    id: 'Rute yang paling banyak dipesan lewat Raksa Travel.',
-    en: 'The most booked routes through Raksa Travel.'
+    id: 'Rute yang Paling Sering Dipesan Minggu Ini',
+    en: 'Our Most Frequently Booked Routes This Week'
   },
   check_showcase_desc: {
-    id: 'Arahkan kursor untuk lihat sekilas ceritanya, klik untuk langsung tanya jadwal & harga tiketnya.',
-    en: 'Hover to see a brief story, click to ask about schedules & ticket prices.'
+    id: 'Pilih salah satu kota di bawah untuk langsung menanyakan ketersediaan kursi dan harga tiket ke admin kami.',
+    en: 'Select any destination below to immediately check seat availability and fares with our team.'
   },
   check_reg_jatim: { id: 'JAWA TIMUR', en: 'EAST JAVA' },
   check_dest_sby: { id: 'Surabaya', en: 'Surabaya' },
@@ -139,205 +139,205 @@ const T = {
   check_dest_mks: { id: 'Makassar', en: 'Makassar' },
   check_reg_papua: { id: 'PAPUA', en: 'PAPUA' },
   check_dest_jayapura: { id: 'Jayapura', en: 'Jayapura' },
-  check_card_action: { id: 'Tanya Jadwal & Harga Tiket →', en: 'Inquire Schedule & Price →' },
+  check_card_action: { id: 'Tanya Jadwal & Harga Tiket →', en: 'Ask Schedule & Price →' },
 
-  check_steps_label: { id: 'Alur Pemesanan', en: 'Booking Process' },
-  check_steps_title: { id: '4 Langkah Mudah Mendapatkan Tiket', en: '4 Simple Steps to Get Your Ticket' },
-  check_step1_title: { id: '1. Tentukan Rute', en: '1. Select Your Route' },
-  check_step1_desc: { id: 'Pilih kota keberangkatan dan tujuan yang Anda tuju.', en: 'Choose your departure point and desired destination.' },
-  check_step2_title: { id: '2. Tentukan Tanggal', en: '2. Pick Travel Date' },
-  check_step2_desc: { id: 'Beri tahu kami perkiraan tanggal bepergian dan jumlah orang.', en: 'Let us know your preferred dates and group size.' },
-  check_step3_title: { id: '3. Konfirmasi via WA', en: '3. Confirm via WhatsApp' },
-  check_step3_desc: { id: 'Tim kami berikan opsi jadwal dan tarif terbaik yang tersedia.', en: 'We send available time slots and the best fare options.' },
-  check_step4_title: { id: '4. E-Ticket Diterbitkan', en: '4. Receive E-Ticket' },
-  check_step4_desc: { id: 'Lakukan pembayaran aman dan e-ticket resmi dikirim ke WhatsApp Anda.', en: 'Complete secure payment and receive your official e-ticket.' },
+  check_steps_label: { id: 'Cara Pesan', en: 'How It Works' },
+  check_steps_title: { id: '4 Langkah Cepat Beli Tiket di RaksaTravel', en: '4 Simple Steps to Get Your Ticket' },
+  check_step1_title: { id: '1. Kirim Rute & Tanggal', en: '1. Send Route & Date' },
+  check_step1_desc: { id: 'Beri tahu kami kota asal, tujuan, dan perkiraan tanggal berangkat Anda lewat chat WhatsApp.', en: 'Message us your departure, destination, and preferred travel date on WhatsApp.' },
+  check_step2_title: { id: '2. Pilih Jam & Tarif', en: '2. Pick Flight & Fare' },
+  check_step2_desc: { id: 'Admin kami kirimkan pilihan jadwal penerbangan atau kapal laut beserta harga termurah yang tersedia.', en: 'We send available departure times and the lowest prices directly for you to choose.' },
+  check_step3_title: { id: '3. Pembayaran Aman', en: '3. Secure Payment' },
+  check_step3_desc: { id: 'Transfer via rekening resmi bank kami atau scan QRIS. Konfirmasi pembayaran diverifikasi dalam hitungan menit.', en: 'Transfer via our official bank account or QRIS. Payment is verified within minutes.' },
+  check_step4_title: { id: '4. E-Ticket Langsung Dikirim', en: '4. Receive E-Ticket' },
+  check_step4_desc: { id: 'File PDF tiket resmi dikirim ke WhatsApp Anda, lengkap dengan kode PNR untuk langsung check-in.', en: 'Your official e-ticket PDF is sent straight to WhatsApp, ready for easy airport/port check-in.' },
 
-  check_cta_title: { id: 'Punya Rute Khusus atau Tiket Rombongan?', en: 'Need a Custom Route or Group Booking?' },
-  check_cta_desc: { id: 'Kami siap melayani kebutuhan tiket rombongan, keluarga, atau instansi dengan penawaran khusus.', en: 'We provide tailored deals for family holidays, group outings, and corporate travel.' },
-  check_cta_btn_wa: { id: 'Hubungi Customer Care', en: 'Contact Customer Care' },
-  check_cta_btn_contact: { id: 'Lihat Info Kontak', en: 'View Contact Details' },
+  check_cta_title: { id: 'Butuh Tiket Rombongan Kantor atau Keluarga Besar?', en: 'Planning a Group Booking for Office or Family?' },
+  check_cta_desc: { id: 'Kami siap bantu carikan kuota kursi rombongan dengan pengaturan bagasi dan tarif spesial yang lebih hemat.', en: 'We help organize group seat quotas, manage baggage logistics, and secure special package rates.' },
+  check_cta_btn_wa: { id: 'Konsultasi Tiket Rombongan', en: 'Inquire Group Booking' },
+  check_cta_btn_contact: { id: 'Lihat Info Kontak', en: 'View Contact Info' },
 
   // ================= TENTANG (tentang.html) =================
-  about_hero_title: { id: 'Mengenal Lebih Dekat RaksaTravel', en: 'Getting to Know RaksaTravel' },
-  about_hero_desc: { id: 'Perjalanan kami dalam menghadirkan kemudahan tiket perjalanan darat, laut, dan udara bagi masyarakat Indonesia.', en: 'Our journey in bringing accessible and reliable flight and sea travel tickets to everyone.' },
+  about_hero_title: { id: 'Tentang RaksaTravel', en: 'About RaksaTravel' },
+  about_hero_desc: { id: 'Mengenal biro tiket perjalanan resmi di Jayapura yang berkomitmen memberikan layanan tiket transparan, jujur, dan mudah diakses siapa saja.', en: 'Learn about our authorized travel ticketing agency in Jayapura, committed to transparent and dependable travel services.' },
   about_breadcrumb: { id: 'Tentang Kami', en: 'About Us' },
 
-  about_story_label: { id: 'Cerita Kami', en: 'Our Story' },
-  about_story_title: { id: 'Berawal dari Komitmen Melayani dengan Tulus', en: 'Started from a Genuine Commitment to Serve' },
+  about_story_label: { id: 'Perjalanan Kami', en: 'Our Story' },
+  about_story_title: { id: 'Bermula dari Niat Membantu Penumpang Dapat Tiket Resmi', en: 'Started from a Mission to Make Ticketing Honest' },
   about_story_p1: {
-    id: 'RaksaTravel didirikan pada tahun 2016 di Jayapura dengan niat sederhana: membantu masyarakat mendapatkan tiket perjalanan tanpa rasa khawatir akan penipuan atau harga yang melambung tinggi.',
-    en: 'RaksaTravel was established in 2016 in Jayapura with a simple aim: to help people obtain genuine travel tickets without worrying about scams or inflated prices.'
+    id: 'RaksaTravel pertama kali membuka layanan di Jayapura pada tahun 2016. Saat itu, banyak calon penumpang kapal PELNI dan pesawat mengeluhkan susahnya mencari tiket resmi tanpa tergiur calo atau harga yang melambung tak wajar.',
+    en: 'RaksaTravel first opened its doors in Jayapura in 2016. Back then, many travelers struggled to secure official ship and flight tickets without risking unauthorized scalpers or arbitrary markups.'
   },
   about_story_p2: {
-    id: 'Kini, kami telah melayani lebih dari 1.500 pelanggan dari berbagai daerah. Baik Anda yang ingin mudik berkumpul bersama keluarga, berlibur santai, maupun bertugas ke luar pulau, RaksaTravel siap menjadi kawan perjalanan setia Anda.',
-    en: 'Today, we have served over 1.500 travelers across Indonesia. Whether visiting family back home, holidaying, or traveling for work, RaksaTravel is your dependable companion.'
+    id: 'Dari sana kami hadir dengan prinsip sederhana: melayani setiap pesanan secara terbuka, menerbitkan tiket resmi bergaransi, dan merespons setiap pertanyaan pelanggan dengan cepat lewat chat WhatsApp. Sampai sekarang, lebih dari 1.500 penumpang telah mempercayakan perjalanannya kepada kami.',
+    en: 'We built our service on a simple premise: transparent pricing, verified official tickets, and swift, personal customer service on WhatsApp. Today, over 1,500 travelers rely on us for their journeys.'
   },
-  about_story_btn: { id: 'Hubungi Tim Kami', en: 'Get in Touch' },
+  about_story_btn: { id: 'Hubungi Tim Kami', en: 'Talk with Our Team' },
 
-  about_vm_label: { id: 'Tujuan Kami', en: 'Our Direction' },
-  about_vm_title: { id: 'Visi & Misi Perusahaan', en: 'Vision & Mission' },
-  about_vision_title: { id: 'Visi Kami', en: 'Our Vision' },
-  about_vision_desc: { id: 'Menjadi biro layanan tiket perjalanan paling terpercaya dan paling bersahabat di Indonesia dengan standar pelayanan prima.', en: 'To be Indonesia’s most trusted and friendly travel ticket agency with exemplary customer service standards.' },
-  about_mission_title: { id: 'Misi Kami', en: 'Our Mission' },
-  about_mission_desc: { id: 'Memberikan kemudahan akses tiket transportasi resmi, tarif bersaing, serta pendampingan ramah dan responsif bagi setiap pelanggan.', en: 'To deliver accessible official tickets, competitive fares, and responsive, heartfelt assistance for every traveler.' },
+  about_vm_label: { id: 'Komitmen Kami', en: 'Our Commitment' },
+  about_vm_title: { id: 'Visi & Misi Layanan', en: 'Vision & Mission' },
+  about_vision_title: { id: 'Visi', en: 'Vision' },
+  about_vision_desc: { id: 'Menjadi biro layanan tiket perjalanan paling dapat diandalkan dan paling nyaman diajak konsultasi di Papua dan seluruh Indonesia.', en: 'To be the most dependable, friendly, and accessible travel ticket partner across Papua and Indonesia.' },
+  about_mission_title: { id: 'Misi', en: 'Mission' },
+  about_mission_desc: { id: 'Menyediakan akses tiket resmi maskapai dan kapal laut dengan tarif transparan, proses cepat, serta pendampingan ramah dari awal tanya hingga penumpang tiba di tujuan.', en: 'Providing genuine airline and ferry tickets with honest fares, quick turnaround, and attentive customer care every step of the journey.' },
 
-  about_values_label: { id: 'Prinsip Kerja', en: 'Core Principles' },
-  about_values_title: { id: 'Nilai-Nilai yang Kami Pegang', en: 'Values That Guide Us' },
-  about_val1_title: { id: 'Integritas & Kejujuran', en: 'Integrity & Honesty' },
-  about_val1_desc: { id: 'Informasi rute, harga, dan ketersediaan kursi disampaikan apa adanya tanpa ada yang ditutupi.', en: 'All route details, prices, and seat availability are shared transparently without surprises.' },
-  about_val2_title: { id: 'Kecepatan Tanggapan', en: 'Fast Responsiveness' },
-  about_val2_desc: { id: 'Waktu Anda sangat berharga. Tim kami selalu siap merespons chat dan pertanyaan Anda dengan sigap.', en: 'Your time is valuable. Our dedicated team is always ready to assist promptly.' },
-  about_val3_title: { id: 'Pelayanan Ramah', en: 'Heartfelt Hospitality' },
-  about_val3_desc: { id: 'Kami mendengarkan kebutuhan perjalanan Anda layaknya membantu keluarga atau sahabat sendiri.', en: 'We listen to your travel requirements just like we would assist our own family and friends.' },
+  about_values_label: { id: 'Prinsip Kerja', en: 'Our Values' },
+  about_values_title: { id: '3 Nilai yang Selalu Kami Pegang', en: '3 Values We Stand By' },
+  about_val1_title: { id: 'Kejujuran Tarif', en: 'Honest Pricing' },
+  about_val1_desc: { id: 'Tidak ada biaya tersembunyi. Rincian harga tiket, pajak, dan bagasi kami jelaskan gamblang sebelum Anda transfer.', en: 'Zero unexpected charges. Full fare breakdowns, taxes, and baggage allowances are stated clearly upfront.' },
+  about_val2_title: { id: 'Respon Cepat', en: 'Prompt Response' },
+  about_val2_desc: { id: 'Kami tahu Anda butuh kepastian jadwal secepatnya. Admin kami selalu siap membalas chat Anda dalam hitungan menit.', en: 'We know travel plans require quick certainty. Our ticketing team responds promptly within minutes.' },
+  about_val3_title: { id: 'Tanggung Jawab Penuh', en: 'Full Accountability' },
+  about_val3_desc: { id: 'Ada kendala reschedule, pembatalan penerbangan dari maskapai, atau ganti nama? Kami kawal prosesnya sampai tuntas.', en: 'Facing schedule changes, carrier cancellations, or name updates? We guide you through until fully resolved.' },
 
-  about_team_label: { id: 'Orang di Balik Layanan', en: 'Our People' },
-  about_team_title: { id: 'Tim Profesional RaksaTravel', en: 'The RaksaTravel Team' },
-  about_team_member1_role: { id: 'Founder & Direktur Utama', en: 'Founder & Managing Director' },
-  about_team_member1_desc: { id: 'Berpengalaman lebih dari 10 tahun di industri pariwisata dan tiket transportasi nasional.', en: 'Over 10 years of experience in the national travel and transportation industry.' },
-  about_team_member2_role: { id: 'Manajer Operasional Tiket', en: 'Ticketing Operations Manager' },
-  about_team_member2_desc: { id: 'Memastikan integrasi sistem reservasi maskapai dan kapal berjalan lancar dan akurat.', en: 'Ensures seamless reservation integration across airline and maritime partners.' },
-  about_team_member3_role: { id: 'Kepala Layanan Pelanggan', en: 'Customer Care Lead' },
-  about_team_member3_desc: { id: 'Memimpin tim WhatsApp support yang siap siaga membantu pemesanan dan jadwal ulang.', en: 'Leads our WhatsApp support team ready to assist with bookings and rescheduling.' },
-  about_team_member4_role: { id: 'Koordinator Rute Laut & Feri', en: 'Maritime Routes Coordinator' },
-  about_team_member4_desc: { id: 'Spesialis jadwal kapal laut PELNI dan feri penyeberangan antar pulau di Nusantara.', en: 'Specialist in PELNI vessel schedules and inter-island ferry services nationwide.' },
+  about_team_label: { id: 'Tim Kami', en: 'Our People' },
+  about_team_title: { id: 'Staf Berpengalaman di Balik RaksaTravel', en: 'The Dedicated Team Behind RaksaTravel' },
+  about_team_member1_role: { id: 'Founder & Pengelola Operasional', en: 'Founder & Operations Lead' },
+  about_team_member1_desc: { id: 'Berpengalaman lebih dari 10 tahun menangani reservasi tiket penerbangan dan pelayaran di Indonesia Timur.', en: 'Over 10 years of hands-on experience managing flight and sea travel reservations across Eastern Indonesia.' },
+  about_team_member2_role: { id: 'Manajer Reservasi Maskapai', en: 'Flight Reservation Specialist' },
+  about_team_member2_desc: { id: 'Mengawal integrasi sistem tiket maskapai agar penerbitan kode PNR berjalan instan dan akurat.', en: 'Oversees airline ticketing channels ensuring immediate, accurate PNR issuance for all airlines.' },
+  about_team_member3_role: { id: 'Koordinator Tiket Kapal & Feri', en: 'Maritime Routes Coordinator' },
+  about_team_member3_desc: { id: 'Spesialis jadwal kapal PELNI, pemesanan kabin kelas, dan tiket penyeberangan feri kendaraan.', en: 'Specialist in PELNI passenger ship schedules, cabin reservations, and vehicle ferry crossings.' },
+  about_team_member4_role: { id: 'Customer Care WhatsApp', en: 'WhatsApp Customer Support' },
+  about_team_member4_desc: { id: 'Siap membantu konsultasi rute, cek ketersediaan kursi, dan bantuan reschedule setiap hari.', en: 'Dedicated to helping with route inquiries, seat checks, and rescheduling assistance daily.' },
 
   // ================= LAYANAN (layanan.html) =================
-  services_hero_title: { id: 'Layanan Tiket & Perjalanan Lengkap', en: 'Complete Ticketing & Travel Services' },
-  services_hero_desc: { id: 'Solusi lengkap pemesanan tiket pesawat, kapal laut, hingga kebutuhan pendukung perjalanan Anda.', en: 'Your comprehensive solution for airline tickets, ship voyages, and travel support.' },
+  services_hero_title: { id: 'Layanan Pemesanan Tiket Resmi', en: 'Official Ticketing & Travel Services' },
+  services_hero_desc: { id: 'Dari tiket pesawat seluruh maskapai, kapal penumpang PELNI, feri penyeberangan, hingga pengaturan tiket rombongan keluarga dan dinas.', en: 'From major domestic & international airlines to PELNI ships, vehicle ferries, and group corporate bookings.' },
   services_breadcrumb: { id: 'Layanan Kami', en: 'Our Services' },
 
-  services_main_label: { id: 'Layanan Utama', en: 'Primary Services' },
-  services_main_title: { id: 'Pilihan Transportasi Unggulan', en: 'Featured Transport Modes' },
-  services_main_desc: { id: 'Kami melayani rute domestik seluruh Nusantara dan rute internasional terpopuler.', en: 'We serve all domestic routes across Indonesia and popular international destinations.' },
+  services_main_label: { id: 'Layanan Utama', en: 'Core Services' },
+  services_main_title: { id: 'Pilihan Transportasi yang Kami Layani', en: 'Transport Modes We Cover' },
+  services_main_desc: { id: 'Melayani rute penerbangan dan pelayaran domestik ke seluruh Nusantara serta penerbangan internasional pilihan.', en: 'Covering domestic routes nationwide across Indonesia as well as selected international flights.' },
 
-  services_flight_tag: { id: 'PESAWAT TERBANG', en: 'AIRPLANE FLIGHTS' },
+  services_flight_tag: { id: 'PESAWAT TERBANG', en: 'AIRLINE FLIGHTS' },
   services_flight_title: { id: 'Tiket Pesawat Domestik & Internasional', en: 'Domestic & International Flight Tickets' },
   services_flight_desc: {
-    id: 'Pemesanan tiket seluruh maskapai terkemuka seperti Garuda Indonesia, Citilink, Lion Air, Batik Air, Super Air Jet, AirAsia, dan maskapai internasional lainnya. Opsi penerbangan langsung maupun transit dengan harga transparan.',
-    en: 'Booking for all major airlines including Garuda Indonesia, Citilink, Lion Air, Batik Air, Super Air Jet, AirAsia, and international carriers. Direct or transit flights with clear pricing.'
+    id: 'Pemesanan tiket resmi untuk semua maskapai nasional seperti Garuda Indonesia, Citilink, Batik Air, Lion Air, Super Air Jet, Sriwijaya Air, dan Wings Air. Tersedia rute langsung maupun transit dengan pilihan bagasi sesuai kebutuhan Anda.',
+    en: 'Official reservations for Garuda Indonesia, Citilink, Batik Air, Lion Air, Super Air Jet, Sriwijaya Air, and Wings Air. Direct and transit options with flexible baggage selections.'
   },
   services_flight_btn: { id: 'Pesan Tiket Pesawat', en: 'Book Flight Ticket' },
 
-  services_ship_tag: { id: 'KAPAL LAUT & FERI', en: 'SHIP & FERRY' },
-  services_ship_title: { id: 'Tiket Kapal Laut PELNI & Feri Penyeberangan', en: 'PELNI Ship & Ferry Crossing Tickets' },
+  services_ship_tag: { id: 'KAPAL LAUT & FERI', en: 'PASSENGER SHIPS & FERRIES' },
+  services_ship_title: { id: 'Tiket Kapal PELNI & Feri Penyeberangan', en: 'PELNI Vessels & Ferry Crossings' },
   services_ship_desc: {
-    id: 'Layanan pemesanan tiket resmi kapal PELNI ke berbagai pelabuhan di Indonesia serta tiket feri ASDP untuk penumpang dan kendaraan. Pilihan kelas ekonomi, kabin wisata, hingga logistik kendaraan.',
-    en: 'Official ticketing for PELNI passenger vessels across Indonesian ports and ASDP ferry crossings for passengers and vehicles. Economy class, cabin options, and vehicle transport.'
+    id: 'Layanan tiket resmi kapal penumpang PELNI (seperti KM Dobonsolo, KM Labobar, KM Sinabung, dll) dan penyeberangan feri ASDP. Pilihan kelas ekonomi, kabin wisata ber-AC, serta tiket untuk membawa motor atau mobil pribadi.',
+    en: 'Official ticketing for PELNI passenger vessels (KM Dobonsolo, KM Labobar, KM Sinabung, etc.) and ASDP ferry crossings. Economy berths, AC tourist cabins, and vehicle boarding passes.'
   },
   services_ship_btn: { id: 'Pesan Tiket Kapal Laut', en: 'Book Ship Ticket' },
 
-  services_extra_label: { id: 'Layanan Tambahan', en: 'Extra Value' },
-  services_extra_title: { id: 'Kebutuhan Perjalanan Lainnya', en: 'Complementary Travel Services' },
-  services_extra1_title: { id: 'Asuransi Perjalanan', en: 'Travel Insurance' },
-  services_extra1_desc: { id: 'Perlindungan ekstra selama perjalanan untuk kenyamanan dan ketenangan pikiran Anda serta keluarga.', en: 'Extra coverage during your journey for peace of mind for you and your family.' },
-  services_extra2_title: { id: 'Bantuan Reschedule & Refund', en: 'Reschedule & Refund Help' },
-  services_extra2_desc: { id: 'Rencana perjalanan berubah? Kami bantu proses pengajuan perubahan jadwal atau pengembalian dana sesuai kebijakan operator.', en: 'Schedule changes? We assist with date modifications or refund requests in line with carrier policies.' },
-  services_extra3_title: { id: 'Tiket Rombongan & Korporat', en: 'Group & Corporate Booking' },
-  services_extra3_desc: { id: 'Layanan khusus untuk perjalanan dinas kantor, studi tour sekolah, atau rombongan keluarga besar dengan penawaran menarik.', en: 'Specialized arrangements for corporate trips, school study tours, or large family groups with special quotes.' },
-  services_ask_btn: { id: 'Konsultasikan via WA', en: 'Inquire on WhatsApp' },
+  services_extra_label: { id: 'Bantuan Ekstra', en: 'Additional Assistance' },
+  services_extra_title: { id: 'Layanan Pendukung Perjalanan Anda', en: 'Travel Support Services' },
+  services_extra1_title: { id: 'Asuransi Perjalanan Tambahan', en: 'Travel Protection' },
+  services_extra1_desc: { id: 'Bagi Anda yang menginginkan proteksi lebih selama di perjalanan untuk kenyamanan ekstra bersama keluarga.', en: 'Comprehensive travel coverage for complete peace of mind during your journeys.' },
+  services_extra2_title: { id: 'Bantuan Reschedule & Ganti Jadwal', en: 'Reschedule & Date Modifications' },
+  services_extra2_desc: { id: 'Rencana kerja atau liburan mendadak bergeser? Kami bantu proses pengajuan perubahan tanggal tiket ke pihak maskapai.', en: 'Travel plans shifted? We handle the date change and rebooking process with the transport operator.' },
+  services_extra3_title: { id: 'Tiket Rombongan & Carter Perjalanan', en: 'Group & Corporate Travel' },
+  services_extra3_desc: { id: 'Pengaturan tiket untuk dinas instansi, studi tour sekolah, atau rombongan keluarga besar dengan koordinasi satu pintu.', en: 'Seamless group booking arrangements for corporate trips, school tours, or large family gatherings.' },
+  services_ask_btn: { id: 'Tanya via WhatsApp', en: 'Ask on WhatsApp' },
 
   // ================= FAQ (faq.html) =================
-  faq_hero_title: { id: 'Tanya Jawab Seputar Layanan', en: 'Frequently Asked Questions' },
-  faq_hero_desc: { id: 'Jawaban lengkap untuk pertanyaan umum mengenai cara pemesanan, pembayaran, dan ketentuan tiket.', en: 'Clear answers to common questions regarding booking procedures, payments, and ticket terms.' },
+  faq_hero_title: { id: 'Pertanyaan yang Sering Diajukan', en: 'Frequently Asked Questions' },
+  faq_hero_desc: { id: 'Jawaban langsung seputar cara pemesanan, verifikasi tiket resmi, metode transfer, dan bantuan jadwal ulang.', en: 'Direct answers regarding ticket reservations, official PNR verification, payment methods, and rescheduling.' },
   faq_breadcrumb: { id: 'Tanya Jawab (FAQ)', en: 'FAQ' },
 
-  faq_sec1_label: { id: 'Pemesanan Umum', en: 'General Booking' },
-  faq_sec1_title: { id: 'Pertanyaan Seputar Pemesanan Tiket', en: 'Ticket Booking Questions' },
-  faq_q1: { id: 'Bagaimana langkah praktis memesan tiket di RaksaTravel?', en: 'What are the practical steps to book a ticket with RaksaTravel?' },
+  faq_sec1_label: { id: 'Pemesanan', en: 'Booking Inquiries' },
+  faq_sec1_title: { id: 'Cara Pesan & Verifikasi Tiket', en: 'Booking & Ticket Verification' },
+  faq_q1: { id: 'Bagaimana cara pesan tiket di RaksaTravel?', en: 'How do I book a ticket through RaksaTravel?' },
   faq_a1: {
-    id: 'Sangat mudah! Anda cukup menghubungi kami via WhatsApp di 0821-5304-3601, sebutkan kota asal, tujuan, tanggal keberangkatan, dan jumlah penumpang. Tim kami akan segera mengirimkan daftar jadwal dan harga terbaik untuk Anda pilih.',
-    en: 'Very simple! Just contact us on WhatsApp at 0821-5304-3601, specify departure city, destination, travel date, and passenger count. We will send the best schedules and fares for your selection.'
+    id: 'Cukup kirim pesan ke WhatsApp kami di 0821-5304-3601. Sebutkan rute asal, kota tujuan, tanggal rencana jalan, dan jumlah orang. Tim kami langsung cekkan ketersediaan kursi dan pilihan harga termurah untuk Anda.',
+    en: 'Just message our WhatsApp at 0821-5304-3601 with your departure city, destination, preferred date, and number of passengers. We will look up live seats and send the best options right away.'
   },
-  faq_q2: { id: 'Apakah tiket yang diterbitkan dijamin resmi dan bisa langsung dipakai check-in?', en: 'Are tickets guaranteed official and valid for direct check-in?' },
+  faq_q2: { id: 'Apakah tiketnya pasti resmi dan bisa dipakai check-in?', en: 'Are the tickets guaranteed official for airport check-in?' },
   faq_a2: {
-    id: 'Ya, 100% resmi. Tiket pesawat dilengkapi Kode Booking (PNR) yang bisa Anda cek langsung di website maskapai. Tiket kapal laut juga menyertakan barcode resmi untuk cetak boarding pass di pelabuhan.',
-    en: 'Yes, 100% official. Flight tickets come with valid PNR codes verifiable on airline websites. Sea tickets include official barcodes for boarding pass collection at ports.'
+    id: 'Pasti 100% resmi. Untuk tiket pesawat, Anda akan menerima Kode Booking (PNR) yang bisa dicek langsung di situs resmi maskapai bersangkutan. Untuk tiket kapal laut, kami sertakan barcode resmi untuk cetak boarding pass di pelabuhan.',
+    en: '100% genuine. For flights, you receive a valid Booking Code (PNR) verifiable directly on the airline’s website. Ship tickets include official barcoded vouchers for port boarding pass issuance.'
   },
-  faq_q3: { id: 'Berapa lama proses penerbitan e-ticket setelah pembayaran?', en: 'How long does e-ticket issuance take after payment confirmation?' },
+  faq_q3: { id: 'Berapa lama e-ticket dikirim setelah saya transfer?', en: 'How fast will I receive my e-ticket after payment?' },
   faq_a3: {
-    id: 'Setelah pembayaran terverifikasi, e-ticket biasanya diterbitkan dan dikirimkan ke WhatsApp Anda dalam waktu 5 hingga 15 menit.',
-    en: 'Once payment is verified, e-tickets are typically issued and sent to your WhatsApp within 5 to 15 minutes.'
+    id: 'Begitu transfer kami terima, e-ticket resmi biasanya langsung terbit dan dikirimkan ke WhatsApp Anda dalam waktu 5 sampai 15 menit.',
+    en: 'Once payment is received, your official PDF e-ticket is typically issued and sent to your WhatsApp in 5 to 15 minutes.'
   },
 
-  faq_sec2_label: { id: 'Kapal Laut & Feri', en: 'Ship & Ferry' },
-  faq_sec2_title: { id: 'Ketentuan Perjalanan Laut', en: 'Sea Voyage Terms' },
-  faq_q4: { id: 'Apakah bisa memesan tiket kapal untuk membawa kendaraan pribadi?', en: 'Can I book ferry tickets for my personal vehicle?' },
+  faq_sec2_label: { id: 'Kapal Laut & Feri', en: 'Maritime & Ferry' },
+  faq_sec2_title: { id: 'Ketentuan Tiket Kapal Laut', en: 'Sea Voyage Details' },
+  faq_q4: { id: 'Bisa pesan tiket kapal untuk bawa motor atau mobil?', en: 'Can I book ferry tickets for my motorcycle or car?' },
   faq_a4: {
-    id: 'Bisa. Untuk penyeberangan feri (seperti Merak - Bakauheni, Ketapang - Gilimanuk, dll), kami melayani pemesanan tiket untuk motor, mobil pribadi, maupun truk muatan.',
-    en: 'Yes. For ferry crossings (such as Merak - Bakauheni, Ketapang - Gilimanuk, etc.), we arrange tickets for motorcycles, private cars, and freight vehicles.'
+    id: 'Bisa. Kami melayani tiket penumpang kapal PELNI maupun tiket penyeberangan feri ASDP lengkap dengan kendaraan (motor, mobil keluarga, maupun mobil pick-up).',
+    en: 'Yes. We handle passenger tickets for PELNI vessels as well as ASDP ferry boarding passes for passengers with motorcycles or cars.'
   },
-  faq_q5: { id: 'Berapa jam sebelum keberangkatan kapal saya harus tiba di pelabuhan?', en: 'How early should I arrive at the port before ship departure?' },
+  faq_q5: { id: 'Berapa jam sebelum kapal berangkat saya harus standby di pelabuhan?', en: 'How early should I arrive at the port before departure?' },
   faq_a5: {
-    id: 'Kami menyarankan tiba di pelabuhan minimal 2 jam sebelum jadwal keberangkatan untuk proses penukaran tiket/boarding pass dan pemeriksaan bagasi.',
-    en: 'We recommend arriving at the harbor at least 2 hours before scheduled departure for boarding pass exchange and baggage check.'
+    id: 'Sebaiknya tiba di pelabuhan minimal 2 jam sebelum jadwal keberangkatan untuk menukar e-ticket dengan boarding pass fisik dan melewati pemeriksaan bagasi.',
+    en: 'We recommend arriving at least 2 hours before scheduled departure to exchange your voucher for physical boarding passes and clear baggage check.'
   },
 
-  faq_sec3_label: { id: 'Pembayaran & Perubahan', en: 'Payment & Changes' },
-  faq_sec3_title: { id: 'Metode Bayar & Kebijakan Jadwal', en: 'Payment Methods & Changes' },
-  faq_q6: { id: 'Metode pembayaran apa saja yang diterima?', en: 'What payment methods are supported?' },
+  faq_sec3_label: { id: 'Pembayaran & Reschedule', en: 'Payment & Reschedule' },
+  faq_sec3_title: { id: 'Metode Bayar & Perubahan Tiket', en: 'Payments & Date Changes' },
+  faq_q6: { id: 'Pembayaran bisa lewat apa saja?', en: 'What payment options do you accept?' },
   faq_a6: {
-    id: 'Kami menerima transfer antar bank nasional (BCA, Mandiri, BNI, BRI, BSI), QRIS untuk semua e-wallet (GoPay, OVO, DANA, ShopeePay), serta rekening resmi perusahaan.',
-    en: 'We accept national bank transfers (BCA, Mandiri, BNI, BRI, BSI), QRIS across all e-wallets, and official company accounts.'
+    id: 'Bisa lewat transfer bank nasional (BCA, Mandiri, BRI, BNI, BSI) maupun scan QRIS untuk semua aplikasi e-wallet (GoPay, OVO, DANA, ShopeePay).',
+    en: 'We support bank transfers (BCA, Mandiri, BRI, BNI, BSI) and QRIS payments via all popular e-wallets.'
   },
-  faq_q7: { id: 'Bagaimana jika saya ingin mengubah tanggal (reschedule) atau membatalkan tiket?', en: 'What if I need to reschedule or cancel my ticket?' },
+  faq_q7: { id: 'Kalau jadwal mendadak berubah, apakah bisa reschedule?', en: 'Can I reschedule if my plans change unexpectedly?' },
   faq_a7: {
-    id: 'Hubungi tim kami sesegera mungkin di WhatsApp. Kami akan membantu proses reschedule atau pembatalan sesuai ketentuan dan biaya administrasi maskapai atau operator kapal.',
-    en: 'Contact our team on WhatsApp as early as possible. We will assist you with rescheduling or cancellations per the transport operator’s specific policies.'
+    id: 'Bisa. Segera kabari admin kami di WhatsApp. Kami bantu ajukan reschedule ke maskapai atau operator kapal sesuai dengan aturan dan ketentuan tarif yang berlaku.',
+    en: 'Yes. Notify our WhatsApp admin as soon as possible. We will guide and process your reschedule request following carrier fare policies.'
   },
 
   // ================= TESTIMONI (testimoni.html) =================
-  testi_hero_title: { id: 'Pengalaman Nyata Bersama Kami', en: 'Real Experiences with RaksaTravel' },
-  testi_hero_desc: { id: 'Simak cerita dan ulasan tulus dari ribuan pelanggan yang mempercayakan perjalanan mereka kepada RaksaTravel.', en: 'Read sincere reviews from thousands of travelers who rely on RaksaTravel for their journeys.' },
+  testi_hero_title: { id: 'Cerita Pengalaman Pelanggan Kami', en: 'Reviews from Our Travelers' },
+  testi_hero_desc: { id: 'Ulasan asli dari para penumpang yang memesan tiket pesawat dan kapal laut lewat RaksaTravel.', en: 'Real experiences and honest feedback from passengers who book their journeys with RaksaTravel.' },
   testi_breadcrumb: { id: 'Testimoni Pelanggan', en: 'Testimonials' },
 
-  testi_stat_rating: { id: 'Penilaian Rata-rata Pelanggan', en: 'Average Customer Rating' },
-  testi_stat_tickets: { id: 'Tiket Sukses Diterbitkan', en: 'Tickets Successfully Issued' },
+  testi_stat_rating: { id: 'Kepuasan Layanan Pelanggan', en: 'Customer Satisfaction Score' },
+  testi_stat_tickets: { id: 'Tiket Berhasil Diterbitkan', en: 'Tickets Successfully Issued' },
 
   testi_card1_text: {
-    id: '"Pesan tiket pesawat Jakarta - Surabaya mendadak buat urusan dinas. Respon admin WhatsApp sangat cepat dan ramah, 10 menit tiket sudah masuk WA. Sangat membantu!"',
-    en: '"Booked a last-minute flight from Jakarta to Surabaya for urgent business. The WhatsApp response was super fast and friendly; e-ticket arrived in 10 minutes!"'
+    id: '"Waktu itu butuh tiket pesawat Jayapura ke Makassar mendadak untuk urusan kerjaan kantor. Chat admin jam 7 pagi langsung dibalas, 10 menit kemudian e-ticket sudah masuk WA. Sangat membantu saat buru-buru."',
+    en: '"Needed an urgent flight from Jayapura to Makassar for work. Messaged their team at 7 AM and got an immediate reply. Within 10 minutes, my e-ticket was in my WhatsApp. Lifesaver!"'
   },
   testi_card1_author: { id: 'Bambang Prasetyo', en: 'Bambang Prasetyo' },
-  testi_card1_role: { id: 'Karyawan Swasta, Jakarta', en: 'Corporate Professional, Jakarta' },
+  testi_card1_role: { id: 'Pegawai Swasta, Jayapura', en: 'Private Sector Employee, Jayapura' },
 
   testi_card2_text: {
-    id: '"Pertama kali ajak keluarga besar mudik naik kapal laut ke Makassar. Dibantu dari pemilihan kelas kabin sampai tips barang bawaan. Harganya jujur tanpa biaya aneh-aneh."',
-    en: '"First time taking my extended family home by ship to Makassar. Guided from cabin selection to baggage advice. Honest pricing with zero hidden costs."'
+    id: '"Baru pertama kali beli tiket kapal PELNI buat mudik sekeluarga 6 orang. Dijelaskan detail bedanya kelas ekonomi sama kabin ber-AC. Harganya pas dan gak ada biaya aneh-aneh."',
+    en: '"First time booking PELNI ship tickets for a family of 6. The staff explained the difference between economy and AC cabins clearly. Honest price without hidden markups."'
   },
-  testi_card2_author: { id: 'Andini', en: 'Andini' },
+  testi_card2_author: { id: 'Ibu Andini', en: 'Ibu Andini' },
   testi_card2_role: { id: 'Ibu Rumah Tangga, Surabaya', en: 'Homemaker, Surabaya' },
 
   testi_card3_text: {
-    id: '"Pernah salah tanggal waktu pesan tiket ke Bali karena terburu-buru. Admin RaksaTravel bantu proses perubahan jadwal dengan sabar dan tuntas. Pelayanan jempolan!"',
-    en: '"I once picked the wrong date when rushing to book a Bali flight. RaksaTravel team patiently handled the rescheduling smoothly. Top notch service!"'
+    id: '"Sempat panik karena salah sebut tanggal keberangkatan saat pesan tiket ke Bali. Untung adminnya sabar banget dan bantu proses ganti jadwal sampai tuntas tanpa ribet."',
+    en: '"Panicked when I realized I gave the wrong departure date for my Bali flight. Thankfully their admin patiently sorted out the reschedule smoothly."'
   },
   testi_card3_author: { id: 'Zakkry Al-Nazar', en: 'Zakkry Al-Nazar' },
-  testi_card3_role: { id: 'Pekerja Kreatif, Wamena', en: 'Creative Worker, Wamena' },
+  testi_card3_role: { id: 'Fotografer Lepas, Wamena', en: 'Freelance Photographer, Wamena' },
 
   testi_card4_text: {
-    id: '"Langganan tiket kapal feri penyeberangan rombongan mobil kantor ke Lampung. Sangat praktis, tidak perlu antre beli tiket fisik di pelabuhan. Sukses terus RaksaTravel!"',
-    en: '"Regular client for group ferry bookings across to Lampung. Extremely convenient; no need to queue for physical tickets at the port. Keep it up!"'
+    id: '"Sudah jadi langganan tetap tiap kali pesan tiket penyeberangan feri dan kapal logistik kantor. Praktis tinggal WhatsApp, gak perlu antre berdesakan di loket pelabuhan."',
+    en: '"Our go-to contact for office vehicle ferry and logistics ticketing. Extremely convenient via WhatsApp, no need to queue for hours at crowded port counters."'
   },
   testi_card4_author: { id: 'Agus Salim', en: 'Agus Salim' },
-  testi_card4_role: { id: 'Koordinator Logistik, Tangerang', en: 'Logistics Coordinator, Tangerang' },
+  testi_card4_role: { id: 'Staf Logistik, Merauke', en: 'Logistics Staff, Merauke' },
 
   testi_card5_text: {
-    id: '"Pelayanan ramah dan penjelasannya sangat jelas buat saya yang jarang bepergian naik pesawat. Terasa aman dan tenang bertransaksi di sini."',
-    en: '"Friendly service with clear guidance for someone like me who rarely flies. Felt completely secure and assured transacting with them."'
+    id: '"Penjelasannya ramah dan jelas banget untuk orang tua seperti saya yang jarang bepergian naik pesawat. Terasa aman dan tenang bertransaksi di sini."',
+    en: '"Patient and clear instructions, especially helpful for seniors like me who rarely travel by plane. Felt safe and well-guided throughout."'
   },
   testi_card5_author: { id: 'Siti Rahmawati', en: 'Siti Rahmawati' },
-  testi_card5_role: { id: 'Wirausaha, Yogyakarta', en: 'Entrepreneur, Yogyakarta' },
+  testi_card5_role: { id: 'Wirausaha, Biak', en: 'Business Owner, Biak' },
 
   testi_card6_text: {
-    id: '"Harga tiketnya bersaing dan pilihan jam terbangnya lengkap. Selalu jadi pilihan pertama keluarga kalau mau liburan."',
-    en: '"Competitive fares and comprehensive flight schedules. Always our family’s first choice whenever we plan a holiday."'
+    id: '"Harga tiketnya bersaing dan pilihan jam terbangnya selalu dicarikan yang paling pas sama jadwal kegiatan. Rekomendasi buat yang mau beli tiket tanpa repot."',
+    en: '"Competitive fares and they always find departure times that fit my schedule perfectly. Highly recommended for hassle-free ticketing."'
   },
   testi_card6_author: { id: 'Kevin Wijaya', en: 'Kevin Wijaya' },
-  testi_card6_role: { id: 'Pengusaha, Semarang', en: 'Business Owner, Semarang' },
+  testi_card6_role: { id: 'Pengusaha, Makassar', en: 'Business Owner, Makassar' },
 
   // ================= KONTAK (kontak.html) =================
-  contact_hero_title: { id: 'Hubungi Tim RaksaTravel', en: 'Get in Touch with RaksaTravel' },
-  contact_hero_desc: { id: 'Ada pertanyaan seputar rute, ketersediaan tiket, atau ingin konsultasi jadwal perjalanan? Kami siap melayani Anda.', en: 'Have questions about routes, ticket availability, or need travel schedule advice? We are ready to help.' },
+  contact_hero_title: { id: 'Hubungi Tim RaksaTravel', en: 'Contact RaksaTravel Team' },
+  contact_hero_desc: { id: 'Ada pertanyaan tentang jadwal penerbangan, harga tiket kapal, atau bantuan perubahan tiket? Tim kami siap melayani Anda setiap hari kerja.', en: 'Have questions about flights, ship schedules, or need help with bookings? Our team is ready to assist daily.' },
   contact_breadcrumb: { id: 'Kontak Kami', en: 'Contact Us' },
 
   // Image 1 cards
@@ -349,38 +349,38 @@ const T = {
   contact_card_ig_val: { id: '@raksatraveljayapura', en: '@raksatraveljayapura' },
   contact_card_fb_title: { id: 'Facebook', en: 'Facebook' },
   contact_card_fb_val: { id: 'RaksaTravelJayapura', en: 'RaksaTravelJayapura' },
-  contact_card_addr_title: { id: 'Alamat Kantor', en: 'Office Address' },
+  contact_card_addr_title: { id: 'Lokasi Kantor', en: 'Office Location' },
   contact_card_addr_val: { id: 'Kompleks Asri Residence, Jayapura, Papua', en: 'Kompleks Asri Residence, Jayapura, Papua' },
-  contact_card_hours_title: { id: 'Jam Operasional', en: 'Business Hours' },
+  contact_card_hours_title: { id: 'Jam Operasional', en: 'Office Hours' },
   contact_card_hours_val: { id: 'Senin – Sabtu, 08.00 – 20.00 WIT', en: 'Monday – Saturday, 08.00 – 20.00 WIT' },
 
-  contact_form_title: { id: 'Kirim Pesan atau Pertanyaan', en: 'Send a Message or Inquiry' },
-  contact_form_desc: { id: 'Tuliskan pesan Anda dan pesan akan langsung diteruskan ke staf WhatsApp kami untuk ditindaklanjuti.', en: 'Write your inquiry below and it will open directly in WhatsApp for prompt follow-up.' },
+  contact_form_title: { id: 'Tulis Pesan atau Pertanyaan Anda', en: 'Send an Inquiry' },
+  contact_form_desc: { id: 'Isi pesan di bawah dan percakapan akan langsung tersambung ke admin WhatsApp kami untuk ditanggapi.', en: 'Fill out your message below to immediately connect with our WhatsApp admin for quick assistance.' },
   contact_form_name: { id: 'Nama Lengkap', en: 'Full Name' },
   contact_form_name_ph: { id: 'Contoh: Ahmad Rizki', en: 'e.g. Ahmad Rizki' },
   contact_form_email: { id: 'Alamat Email', en: 'Email Address' },
   contact_form_email_ph: { id: 'Contoh: ahmad@email.com', en: 'e.g. ahmad@email.com' },
-  contact_form_subject: { id: 'Kategori Keperluan', en: 'Inquiry Category' },
-  contact_form_msg: { id: 'Pesan / Pertanyaan Anda', en: 'Your Message / Inquiry' },
-  contact_form_msg_ph: { id: 'Tuliskan rute, tanggal rencana berangkat, atau pertanyaan yang ingin disampaikan...', en: 'Describe your route, planned travel date, or questions in detail...' },
-  contact_form_submit: { id: 'Kirim Pesan ke WhatsApp', en: 'Send Message to WhatsApp' },
+  contact_form_subject: { id: 'Kategori Keperluan', en: 'Inquiry Subject' },
+  contact_form_msg: { id: 'Pesan / Rincian Rute', en: 'Your Message / Route Details' },
+  contact_form_msg_ph: { id: 'Tuliskan rute, perkiraan tanggal keberangkatan, atau hal yang ingin Anda tanyakan...', en: 'Describe your route, planned departure date, or questions...' },
+  contact_form_submit: { id: 'Kirim Pesan ke WhatsApp', en: 'Send to WhatsApp' },
 
-  contact_map_title: { id: 'Lokasi Kantor Kami', en: 'Our Office Location' },
+  contact_map_title: { id: 'Alamat Kantor Kami', en: 'Our Physical Office' },
   contact_map_open_btn: { id: 'Buka Petunjuk Arah di Google Maps', en: 'Open Directions in Google Maps' },
-  contact_hours_detail_title: { id: 'Jadwal Layanan Customer Support', en: 'Customer Support Schedule' },
+  contact_hours_detail_title: { id: 'Jam Layanan Customer Support', en: 'Customer Support Hours' },
   contact_day_mon: { id: 'Senin', en: 'Monday' },
   contact_day_tue: { id: 'Selasa', en: 'Tuesday' },
   contact_day_wed: { id: 'Rabu', en: 'Wednesday' },
   contact_day_thu: { id: 'Kamis', en: 'Thursday' },
   contact_day_fri: { id: 'Jumat', en: 'Friday' },
   contact_day_sat: { id: 'Sabtu', en: 'Saturday' },
-  contact_day_sun: { id: 'Minggu / Hari Libur', en: 'Sunday / Public Holidays' },
+  contact_day_sun: { id: 'Minggu / Tanggal Merah', en: 'Sunday / Public Holidays' },
   contact_status_closed: { id: 'Tutup (Emergency WhatsApp Tetap Siaga)', en: 'Closed (Emergency WhatsApp on Standby)' },
 
   // Select options
   select_inquiry_options: {
-    id: ['Tanya Jadwal & Harga Tiket', 'Pemesanan Tiket Baru', 'Permintaan Reschedule / Jadwal Ulang', 'Bantuan Refund / Pembatalan', 'Pemesanan Rombongan / Korporat', 'Lainnya'],
-    en: ['Inquire Schedule & Ticket Price', 'New Ticket Booking', 'Reschedule Request', 'Refund Assistance', 'Group / Corporate Booking', 'Other']
+    id: ['Tanya Jadwal & Harga Tiket', 'Pemesanan Tiket Baru', 'Permintaan Reschedule / Ganti Jadwal', 'Bantuan Refund / Pembatalan', 'Pemesanan Rombongan / Korporat', 'Lainnya'],
+    en: ['Check Schedule & Ticket Price', 'New Ticket Booking', 'Reschedule / Date Change Request', 'Refund Assistance', 'Group / Corporate Booking', 'Other']
   }
 };
 
@@ -568,13 +568,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let isStageInView = true;
     let animationFrameId = null;
 
-    // Viewport Liveness Observer (Zero CPU consumption when scrolled away)
+    // Viewport Liveness Observer (Zero CPU & Battery consumption when scrolled away)
     if ('IntersectionObserver' in window) {
       const stageObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             isStageInView = entry.isIntersecting;
-            if (isStageInView && !animationFrameId) {
+            hero3DCard.style.animationPlayState = isStageInView ? 'running' : 'paused';
+            if (isStageInView && !animationFrameId && !isTouchDevice) {
               animate3D();
             }
           });
@@ -590,11 +591,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = hero3DStage.getBoundingClientRect();
       const x = clientX - (rect.left + rect.width / 2);
       const y = clientY - (rect.top + rect.height / 2);
-      targetX = Math.max(Math.min((y / (rect.height / 2)) * -18, 18), -18);
-      targetY = Math.max(Math.min((x / (rect.width / 2)) * 18, 18), -18);
-      targetZ = isTouchDevice ? 10 : 20;
+      targetX = Math.max(Math.min((y / (rect.height / 2)) * -16, 16), -16);
+      targetY = Math.max(Math.min((x / (rect.width / 2)) * 16, 16), -16);
+      targetZ = 20;
 
-      if (heroLogoShine && !isTouchDevice) {
+      if (heroLogoShine) {
         const shineX = 50 + (x / (rect.width / 2)) * 35;
         const shineY = 50 + (y / (rect.height / 2)) * 35;
         heroLogoShine.style.background = `radial-gradient(circle at ${shineX.toFixed(1)}% ${shineY.toFixed(1)}%, rgba(255, 255, 255, 0.6) 0%, transparent 65%)`;
@@ -628,54 +629,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
       hero3DStage.addEventListener('mousedown', () => { targetZ = -10; });
       window.addEventListener('mouseup', () => { if (isHovered) targetZ = 20; });
+
+      // High performance smooth render loop only on desktop
+      const animate3D = () => {
+        if (!isStageInView) {
+          animationFrameId = null;
+          return;
+        }
+
+        if (isHovered) {
+          currentX += (targetX - currentX) * 0.1;
+          currentY += (targetY - currentY) * 0.1;
+          currentZ += (targetZ - currentZ) * 0.1;
+        } else {
+          idleAngle += 0.02;
+          const idleTiltX = Math.sin(idleAngle) * 4.5;
+          const idleTiltY = Math.cos(idleAngle * 0.7) * 6;
+          currentX += (idleTiltX - currentX) * 0.04;
+          currentY += (idleTiltY - currentY) * 0.04;
+          currentZ += (0 - currentZ) * 0.05;
+        }
+
+        hero3DCard.style.transform = `rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg) translateZ(${currentZ.toFixed(1)}px)`;
+        animationFrameId = requestAnimationFrame(animate3D);
+      };
+
+      animate3D();
     } else {
-      // Lightweight touch interaction on mobile
+      // Fluid mobile touch 3D gesture
       hero3DStage.addEventListener('touchstart', (e) => {
         if (e.touches.length > 0) {
-          isHovered = true;
+          hero3DCard.style.animationPlayState = 'paused';
           handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+          hero3DCard.style.transform = `rotateX(${targetX.toFixed(2)}deg) rotateY(${targetY.toFixed(2)}deg) translateZ(8px)`;
         }
       }, { passive: true });
 
       hero3DStage.addEventListener('touchmove', (e) => {
         if (e.touches.length > 0) {
           handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+          hero3DCard.style.transform = `rotateX(${targetX.toFixed(2)}deg) rotateY(${targetY.toFixed(2)}deg) translateZ(8px)`;
         }
       }, { passive: true });
 
       hero3DStage.addEventListener('touchend', () => {
-        isHovered = false;
-        targetX = 0;
-        targetY = 0;
-        targetZ = 0;
+        hero3DCard.style.transform = '';
+        hero3DCard.style.animationPlayState = isStageInView ? 'running' : 'paused';
       }, { passive: true });
     }
-
-    // High performance smooth render loop
-    const animate3D = () => {
-      if (!isStageInView) {
-        animationFrameId = null;
-        return;
-      }
-
-      if (isHovered) {
-        currentX += (targetX - currentX) * 0.1;
-        currentY += (targetY - currentY) * 0.1;
-        currentZ += (targetZ - currentZ) * 0.1;
-      } else {
-        idleAngle += 0.02;
-        const idleTiltX = Math.sin(idleAngle) * 4.5;
-        const idleTiltY = Math.cos(idleAngle * 0.7) * 6;
-        currentX += (idleTiltX - currentX) * 0.04;
-        currentY += (idleTiltY - currentY) * 0.04;
-        currentZ += (0 - currentZ) * 0.05;
-      }
-
-      hero3DCard.style.transform = `rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg) translateZ(${currentZ.toFixed(1)}px)`;
-      animationFrameId = requestAnimationFrame(animate3D);
-    };
-
-    animate3D();
   }
 
   // 4. Mobile Menu Navigation
@@ -735,20 +736,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: true });
 
-  // 5. Scroll Reveal with IntersectionObserver
+  // 5. Scroll Reveal with IntersectionObserver & Instant Hero Reveal
   const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }
-  );
-  revealElements.forEach((el) => revealObserver.observe(el));
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }
+    );
+    revealElements.forEach((el) => revealObserver.observe(el));
+  } else {
+    revealElements.forEach((el) => el.classList.add('visible'));
+  }
+
+  // Immediate reveal for hero elements so they render without any delay
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.hero .reveal, .page-hero .reveal, .navbar').forEach((el) => {
+      el.classList.add('visible');
+    });
+  });
 
   // 6. Number Counter Animation
   const counters = document.querySelectorAll('[data-counter]');
@@ -912,11 +924,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4500);
   };
 
-  // Start showing social proof after 4.5 seconds, then every 14 seconds
+  // Start showing social proof after 4.5 seconds, then periodically
+  const isMobileForToast = window.innerWidth <= 768;
+  const toastInterval = isMobileForToast ? 25000 : 14000;
+  const toastInitialDelay = isMobileForToast ? 6000 : 4500;
   setTimeout(() => {
     showNextBooking();
-    setInterval(showNextBooking, 14000);
-  }, 4500);
+    setInterval(showNextBooking, toastInterval);
+  }, toastInitialDelay);
 
   // 12. Ergonomic Mobile Bottom Action Bar Injector
   let mobileBar = document.querySelector('.mobile-bottom-bar');
@@ -928,7 +943,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20dan%20pesan%20tiket" class="mobile-bar-btn mobile-bar-wa" target="_blank" rel="noopener">
           <i class="fab fa-whatsapp"></i> <span>Pesan via WhatsApp</span>
         </a>
-        <a href="cek-tiket.html" class="mobile-bar-btn mobile-bar-tickets">
+        <a href="cek-tiket" class="mobile-bar-btn mobile-bar-tickets">
           <i class="fas fa-search"></i> <span>Cek Tiket</span>
         </a>
       </div>
