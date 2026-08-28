@@ -9,7 +9,7 @@ const { exec } = require('child_process');
 const Tesseract = require('tesseract.js');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 7860;
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const PROMOS_JSON_PATH = path.join(ROOT_DIR, 'promos.json');
