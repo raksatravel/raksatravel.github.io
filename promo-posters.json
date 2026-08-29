@@ -1,0 +1,32 @@
+[
+  {
+    "id": "poster-init-1",
+    "image": "images/promo-pesawat.jpeg",
+    "badge": "TIKET PESAWAT",
+    "badgeType": "airline",
+    "title": "Promo Tiket Pesawat",
+    "desc": "Harga spesial penerbangan domestik & internasional. Terbatas!",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20tertarik%20promo%20tiket%20pesawat%20yang%20di%20website",
+    "addedAt": "2026-08-29T00:00:00.000Z"
+  },
+  {
+    "id": "poster-init-2",
+    "image": "images/promo-kapal.jpeg",
+    "badge": "TIKET KAPAL",
+    "badgeType": "ship",
+    "title": "Promo Tiket Kapal",
+    "desc": "Harga hemat perjalanan laut antar pulau. Booking sebelum habis!",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20tertarik%20promo%20tiket%20kapal%20yang%20di%20website",
+    "addedAt": "2026-08-29T00:00:00.000Z"
+  },
+  {
+    "id": "poster-init-3",
+    "image": "images/promo-opentrip.jpeg",
+    "badge": "OPEN TRIP",
+    "badgeType": "airline",
+    "title": "Promo Paket Open Trip",
+    "desc": "Paket lengkap pesawat + kapal + akomodasi harga promo spesial.",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20tertarik%20promo%20paket%20open%20trip%20yang%20di%20website",
+    "addedAt": "2026-08-29T00:00:00.000Z"
+  }
+]
