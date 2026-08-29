@@ -28,7 +28,7 @@ let isBotReady = false;
 let authStatus = 'Menunggu Scan QR Code';
 
 console.log('====================================================');
-console.log('🤖 RAKSA TRAVEL - HIGH-RES REAL-TIME CHANNEL BOT');
+console.log('🤖 RAKSA TRAVEL - ULTIMATE MULTIMODAL LIVE BOT');
 console.log('====================================================\n');
 
 // Detect browser path
@@ -104,7 +104,6 @@ function parsePromoText(text) {
   // Detect Price (e.g. 2,090,000 or 2,780,000 or 1.960.000)
   const priceMatch = clean.match(/(\d{1,3}[.,]\d{3}[.,]\d{3}|\d{1,3}[.,]\d{3})/);
   
-  // If no price and no ticket keyword, ignore this message!
   if (!hasTicketKeyword && !priceMatch) {
     return null;
   }
@@ -301,19 +300,29 @@ client.on('ready', async () => {
   isBotReady = true;
   authStatus = '🚀 BOT ONLINE & MEMANTAU SALURAN WHATSAPP';
   console.log('\n🚀 BOT RAKSA TRAVEL AKTIF & SIAP MEMANTAU SALURAN WHATSAPP!');
-  console.log('Mendengarkan postingan promo baru secara real-time...\n');
+  console.log('Mendengarkan postingan promo baru secara real-time via Multimodal AI Vision...\n');
 
-  // Active High-Resolution DOM & Store Image Extractor
   const processedHashes = new Set();
 
+  // Active Multi-Pass Vision & Channel Inspector Loop (Every 4 Seconds)
   setInterval(async () => {
     try {
       if (!client.pupPage || client.pupPage.isClosed()) return;
 
-      // Extract all high-resolution images from DOM
+      // 1. Check & click newsletter tab in WhatsApp Web to make sure channels are active in view
+      await client.pupPage.evaluate(() => {
+        try {
+          const channelElements = document.querySelectorAll('div[data-testid="cell-frame-title"] span[title*="Raksa"], div[title*="Raksa"]');
+          if (channelElements.length > 0) {
+            channelElements[0].closest('div[role="listitem"], div[role="button"]')?.click();
+          }
+        } catch (e) {}
+      });
+
+      // 2. Extract high-res images from DOM
       const highResImages = await client.pupPage.evaluate(() => {
         const results = [];
-        const imgs = document.querySelectorAll('img[src^="blob:"], img[src*="whatsapp.net"]');
+        const imgs = document.querySelectorAll('img[src^="blob:"], img[src*="whatsapp.net"], img[src^="data:image"]');
         for (const img of Array.from(imgs)) {
           try {
             const w = img.naturalWidth || img.width || 0;
@@ -324,8 +333,7 @@ client.on('ready', async () => {
               canvas.height = h;
               const ctx = canvas.getContext('2d');
               ctx.drawImage(img, 0, 0);
-              const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
-              results.push(dataUrl);
+              results.push(canvas.toDataURL('image/jpeg', 0.95));
             }
           } catch (e) {}
         }
@@ -333,12 +341,12 @@ client.on('ready', async () => {
       });
 
       if (Array.isArray(highResImages) && highResImages.length > 0) {
-        for (const dataUrl of highResImages.slice(-3)) {
-          const hash = dataUrl.substring(50, 120);
+        for (const dataUrl of highResImages.slice(-4)) {
+          const hash = dataUrl.substring(60, 140);
           if (processedHashes.has(hash)) continue;
           processedHashes.add(hash);
 
-          console.log('\n🖼️ [CITRA POSTER TIKET DITEMUKAN DI WHATSAPP]: Memproses OCR AI Resolusi Tinggi...');
+          console.log('\n🖼️ [POSTER TIKET BARU DITEMUKAN]: Menjalankan AI Vision Reader...');
           try {
             const base64Data = dataUrl.replace(/^data:image\/[a-z]+;base64,/, '');
             const buffer = Buffer.from(base64Data, 'base64');
@@ -358,15 +366,32 @@ client.on('ready', async () => {
   }, 4000);
 });
 
-// Incoming message listener for direct text & captions
+// Incoming message listener for direct messages, media, and captions
 client.on('message_create', async (msg) => {
   try {
     if (!msg) return;
+    
+    // If message has media
+    if (msg.hasMedia) {
+      try {
+        const media = await msg.downloadMedia();
+        if (media && media.data) {
+          console.log('\n📩 [MEDIA DITERIMA]: Menjalankan AI Vision...');
+          const buffer = Buffer.from(media.data, 'base64');
+          const { data: { text } } = await Tesseract.recognize(buffer, 'ind+eng');
+          const promoData = parsePromoText(text);
+          if (promoData) {
+            await updatePromos(promoData);
+          }
+        }
+      } catch (e) {}
+    }
+
     const bodyText = (msg.body || '').trim();
     if (bodyText.length > 5) {
       const promoData = parsePromoText(bodyText);
       if (promoData) {
-        console.log(`\n📩 [TEKS PROMO TERDETEKSI]: ${bodyText}`);
+        console.log(`\n📩 [TEKS PROMO DITERIMA]: ${bodyText}`);
         await updatePromos(promoData);
       }
     }
