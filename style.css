@@ -3950,6 +3950,118 @@ button:active,
     transform: none !important;
     animation: none !important;
   }
+  .motion-cursor-dot, .motion-cursor-ring, .motion-cursor-glow, .motion-cursor-trail {
+    display: none !important;
+  }
 }
+
+/* ===================================================
+   PC Interactive Spring Motion Cursor & Magnetic Elements
+   (Only Active on Fine Pointer / PC Devices)
+   =================================================== */
+@media (hover: hover) and (pointer: fine) and (min-width: 992px) {
+  .motion-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background: #60A5FA;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100000;
+    transform: translate3d(-100px, -100px, 0);
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.9), 0 0 20px rgba(37, 99, 235, 0.6);
+    will-change: transform;
+    transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.2s ease,
+                opacity 0.3s ease;
+  }
+
+  .motion-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(96, 165, 250, 0.55);
+    background: rgba(37, 99, 235, 0.06);
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate3d(-100px, -100px, 0);
+    will-change: transform, width, height, border-color, background;
+    transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.25s ease,
+                background 0.25s ease,
+                opacity 0.3s ease;
+    backdrop-filter: blur(0.5px);
+    -webkit-backdrop-filter: blur(0.5px);
+  }
+
+  .motion-cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.13) 0%, rgba(96, 165, 250, 0.05) 40%, rgba(37, 99, 235, 0) 70%);
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate3d(-200px, -200px, 0);
+    will-change: transform, opacity;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  /* Cursor Interactive States */
+  .motion-cursor-ring.cursor-hover {
+    width: 54px;
+    height: 54px;
+    border-color: rgba(249, 115, 22, 0.85);
+    background: rgba(249, 115, 22, 0.12);
+    box-shadow: 0 0 25px rgba(249, 115, 22, 0.35);
+  }
+
+  .motion-cursor-dot.cursor-hover {
+    width: 6px;
+    height: 6px;
+    background: #F97316;
+    box-shadow: 0 0 12px rgba(249, 115, 22, 0.9);
+  }
+
+  .motion-cursor-ring.cursor-active {
+    width: 32px;
+    height: 32px;
+    transform: translate3d(-100px, -100px, 0) scale(0.9);
+    border-color: rgba(96, 165, 250, 0.9);
+    background: rgba(37, 99, 235, 0.25);
+  }
+
+  .motion-cursor-dot.cursor-active {
+    transform: translate3d(-100px, -100px, 0) scale(0.7);
+  }
+
+  .motion-cursor-hidden {
+    opacity: 0 !important;
+  }
+
+  /* Micro Motion Stagger Particles on Click */
+  .motion-click-particle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    will-change: transform, opacity;
+  }
+}
+
 
 

@@ -971,4 +971,162 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(() => {});
     }
+
+  // ===================================================
+  // 15. PC Motion Cursor & Magnetic Physics Engine (Framer Motion Inspired)
+  // ===================================================
+  const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 992px)').matches;
+  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (isFinePointer && !isReducedMotion) {
+    // Inject Cursor DOM
+    const dot = document.createElement('div');
+    dot.className = 'motion-cursor-dot';
+    const ring = document.createElement('div');
+    ring.className = 'motion-cursor-ring';
+    const glow = document.createElement('div');
+    glow.className = 'motion-cursor-glow';
+
+    document.body.appendChild(glow);
+    document.body.appendChild(ring);
+    document.body.appendChild(dot);
+
+    let mouseX = -200, mouseY = -200;
+    let dotX = -200, dotY = -200;
+    let ringX = -200, ringY = -200;
+    let glowX = -200, glowY = -200;
+    let isVisible = false;
+    let isHovering = false;
+
+    // Smooth Spring Lerp interpolation (mass/damping model)
+    const lerp = (start, end, factor) => start + (end - start) * factor;
+
+    // Motion Loop
+    const renderMotionCursor = () => {
+      // Dot follows immediately with tight spring
+      dotX = lerp(dotX, mouseX, 0.45);
+      dotY = lerp(dotY, mouseY, 0.45);
+      dot.style.transform = `translate3d(${dotX - 4}px, ${dotY - 4}px, 0)`;
+
+      // Ring trails with smooth physics easing
+      ringX = lerp(ringX, mouseX, isHovering ? 0.28 : 0.18);
+      ringY = lerp(ringY, mouseY, isHovering ? 0.28 : 0.18);
+      ring.style.transform = `translate3d(${ringX - 19}px, ${ringY - 19}px, 0)`;
+
+      // Ambient glow follows lazily
+      glowX = lerp(glowX, mouseX, 0.08);
+      glowY = lerp(glowY, mouseY, 0.08);
+      glow.style.transform = `translate3d(${glowX - 160}px, ${glowY - 160}px, 0)`;
+
+      requestAnimationFrame(renderMotionCursor);
+    };
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (!isVisible) {
+        isVisible = true;
+        dotX = mouseX;
+        dotY = mouseY;
+        ringX = mouseX;
+        ringY = mouseY;
+        glowX = mouseX;
+        glowY = mouseY;
+        glow.style.opacity = '1';
+        dot.classList.remove('motion-cursor-hidden');
+        ring.classList.remove('motion-cursor-hidden');
+      }
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', () => {
+      isVisible = false;
+      glow.style.opacity = '0';
+      dot.classList.add('motion-cursor-hidden');
+      ring.classList.add('motion-cursor-hidden');
+    });
+
+    document.addEventListener('mouseenter', () => {
+      isVisible = true;
+      glow.style.opacity = '1';
+      dot.classList.remove('motion-cursor-hidden');
+      ring.classList.remove('motion-cursor-hidden');
+    });
+
+    // Interactive Hover Elements (Links, Buttons, Cards, Inputs)
+    const interactiveSelector = 'a, button, input, select, textarea, .card, .dest-card, .dest-showcase-card, .service-card, .faq-question, .contact-card, .badge, .hero-search-btn';
+    
+    document.addEventListener('mouseover', (e) => {
+      const target = e.target.closest(interactiveSelector);
+      if (target) {
+        isHovering = true;
+        ring.classList.add('cursor-hover');
+        dot.classList.add('cursor-hover');
+      }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+      const target = e.target.closest(interactiveSelector);
+      if (target) {
+        isHovering = false;
+        ring.classList.remove('cursor-hover');
+        dot.classList.remove('cursor-hover');
+      }
+    });
+
+    // Click micro-motion
+    document.addEventListener('mousedown', () => {
+      ring.classList.add('cursor-active');
+      dot.classList.add('cursor-active');
+    });
+
+    document.addEventListener('mouseup', () => {
+      ring.classList.remove('cursor-active');
+      dot.classList.remove('cursor-active');
+    });
+
+    // Magnetic pull effect on primary buttons
+    const magneticBtns = document.querySelectorAll('.btn, .theme-toggle-btn, .lang-toggle-btn, .nav-logo');
+    magneticBtns.forEach((btn) => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const pullX = (e.clientX - centerX) * 0.22;
+        const pullY = (e.clientY - centerY) * 0.22;
+        btn.style.transform = `translate3d(${pullX.toFixed(2)}px, ${pullY.toFixed(2)}px, 0)`;
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+
+    // Particle ripple burst on click
+    document.addEventListener('click', (e) => {
+      const colors = ['#60A5FA', '#3B82F6', '#F97316', '#38BDF8'];
+      for (let i = 0; i < 5; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'motion-click-particle';
+        particle.style.background = colors[i % colors.length];
+        document.body.appendChild(particle);
+
+        const angle = (Math.PI * 2 * i) / 5;
+        const distance = 24 + Math.random() * 18;
+        const targetX = e.clientX + Math.cos(angle) * distance;
+        const targetY = e.clientY + Math.sin(angle) * distance;
+
+        particle.animate([
+          { transform: `translate3d(${e.clientX}px, ${e.clientY}px, 0) scale(1)`, opacity: 0.9 },
+          { transform: `translate3d(${targetX}px, ${targetY}px, 0) scale(0)`, opacity: 0 }
+        ], {
+          duration: 450,
+          easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+        }).onfinish = () => particle.remove();
+      }
+    });
+
+    // Start requestAnimationFrame loop
+    renderMotionCursor();
+  }
 });
