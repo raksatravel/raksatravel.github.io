@@ -1033,6 +1033,7 @@ p { margin-bottom: 1rem; color: var(--text-body); transition: color var(--transi
   cursor: grab;
   z-index: 2;
   transition: filter 0.3s ease;
+  pointer-events: auto;
 }
 
 .hero-3d-card:active {
@@ -1047,22 +1048,21 @@ p { margin-bottom: 1rem; color: var(--text-body); transition: color var(--transi
 }
 
 .hero-3d-stage:hover .hero-logo-frame {
-  transform: translateZ(60px);
   box-shadow: 0 35px 75px rgba(0, 0, 0, 0.7),
               0 0 60px rgba(37, 99, 235, 0.65),
               inset 0 0 25px rgba(255, 255, 255, 0.6);
 }
 
 .hero-3d-stage:hover .chip-plane {
-  transform: translateZ(105px);
+  transform: translateZ(90px) scale(1.08);
 }
 
 .hero-3d-stage:hover .chip-ship {
-  transform: translateZ(90px);
+  transform: translateZ(80px) scale(1.08);
 }
 
 .hero-3d-stage:hover .chip-shield {
-  transform: translateZ(80px);
+  transform: translateZ(70px) scale(1.08);
 }
 
 /* 3D Logo Frame Medallion */
@@ -1077,10 +1077,10 @@ p { margin-bottom: 1rem; color: var(--text-body); transition: color var(--transi
               inset 0 0 20px rgba(255, 255, 255, 0.5);
   position: relative;
   z-index: 2;
-  transform: translateZ(40px);
+  transform: translateZ(35px);
   transform-style: preserve-3d;
   backface-visibility: hidden;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  transition: box-shadow 0.4s ease;
 }
 
 .hero-showcase-logo {

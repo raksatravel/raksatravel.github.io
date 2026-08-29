@@ -563,7 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
           entries.forEach((entry) => {
             isStageInView = entry.isIntersecting;
             hero3DCard.style.animationPlayState = isStageInView ? 'running' : 'paused';
-            if (isStageInView && !animationFrameId && !isTouchDevice) {
+            if (isStageInView && !animationFrameId) {
               animate3D();
             }
           });
@@ -573,98 +573,78 @@ document.addEventListener('DOMContentLoaded', () => {
       stageObserver.observe(hero3DStage);
     }
 
-    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 768);
-
     const handlePointerMove = (clientX, clientY) => {
       const rect = hero3DStage.getBoundingClientRect();
       const x = clientX - (rect.left + rect.width / 2);
       const y = clientY - (rect.top + rect.height / 2);
-      targetX = Math.max(Math.min((y / (rect.height / 2)) * -16, 16), -16);
-      targetY = Math.max(Math.min((x / (rect.width / 2)) * 16, 16), -16);
-      targetZ = 20;
+      
+      // Calculate responsive tilt angles with smooth limits
+      targetX = Math.max(Math.min((y / (rect.height / 2)) * -22, 22), -22);
+      targetY = Math.max(Math.min((x / (rect.width / 2)) * 22, 22), -22);
+      targetZ = 30;
 
       if (heroLogoShine) {
-        const shineX = 50 + (x / (rect.width / 2)) * 35;
-        const shineY = 50 + (y / (rect.height / 2)) * 35;
-        heroLogoShine.style.background = `radial-gradient(circle at ${shineX.toFixed(1)}% ${shineY.toFixed(1)}%, rgba(255, 255, 255, 0.6) 0%, transparent 65%)`;
+        const shineX = 50 + (x / (rect.width / 2)) * 40;
+        const shineY = 50 + (y / (rect.height / 2)) * 40;
+        heroLogoShine.style.background = `radial-gradient(circle at ${shineX.toFixed(1)}% ${shineY.toFixed(1)}%, rgba(255, 255, 255, 0.7) 0%, transparent 60%)`;
       }
     };
 
-    if (!isTouchDevice) {
-      const heroSection = document.querySelector('.hero');
-      if (heroSection) {
-        heroSection.addEventListener('mousemove', (e) => {
-          const rect = hero3DStage.getBoundingClientRect();
-          if (
-            e.clientX >= rect.left - 150 &&
-            e.clientX <= rect.right + 150 &&
-            e.clientY >= rect.top - 150 &&
-            e.clientY <= rect.bottom + 150
-          ) {
-            isHovered = true;
-            handlePointerMove(e.clientX, e.clientY);
-          } else {
-            isHovered = false;
-            targetZ = 0;
-          }
-        }, { passive: true });
+    // Track mouse anywhere inside the hero section for a wide, responsive capture zone
+    window.addEventListener('mousemove', (e) => {
+      if (!isStageInView) return;
+      const rect = hero3DStage.getBoundingClientRect();
+      const distance = Math.hypot(e.clientX - (rect.left + rect.width / 2), e.clientY - (rect.top + rect.height / 2));
+      
+      if (distance < 500) {
+        isHovered = true;
+        handlePointerMove(e.clientX, e.clientY);
+      } else {
+        isHovered = false;
+        targetZ = 0;
+      }
+    }, { passive: true });
 
-        heroSection.addEventListener('mouseleave', () => {
-          isHovered = false;
-          targetZ = 0;
-        });
+    hero3DStage.addEventListener('mousedown', () => { targetZ = -15; });
+    window.addEventListener('mouseup', () => { if (isHovered) targetZ = 30; });
+
+    // High performance smooth render loop
+    const animate3D = () => {
+      if (!isStageInView) {
+        animationFrameId = null;
+        return;
       }
 
-      hero3DStage.addEventListener('mousedown', () => { targetZ = -10; });
-      window.addEventListener('mouseup', () => { if (isHovered) targetZ = 20; });
+      if (isHovered) {
+        currentX += (targetX - currentX) * 0.12;
+        currentY += (targetY - currentY) * 0.12;
+        currentZ += (targetZ - currentZ) * 0.12;
+      } else {
+        idleAngle += 0.025;
+        const idleTiltX = Math.sin(idleAngle) * 6;
+        const idleTiltY = Math.cos(idleAngle * 0.8) * 8;
+        currentX += (idleTiltX - currentX) * 0.05;
+        currentY += (idleTiltY - currentY) * 0.05;
+        currentZ += (0 - currentZ) * 0.06;
+      }
 
-      // High performance smooth render loop only on desktop
-      const animate3D = () => {
-        if (!isStageInView) {
-          animationFrameId = null;
-          return;
-        }
+      hero3DCard.style.transform = `perspective(1000px) rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg) translateZ(${currentZ.toFixed(1)}px)`;
+      animationFrameId = requestAnimationFrame(animate3D);
+    };
 
-        if (isHovered) {
-          currentX += (targetX - currentX) * 0.1;
-          currentY += (targetY - currentY) * 0.1;
-          currentZ += (targetZ - currentZ) * 0.1;
-        } else {
-          idleAngle += 0.02;
-          const idleTiltX = Math.sin(idleAngle) * 4.5;
-          const idleTiltY = Math.cos(idleAngle * 0.7) * 6;
-          currentX += (idleTiltX - currentX) * 0.04;
-          currentY += (idleTiltY - currentY) * 0.04;
-          currentZ += (0 - currentZ) * 0.05;
-        }
+    animate3D();
 
-        hero3DCard.style.transform = `rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg) translateZ(${currentZ.toFixed(1)}px)`;
-        animationFrameId = requestAnimationFrame(animate3D);
-      };
+    // Mobile touch support
+    hero3DStage.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        isHovered = true;
+        handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
 
-      animate3D();
-    } else {
-      // Fluid mobile touch 3D gesture
-      hero3DStage.addEventListener('touchstart', (e) => {
-        if (e.touches.length > 0) {
-          hero3DCard.style.animationPlayState = 'paused';
-          handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
-          hero3DCard.style.transform = `rotateX(${targetX.toFixed(2)}deg) rotateY(${targetY.toFixed(2)}deg) translateZ(8px)`;
-        }
-      }, { passive: true });
-
-      hero3DStage.addEventListener('touchmove', (e) => {
-        if (e.touches.length > 0) {
-          handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
-          hero3DCard.style.transform = `rotateX(${targetX.toFixed(2)}deg) rotateY(${targetY.toFixed(2)}deg) translateZ(8px)`;
-        }
-      }, { passive: true });
-
-      hero3DStage.addEventListener('touchend', () => {
-        hero3DCard.style.transform = '';
-        hero3DCard.style.animationPlayState = isStageInView ? 'running' : 'paused';
-      }, { passive: true });
-    }
+    hero3DStage.addEventListener('touchend', () => {
+      isHovered = false;
+    }, { passive: true });
   }
 
   // 4. Mobile Menu Navigation
