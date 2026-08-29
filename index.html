@@ -265,7 +265,7 @@
     </div>
   </section>
 
-  <!-- Why Choose Us -->
+  <!-- Bento 2.0 Feature Matrix (21st.dev Style Architecture) -->
   <section class="section section-alt">
     <div class="container">
       <div class="section-header reveal">
@@ -275,26 +275,90 @@
           langsung direspons staf kami:</p>
       </div>
 
-      <div class="grid grid-3">
-        <div class="card card-feature reveal delay-1">
-          <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
+      <!-- Bento Grid (3-Col Row 1 + 2-Col 70/30 Row 2) -->
+      <div class="bento-grid">
+        <!-- Card 1: Official PNR Validation -->
+        <div class="bento-card bento-col-4 reveal delay-1">
+          <div class="bento-specular-glare"></div>
+          <div class="bento-live-badge">
+            <span class="bento-pulse-dot"></span>
+            <span>Resmi &amp; Terverifikasi</span>
+          </div>
+          <div class="card-icon" style="margin-bottom: 1.25rem;"><i class="fas fa-shield-halved"></i></div>
           <h3 class="card-title" data-i18n="home_why_card1_title">Tiket Resmi Berkode PNR</h3>
           <p class="card-text" data-i18n="home_why_card1_desc">Setiap tiket pesawat dan kapal langsung terdaftar di
             sistem maskapai atau Pelni. Anda bisa cek langsung di situs resmi maskapai.</p>
         </div>
 
-        <div class="card card-feature reveal delay-2">
-          <div class="card-icon"><i class="fas fa-tag"></i></div>
+        <!-- Card 2: Transparent Cost -->
+        <div class="bento-card bento-col-4 reveal delay-2">
+          <div class="bento-specular-glare"></div>
+          <div class="bento-live-badge">
+            <span class="bento-pulse-dot"></span>
+            <span>Tanpa Biaya Tersembunyi</span>
+          </div>
+          <div class="card-icon" style="margin-bottom: 1.25rem;"><i class="fas fa-receipt"></i></div>
           <h3 class="card-title" data-i18n="home_why_card2_title">Rincian Biaya Terbuka</h3>
           <p class="card-text" data-i18n="home_why_card2_desc">Harga yang kami sampaikan di awal sudah termasuk pajak
             bandara dan bagasi. Tidak ada biaya tambahan yang disembunyikan.</p>
         </div>
 
-        <div class="card card-feature reveal delay-3">
-          <div class="card-icon"><i class="fab fa-whatsapp"></i></div>
+        <!-- Card 3: Real Human Support -->
+        <div class="bento-card bento-col-4 reveal delay-3">
+          <div class="bento-specular-glare"></div>
+          <div class="bento-live-badge">
+            <span class="bento-pulse-dot"></span>
+            <span>Respon Cepat WhatsApp</span>
+          </div>
+          <div class="card-icon" style="margin-bottom: 1.25rem;"><i class="fab fa-whatsapp"></i></div>
           <h3 class="card-title" data-i18n="home_why_card3_title">Dibantu Staf Berpengalaman</h3>
           <p class="card-text" data-i18n="home_why_card3_desc">Kalau butuh ubah tanggal keberangkatan, salah ketik nama,
             atau tambah bagasi, staf kami siap bantu sampai selesai.</p>
+        </div>
+
+        <!-- Card 4: Wide Live Route Stream (70% Split) -->
+        <div class="bento-card bento-col-8 reveal delay-1">
+          <div class="bento-specular-glare"></div>
+          <div class="bento-live-badge">
+            <span class="bento-pulse-dot"></span>
+            <span>Live Feed Penerbangan</span>
+          </div>
+          <h3 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.5rem;">Koneksi Jadwal &amp; Rute Terbanyak dari Papua</h3>
+          <p class="card-text" style="margin-bottom: 1.5rem;">Penerbangan harian Lion Group, Garuda Indonesia, Citilink, Sriwijaya Air, serta Kapal Penumpang PELNI &amp; Perintis.</p>
+          
+          <div class="bento-stream-marquee">
+            <div class="bento-stream-track">
+              <span class="badge badge-primary"><i class="fas fa-plane"></i> Jayapura &rarr; Makassar (UPG)</span>
+              <span class="badge badge-accent"><i class="fas fa-plane"></i> Jayapura &rarr; Jakarta (CGK)</span>
+              <span class="badge badge-primary"><i class="fas fa-ship"></i> KM Dobonsolo &rarr; Tanjung Perak</span>
+              <span class="badge badge-primary"><i class="fas fa-plane"></i> Jayapura &rarr; Surabaya (SUB)</span>
+              <span class="badge badge-accent"><i class="fas fa-ship"></i> KM Sinabung &rarr; Bitung</span>
+            </div>
+            <div class="bento-stream-track" aria-hidden="true">
+              <span class="badge badge-primary"><i class="fas fa-plane"></i> Jayapura &rarr; Makassar (UPG)</span>
+              <span class="badge badge-accent"><i class="fas fa-plane"></i> Jayapura &rarr; Jakarta (CGK)</span>
+              <span class="badge badge-primary"><i class="fas fa-ship"></i> KM Dobonsolo &rarr; Tanjung Perak</span>
+              <span class="badge badge-primary"><i class="fas fa-plane"></i> Jayapura &rarr; Surabaya (SUB)</span>
+              <span class="badge badge-accent"><i class="fas fa-ship"></i> KM Sinabung &rarr; Bitung</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Fast Direct Booking Action (30% Split) -->
+        <div class="bento-card bento-col-4 reveal delay-2" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div class="bento-specular-glare"></div>
+          <div>
+            <div class="bento-live-badge">
+              <span class="bento-pulse-dot"></span>
+              <span>1-Click Konsultasi</span>
+            </div>
+            <h3 class="card-title" style="font-size: 1.25rem;">Mau Cek Rute Spesifik?</h3>
+            <p class="card-text" style="font-size: 0.9rem;">Ketik kota tujuan &amp; tanggal berangkat, staf kami langsung carikan tiket termurah.</p>
+          </div>
+          <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20mau%20konsultasi%20rute%20dan%20harga%20tiket" 
+             class="btn btn-primary btn-sm" target="_blank" rel="noopener" style="margin-top: 1.25rem; width: 100%; justify-content: center;">
+            <i class="fab fa-whatsapp"></i> Chat Admin Sekarang
+          </a>
         </div>
       </div>
     </div>

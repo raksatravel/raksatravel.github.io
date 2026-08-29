@@ -3956,6 +3956,161 @@ button:active,
 }
 
 /* ===================================================
+   BENTO 2.0 & 21ST.DEV SPECULAR LIGHTING & GLOW ENGINE
+   =================================================== */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.bento-col-4 { grid-column: span 4; }
+.bento-col-5 { grid-column: span 5; }
+.bento-col-6 { grid-column: span 6; }
+.bento-col-7 { grid-column: span 7; }
+.bento-col-8 { grid-column: span 8; }
+.bento-col-12 { grid-column: span 12; }
+
+@media (max-width: 1024px) {
+  .bento-col-4, .bento-col-5, .bento-col-6, .bento-col-7, .bento-col-8 {
+    grid-column: span 12 !important;
+  }
+}
+
+.bento-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-2xl);
+  padding: 2.25rem;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(96, 165, 250, 0.4),
+    rgba(255, 255, 255, 0.05) 40%,
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+
+.bento-card:hover::before {
+  opacity: 1;
+}
+
+.bento-card:hover {
+  border-color: rgba(96, 165, 250, 0.3);
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.6), 0 0 35px rgba(37, 99, 235, 0.18);
+}
+
+.bento-specular-glare {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle 350px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(96, 165, 250, 0.09),
+    transparent 65%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 1;
+}
+
+.bento-card:hover .bento-specular-glare {
+  opacity: 1;
+}
+
+/* Subtle live pulse indicator badge */
+.bento-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: rgba(37, 99, 235, 0.12);
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--blue-light);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1.15rem;
+}
+
+.bento-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 10px #10B981;
+  position: relative;
+}
+
+.bento-pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid #10B981;
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Infinite Floating Live Stream */
+.bento-stream-marquee {
+  display: flex;
+  gap: 1.25rem;
+  overflow: hidden;
+  user-select: none;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.bento-stream-track {
+  display: flex;
+  gap: 1.25rem;
+  flex-shrink: 0;
+  animation: bento-scroll 24s linear infinite;
+  will-change: transform;
+}
+
+.bento-stream-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes bento-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - 1.25rem)); }
+}
+
+/* ===================================================
    PC Interactive Spring Motion Cursor & Magnetic Elements
    (Only Active on Fine Pointer / PC Devices)
    =================================================== */

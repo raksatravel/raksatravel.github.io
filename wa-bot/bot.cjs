@@ -716,8 +716,8 @@ app.get('/', (req, res) => {
     </head>
     <body>
       <div class="card">
-        <h1>🤖 Raksa Travel WA Bot</h1>
-        <div class="badge">${isBotReady ? '🟢 ONLINE & AUTO-PUSH AKTIF' : '🟡 ' + authStatus}</div>
+        <h1>Raksa Travel Live Listener</h1>
+        <div class="badge">${isBotReady ? 'ONLINE &amp; AUTO-SYNC ACTIVE' : authStatus}</div>
         <p>Status: <b>${authStatus}</b></p>
       </div>
     </body>

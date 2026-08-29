@@ -515,39 +515,27 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
 
-  // Smooth Card Interactive Tilt Effect for General Cards & Destination/Service 3D Cards
+  // Smooth Card Interactive Tilt Effect & 21st.dev Specular Light Tracker
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    // 1. Destination & Service Cards (Deep 3D Hologram Tilt & Parallax)
-    const deep3DCards = document.querySelectorAll('.dest-card, .dest-showcase-card, .service-card');
-    deep3DCards.forEach((card) => {
+    // 1. Bento & High-End Cards (Specular light calculation + 3D Spring tilt)
+    const interactiveCards = document.querySelectorAll('.bento-card, .dest-card, .dest-showcase-card, .service-card, .card, .promo-poster-card');
+    interactiveCards.forEach((card) => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -11;
-        const rotateY = ((x - centerX) / centerX) * 11;
-        card.style.transform = `perspective(1000px) translateY(-10px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
+        
+        // Update CSS Variables for Specular Border and Glare
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
 
-    // 2. Standard Interactive Cards
-    const standardCards = document.querySelectorAll('.card:not(.dest-card), .testimonial-card, .team-card, .contact-card');
-    standardCards.forEach((card) => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -3.5;
-        const rotateY = ((x - centerX) / centerX) * 3.5;
+        const rotateX = ((y - centerY) / centerY) * -6;
+        const rotateY = ((x - centerX) / centerX) * 6;
         card.style.transform = `perspective(1000px) translateY(-6px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
       });
+
       card.addEventListener('mouseleave', () => {
         card.style.transform = '';
       });
