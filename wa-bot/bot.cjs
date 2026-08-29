@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 7860;
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const PROMOS_JSON_PATH = path.join(ROOT_DIR, 'promos.json');
+const POSTERS_JSON_PATH = path.join(ROOT_DIR, 'promo-posters.json');
 const GITHUB_REPO = 'raksatravel/raksatravel.github.io';
 let GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
 try {
@@ -92,7 +93,95 @@ client.on('authenticated', () => {
   console.log('\n🎉 AUTENTIKASI WHATSAPP BERHASIL!');
 });
 
-// Helper: Parse raw text or OCR text into structured promo data
+// AI Multimodal Vision via 9Router (Gemini 3.7 Flash)
+async function analyzeImageWithAiVision(base64Data) {
+  try {
+    const prompt = `Anda adalah AI parser promo tiket pesawat dan kapal laut untuk Raksa Travel.
+Analisa gambar poster tiket promo ini dan ekstrak data berikut dalam format JSON murni:
+{
+  "badge": "nama maskapai atau kapal (contoh: SRIWIJAYA AIR / CITILINK / LION AIR / PELNI / GARUDA)",
+  "badgeType": "airline atau ship",
+  "origin": "Kota Asal (contoh: Jayapura / Makassar / Jakarta / Surabaya)",
+  "originCode": "Kode bandara asal 3 huruf (contoh: DJJ / UPG / CGK / SUB)",
+  "destination": "Kota Tujuan (contoh: Makassar / Surabaya / Jakarta / Jayapura)",
+  "destinationCode": "Kode bandara tujuan 3 huruf (contoh: UPG / SUB / CGK / DJJ)",
+  "transit": "Penerbangan Langsung / Transit Makassar / Transit Surabaya",
+  "price": "Nominal harga saja dengan titik pemisah ribuan (contoh: 1.960.000 / 2.970.000)",
+  "date": "Tanggal atau periode keberangkatan yang tertera di poster (contoh: Tgl 2 September / Keberangkatan Terdekat)",
+  "baggage": "Keterangan bagasi jika ada (contoh: Termasuk Bagasi 20 KG / Termasuk Bagasi 10 KG)"
+}
+HANYA KEMBALIKAN JSON VALID TANPA MARKDOWN ATAU PENJELASAN LAIN.`;
+
+    const requestBody = JSON.stringify({
+      model: "ag/gemini-3.7-flash-high",
+      messages: [
+        {
+          role: "user",
+          content: [
+            { type: "text", text: prompt },
+            {
+              type: "image_url",
+              image_url: {
+                url: `data:image/jpeg;base64,${base64Data}`
+              }
+            }
+          ]
+        }
+      ]
+    });
+
+    const res = await fetch("http://127.0.0.1:20128/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer sk-314fd95655a96de0-jnhrcd-d8fe965d"
+      },
+      body: requestBody
+    });
+
+    const textRes = await res.text();
+    let content = "";
+    
+    // Handle streaming or JSON response from 9Router
+    if (textRes.includes("data:")) {
+      const lines = textRes.split("\n");
+      for (const line of lines) {
+        if (line.startsWith("data:") && !line.includes("[DONE]")) {
+          try {
+            const parsed = JSON.parse(line.replace("data:", "").trim());
+            const delta = parsed.choices?.[0]?.delta?.content || "";
+            content += delta;
+          } catch (e) {}
+        }
+      }
+    } else {
+      const jsonRes = JSON.parse(textRes);
+      content = jsonRes.choices?.[0]?.message?.content || "";
+    }
+
+    content = content.replace(/```json/g, "").replace(/```/g, "").trim();
+    const data = JSON.parse(content);
+    
+    return {
+      id: `promo-${Date.now()}`,
+      badge: data.badge || "TIKET PROMO",
+      badgeType: data.badgeType || "airline",
+      airlineLogo: data.badgeType === "ship" ? "ship" : "plane",
+      origin: data.origin || "Jayapura",
+      originCode: data.originCode || "DJJ",
+      destination: data.destination || "Makassar",
+      destinationCode: data.destinationCode || "UPG",
+      transit: data.transit || "Penerbangan Langsung",
+      price: String(data.price || "1.950.000").replace(/Rp\s*/i, "").trim(),
+      date: data.date || "Keberangkatan Terdekat",
+      baggage: data.baggage || "Termasuk Bagasi",
+      waText: encodeURIComponent(`Halo RaksaTravel, saya mau ambil tiket promo ${data.badge || ''} ${data.origin || ''} - ${data.destination || ''} Rp ${data.price || ''} (${data.date || ''})`)
+    };
+  } catch (err) {
+    console.error("AI Vision extraction error:", err.message);
+    return null;
+  }
+}
 function parsePromoText(text) {
   if (!text || typeof text !== 'string') return null;
   const clean = text.toUpperCase().replace(/\r/g, '\n');
@@ -240,8 +329,118 @@ async function commitToGitHubApi(contentJsonString) {
   }
 }
 
+// Upload poster image to GitHub repo + update promo-posters.json
+async function uploadPosterToGitHub(base64ImageData, promoData) {
+  if (!GITHUB_TOKEN) return;
+
+  const timestamp = Date.now();
+  const fileName = `images/promo-${timestamp}.jpeg`;
+  const ghHeaders = {
+    'User-Agent': 'Raksa-WA-Bot',
+    'Authorization': `token ${GITHUB_TOKEN}`,
+    'Accept': 'application/vnd.github.v3+json'
+  };
+
+  try {
+    // 1. Upload image file to GitHub
+    const imgUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${fileName}`;
+    const imgPutData = JSON.stringify({
+      message: `auto: upload poster promo ${promoData.badge} ${promoData.origin}-${promoData.destination}`,
+      content: base64ImageData
+    });
+
+    await new Promise((resolve, reject) => {
+      const req = https.request(imgUrl, {
+        method: 'PUT',
+        headers: { ...ghHeaders, 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(imgPutData) }
+      }, (res) => {
+        let body = '';
+        res.on('data', c => body += c);
+        res.on('end', () => {
+          if (res.statusCode === 200 || res.statusCode === 201) {
+            console.log(`🖼️ [GITHUB] Poster uploaded: ${fileName}`);
+            resolve();
+          } else {
+            reject(new Error(`Upload gagal: ${res.statusCode} ${body.substring(0, 200)}`));
+          }
+        });
+      });
+      req.on('error', reject);
+      req.write(imgPutData);
+      req.end();
+    });
+
+    // 2. Update promo-posters.json
+    let posters = [];
+    try {
+      if (fs.existsSync(POSTERS_JSON_PATH)) {
+        posters = JSON.parse(fs.readFileSync(POSTERS_JSON_PATH, 'utf-8'));
+      }
+    } catch (e) { posters = []; }
+
+    const newPoster = {
+      id: `poster-${timestamp}`,
+      image: fileName,
+      badge: promoData.badge || 'TIKET PROMO',
+      badgeType: promoData.badgeType || 'airline',
+      title: `${promoData.badge} ${promoData.origin} - ${promoData.destination}`,
+      price: promoData.price || '',
+      date: promoData.date || '',
+      waText: promoData.waText || '',
+      addedAt: new Date().toISOString()
+    };
+
+    // Remove duplicates by similar title, keep max 6 posters
+    posters = posters.filter(p => p.title !== newPoster.title);
+    posters.unshift(newPoster);
+    posters = posters.slice(0, 6);
+
+    const postersJson = JSON.stringify(posters, null, 2);
+    fs.writeFileSync(POSTERS_JSON_PATH, postersJson, 'utf-8');
+
+    // 3. Push promo-posters.json to GitHub
+    const postersUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/promo-posters.json`;
+    
+    // Get existing sha
+    const existingSha = await new Promise((resolve) => {
+      https.get(postersUrl, { headers: ghHeaders }, (res) => {
+        let data = '';
+        res.on('data', c => data += c);
+        res.on('end', () => {
+          try { resolve(JSON.parse(data).sha || ''); } catch (e) { resolve(''); }
+        });
+      }).on('error', () => resolve(''));
+    });
+
+    const postersPutData = JSON.stringify({
+      message: 'auto: update poster promo gallery dari WhatsApp Channel',
+      content: Buffer.from(postersJson).toString('base64'),
+      sha: existingSha || undefined
+    });
+
+    await new Promise((resolve) => {
+      const req = https.request(postersUrl, {
+        method: 'PUT',
+        headers: { ...ghHeaders, 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(postersPutData) }
+      }, (res) => {
+        if (res.statusCode === 200 || res.statusCode === 201) {
+          console.log('🎉 [GITHUB] promo-posters.json updated!');
+        }
+        resolve();
+      });
+      req.on('error', () => resolve());
+      req.write(postersPutData);
+      req.end();
+    });
+
+    console.log(`✅ Poster promo live di website: ${fileName}`);
+  } catch (err) {
+    console.error('Error upload poster:', err.message);
+  }
+}
+
 // Save promo & trigger instant Git Push
-async function updatePromos(newPromo) {
+async function updatePromos(newPromo, imageBase64) {
   try {
     let promos = [];
     if (fs.existsSync(PROMOS_JSON_PATH)) {
@@ -290,6 +489,11 @@ async function updatePromos(newPromo) {
 
     // Cloud Git API
     await commitToGitHubApi(jsonStr);
+
+    // Upload poster image to GitHub if available
+    if (imageBase64) {
+      await uploadPosterToGitHub(imageBase64, newPromo);
+    }
 
   } catch (err) {
     console.error('Error updatePromos:', err.message);
@@ -349,16 +553,22 @@ client.on('ready', async () => {
           console.log('\n🖼️ [POSTER TIKET BARU DITEMUKAN]: Menjalankan AI Vision Reader...');
           try {
             const base64Data = dataUrl.replace(/^data:image\/[a-z]+;base64,/, '');
-            const buffer = Buffer.from(base64Data, 'base64');
-            const { data: { text } } = await Tesseract.recognize(buffer, 'ind+eng');
-            console.log('📝 Teks yang terbaca:\n---\n' + text.trim() + '\n---');
+            
+            // Primary Engine: Multimodal LLM AI Vision (Gemini 3.7 via 9Router)
+            let promoData = await analyzeImageWithAiVision(base64Data);
 
-            const promoData = parsePromoText(text);
+            // Fallback Engine: Local Tesseract OCR
+            if (!promoData) {
+              const buffer = Buffer.from(base64Data, 'base64');
+              const { data: { text } } = await Tesseract.recognize(buffer, 'ind+eng');
+              promoData = parsePromoText(text);
+            }
+
             if (promoData) {
-              await updatePromos(promoData);
+              await updatePromos(promoData, base64Data);
             }
           } catch (ocrErr) {
-            console.log('Info OCR:', ocrErr.message);
+            console.log('Info Vision:', ocrErr.message);
           }
         }
       }
@@ -371,34 +581,125 @@ client.on('message_create', async (msg) => {
   try {
     if (!msg) return;
     
-    // If message has media
+    // If message has media (image/poster)
     if (msg.hasMedia) {
       try {
+        console.log('\n📥 [MEDIA DITERIMA DARI WA]: Mengunduh gambar poster...');
         const media = await msg.downloadMedia();
         if (media && media.data) {
-          console.log('\n📩 [MEDIA DITERIMA]: Menjalankan AI Vision...');
-          const buffer = Buffer.from(media.data, 'base64');
-          const { data: { text } } = await Tesseract.recognize(buffer, 'ind+eng');
-          const promoData = parsePromoText(text);
+          console.log('🤖 Menjalankan Multimodal AI Vision (Gemini 3.7 Flash)...');
+          let promoData = await analyzeImageWithAiVision(media.data);
+          
+          if (!promoData) {
+            console.log('ℹ️ AI Vision gagal, mencoba OCR Tesseract...');
+            const buffer = Buffer.from(media.data, 'base64');
+            const { data: { text } } = await Tesseract.recognize(buffer, 'ind+eng');
+            promoData = parsePromoText(text);
+          }
+
           if (promoData) {
-            await updatePromos(promoData);
+            console.log(`✅ [PROMO BERHASIL DIEKSTRAK]: ${promoData.badge} | ${promoData.origin} -> ${promoData.destination} | Rp ${promoData.price}`);
+            await updatePromos(promoData, media.data);
+          } else {
+            console.log('⚠️ Gambar tidak mengandung data tiket promo yang valid.');
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        console.error('Error processing media:', e.message);
+      }
     }
 
     const bodyText = (msg.body || '').trim();
-    if (bodyText.length > 5) {
+    if (bodyText.length > 5 && !msg.hasMedia) {
       const promoData = parsePromoText(bodyText);
       if (promoData) {
         console.log(`\n📩 [TEKS PROMO DITERIMA]: ${bodyText}`);
-        await updatePromos(promoData);
+        await updatePromos(promoData, null);
       }
     }
   } catch (e) {}
 });
 
-// Express Web Routes (For Status)
+// Express Web Routes (For Status & Manual Sync Trigger)
+app.get('/api/debug-channel', async (req, res) => {
+  try {
+    if (!isBotReady || !client.pupPage || client.pupPage.isClosed()) {
+      return res.json({ success: false, message: 'Bot / browser belum siap' });
+    }
+
+    const debugInfo = await client.pupPage.evaluate(() => {
+      const titles = Array.from(document.querySelectorAll('span[title], div[title]')).map(el => el.getAttribute('title') || el.innerText).filter(Boolean);
+      const imgCount = document.querySelectorAll('img').length;
+      return { titles: titles.slice(0, 30), imgCount };
+    });
+
+    res.json({ success: true, debugInfo });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+app.get('/api/sync-channel', async (req, res) => {
+  try {
+    if (!isBotReady || !client.pupPage || client.pupPage.isClosed()) {
+      return res.json({ success: false, message: 'Bot belum siap atau browser tidak aktif' });
+    }
+
+    console.log('\n🔄 [MANUAL SYNC TRIGGERED]: Membuka saluran RAKSA TRAVEL & mengambil poster...');
+
+    // Extract all images rendered on page
+    const channelImages = await client.pupPage.evaluate(() => {
+      const imgs = document.querySelectorAll('img');
+      const results = [];
+      for (const img of Array.from(imgs)) {
+        try {
+          const src = img.src || '';
+          if (src.startsWith('blob:') || src.includes('whatsapp.net') || src.startsWith('data:image')) {
+            const w = img.naturalWidth || img.width || 0;
+            const h = img.naturalHeight || img.height || 0;
+            if (w >= 120 && h >= 120) {
+              const canvas = document.createElement('canvas');
+              canvas.width = w;
+              canvas.height = h;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(img, 0, 0);
+              results.push(canvas.toDataURL('image/jpeg', 0.95));
+            }
+          }
+        } catch (e) {}
+      }
+      return results;
+    });
+
+    console.log(`🖼️ Total image poster terdeteksi: ${channelImages.length}`);
+
+    let countUpdated = 0;
+    const processedPromos = [];
+
+    for (const imgDataUrl of channelImages.slice(-6).reverse()) {
+      try {
+        const base64Data = imgDataUrl.replace(/^data:image\/[a-z]+;base64,/, '');
+        const promo = await analyzeImageWithAiVision(base64Data);
+        if (promo) {
+          console.log(`✅ AI Vision berhasil ekstrak: ${promo.badge} | ${promo.origin} -> ${promo.destination} | Rp ${promo.price}`);
+          await updatePromos(promo, base64Data);
+          processedPromos.push(promo);
+          countUpdated++;
+          if (countUpdated >= 3) break;
+        }
+      } catch (e) {}
+    }
+
+    res.json({
+      success: true,
+      message: `Sync selesai! Berhasil memproses ${countUpdated} promo via AI Vision.`,
+      promos: processedPromos
+    });
+  } catch (err) {
+    console.error('Error manual sync:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 app.get('/', (req, res) => {
   res.send(`
     <!DOCTYPE html>

@@ -3683,10 +3683,54 @@ p { margin-bottom: 1rem; color: var(--text-body); transition: color var(--transi
   }
 }
 
-/* ===================================================
-   Ultra-Refined Tactile Motion & Ergonomics
-   (Apple Fluid Physics & Emil Kowalski Standard)
-   =================================================== */
+/* --- Desktop GPU Enhanced Graphics vs Mobile Ultra-Lightweight System --- */
+@media (min-width: 992px) {
+  /* PC Full Graphic Mode: Rich Raycasting, Dynamic Depth, Shaders & Orbs */
+  .hero-3d-stage {
+    perspective: 1200px;
+    perspective-origin: 50% 50%;
+  }
+  .hero-3d-card {
+    will-change: transform;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.45));
+  }
+  .dest-card, .dest-showcase-card, .service-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  .hero-gradient-orb {
+    display: block;
+    filter: blur(90px);
+  }
+}
+
+@media (max-width: 991px) {
+  /* Mobile (Android & iOS) Lightweight Mode:
+     - Strip heavy multi-layer blur filters to preserve 60-120fps scrolling & save battery
+     - Disable expensive 3D transforms & backface recalculations
+     - Keep tactile instant taps and fluid spring animations */
+  .hero-gradient-orb {
+    display: none !important;
+  }
+  .hero-decor .hero-circle, .hero-decor .hero-dots {
+    opacity: 0.15;
+  }
+  .hero-3d-pedestal {
+    filter: blur(6px) !important;
+  }
+  .dest-card, .dest-showcase-card, .service-card, .promo-poster-card {
+    transform-style: flat !important;
+    perspective: none !important;
+    will-change: transform;
+  }
+  .dest-card img, .dest-showcase-card img, .service-card img {
+    transform: none !important;
+    filter: none !important;
+  }
+  .dest-card:hover img, .dest-showcase-card:hover img, .service-card:hover img {
+    transform: scale(1.03) !important;
+  }
+}
 
 /* Tactile Click & Tap Micro-Physics */
 button:active,
@@ -3758,6 +3802,20 @@ button:active,
   width: 100%;
 }
 
+@media (max-width: 960px) {
+  .promo-poster-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .promo-poster-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
 .promo-poster-card {
   background: var(--bg-card);
   border-radius: var(--radius-xl);
@@ -3771,6 +3829,27 @@ button:active,
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.35s ease;
+}
+
+/* PC full graphical 3D hover physics */
+@media (min-width: 992px) {
+  .promo-poster-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  .promo-poster-card:hover {
+    transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
+    box-shadow: 0 28px 60px -10px rgba(0, 0, 0, 0.65), 0 0 35px rgba(249, 115, 22, 0.35);
+    border-color: var(--accent);
+  }
+}
+
+/* Mobile high-efficiency flat render */
+@media (max-width: 991px) {
+  .promo-poster-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-hover-shadow);
+  }
 }
 
 .promo-poster-card:hover {

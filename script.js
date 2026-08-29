@@ -933,41 +933,42 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(showNextBooking, toastInterval);
   }, toastInitialDelay);
 
-  // 13. Dynamic Poster Gallery Loader from promo-posters.json
-  const posterGrid = document.getElementById('promoPosterGrid');
-  if (posterGrid) {
-    fetch(`promo-posters.json?_t=${Date.now()}`)
-      .then(res => {
-        if (!res.ok) throw new Error('Network error');
-        return res.json();
-      })
-      .then(posters => {
-        if (!Array.isArray(posters) || posters.length === 0) return;
+    // 14. Dynamic Poster Gallery Loader from promo-posters.json (With Mobile/PC Adaptive Rendering)
+    const posterGrid = document.getElementById('promoPosterGrid');
+    if (posterGrid) {
+      const isMobileDevice = window.innerWidth <= 768;
+      fetch(`promo-posters.json?_t=${Date.now()}`)
+        .then(res => {
+          if (!res.ok) throw new Error('Network error');
+          return res.json();
+        })
+        .then(posters => {
+          if (!Array.isArray(posters) || posters.length === 0) return;
 
-        posterGrid.innerHTML = posters.slice(0, 6).map((p, idx) => {
-          const icon = p.badgeType === 'ship' ? 'fa-ship' : 'fa-plane';
-          const badgeLabel = p.badge || 'TIKET PROMO';
-          const title = p.title || 'Promo Spesial';
-          const desc = p.desc || `Promo ${badgeLabel} dengan harga spesial. Terbatas!`;
-          const waLink = `https://wa.me/6282153043601?text=${p.waText || encodeURIComponent('Halo RaksaTravel, saya tertarik promo ' + title)}`;
+          posterGrid.innerHTML = posters.slice(0, 6).map((p, idx) => {
+            const icon = p.badgeType === 'ship' ? 'fa-ship' : 'fa-plane';
+            const badgeLabel = p.badge || 'TIKET PROMO';
+            const title = p.title || 'Promo Spesial';
+            const desc = p.desc || `Promo ${badgeLabel} dengan harga spesial. Terbatas!`;
+            const waLink = `https://wa.me/6282153043601?text=${p.waText || encodeURIComponent('Halo RaksaTravel, saya tertarik promo ' + title)}`;
 
-          return `
-            <div class="promo-poster-card visible">
-              <div class="promo-poster-img">
-                <img src="${p.image}" alt="${title}" loading="eager" decoding="async">
+            return `
+              <div class="promo-poster-card visible">
+                <div class="promo-poster-img">
+                  <img src="${p.image}" alt="${title}" loading="${idx === 0 || !isMobileDevice ? 'eager' : 'lazy'}" decoding="async">
+                </div>
+                <div class="promo-poster-body">
+                  <span class="promo-poster-tag"><i class="fas ${icon}"></i> ${badgeLabel}</span>
+                  <h3>${title}</h3>
+                  <p>${desc}</p>
+                  <a href="${waLink}" class="btn btn-accent btn-sm" target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                  </a>
+                </div>
               </div>
-              <div class="promo-poster-body">
-                <span class="promo-poster-tag"><i class="fas ${icon}"></i> ${badgeLabel}</span>
-                <h3>${title}</h3>
-                <p>${desc}</p>
-                <a href="${waLink}" class="btn btn-accent btn-sm" target="_blank" rel="noopener">
-                  <i class="fab fa-whatsapp"></i> Pesan Sekarang
-                </a>
-              </div>
-            </div>
-          `;
-        }).join('');
-      })
-      .catch(() => {});
-  }
+            `;
+          }).join('');
+        })
+        .catch(() => {});
+    }
 });
