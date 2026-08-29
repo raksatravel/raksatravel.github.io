@@ -3741,12 +3741,83 @@ button:active,
 .dest-card,
 .dest-showcase-card,
 .promo-card,
+.promo-poster-card,
 .service-card,
 .step-card,
 .feature-card {
   will-change: transform, box-shadow;
   transform: translateZ(0);
   backface-visibility: hidden;
+}
+
+/* --- Promo Poster Cards (Home Page Image Promos) --- */
+.promo-poster-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1.5px solid var(--border-card);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease;
+}
+
+.promo-poster-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.5), 0 0 25px rgba(249, 115, 22, 0.25);
+  border-color: var(--accent);
+}
+
+.promo-poster-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.promo-poster-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.promo-poster-card:hover .promo-poster-img img {
+  transform: scale(1.06);
+}
+
+.promo-poster-body {
+  padding: 1.5rem 1.35rem 1.75rem;
+}
+
+.promo-poster-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.85rem;
+  background: var(--badge-bg);
+  color: var(--accent);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.promo-poster-body h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.promo-poster-body p {
+  color: var(--text-light);
+  font-size: 0.9375rem;
+  margin-bottom: 1.15rem;
+  line-height: 1.6;
+}
+
+.promo-poster-body .btn {
+  width: 100%;
 }
 
 
