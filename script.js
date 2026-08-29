@@ -875,12 +875,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 11. Live Social Proof Booking Toast Notification (High Conversion)
   const recentBookings = [
-    { name: 'Bambang P.', route: 'Tiket Pesawat: Jayapura ✈️ Makassar', time: '2 menit lalu', icon: 'fa-plane' },
-    { name: 'Siti Rahma', route: 'Tiket Kapal: Surabaya 🚢 Sorong', time: '5 menit lalu', icon: 'fa-ship' },
-    { name: 'Andini W.', route: 'Tiket Pesawat: Jayapura ✈️ Surabaya', time: '8 menit lalu', icon: 'fa-plane' },
-    { name: 'Zakkry A.', route: 'Tiket Pesawat: Jayapura ✈️ Wamena', time: '11 menit lalu', icon: 'fa-plane' },
-    { name: 'Agus Salim', route: 'Tiket Kapal PELNI: Jayapura 🚢 Biak', time: '14 menit lalu', icon: 'fa-ship' },
-    { name: 'Kevin W.', route: 'Tiket Pesawat: Jayapura ✈️ Jakarta', time: '18 menit lalu', icon: 'fa-plane' }
+    { name: 'Bambang P.', route: 'Tiket Pesawat: Jayapura - Makassar', time: '2 menit lalu', icon: 'fa-plane' },
+    { name: 'Siti Rahma', route: 'Tiket Kapal: Surabaya - Sorong', time: '5 menit lalu', icon: 'fa-ship' },
+    { name: 'Andini W.', route: 'Tiket Pesawat: Jayapura - Surabaya', time: '8 menit lalu', icon: 'fa-plane' },
+    { name: 'Zakkry A.', route: 'Tiket Pesawat: Jayapura - Wamena', time: '11 menit lalu', icon: 'fa-plane' },
+    { name: 'Agus Salim', route: 'Tiket Kapal PELNI: Jayapura - Biak', time: '14 menit lalu', icon: 'fa-ship' },
+    { name: 'Kevin W.', route: 'Tiket Pesawat: Jayapura - Jakarta', time: '18 menit lalu', icon: 'fa-plane' }
   ];
 
   let toastEl = document.querySelector('.live-booking-toast');
@@ -901,7 +901,7 @@ document.addEventListener('DOMContentLoaded', () => {
     toastEl.innerHTML = `
       <div class="toast-avatar"><i class="fas ${booking.icon}"></i></div>
       <div class="toast-body">
-        <div class="toast-title">✨ ${booking.name} baru memesan</div>
+        <div class="toast-title">${booking.name} baru memesan</div>
         <div class="toast-route">${booking.route}</div>
         <div class="toast-time"><i class="far fa-clock"></i> ${booking.time} • Terverifikasi</div>
       </div>
