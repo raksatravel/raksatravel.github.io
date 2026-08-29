@@ -249,14 +249,21 @@ async function updatePromos(newPromo) {
       fs.writeFileSync(PROMOS_JSON_PATH, jsonStr, 'utf-8');
     } catch (e) {}
 
-    console.log(`\n💾 Promo baru disimpan: ${newPromo.origin} -> ${newPromo.destination} (Rp ${newPromo.price})`);
+    // Auto Push to GitHub
+    console.log('🔄 Mengirim pembaruan promo langsung ke GitHub raksatravel.github.io...');
+    
+    // Execute local Git CLI push
+    exec('git add promos.json && git commit -m "auto: update live promo from WhatsApp Channel" && git push origin main', { cwd: ROOT_DIR }, (err, stdout, stderr) => {
+      if (err) {
+        console.log('⚠️ Info Git CLI:', err.message);
+      } else {
+        console.log('🎉 SUKSES! Perubahan promo langsung terkirim (push) ke GitHub Pages!');
+      }
+    });
 
-    // Cloud Git Sync
+    // Also trigger GitHub API if GITHUB_TOKEN is available
     if (GITHUB_TOKEN) {
       await commitToGitHubApi(jsonStr);
-    } else {
-      // Local Git CLI
-      exec('git add promos.json && git commit -m "auto: update live promo" && git push origin main', { cwd: ROOT_DIR }, () => {});
     }
   } catch (err) {
     console.error('Error updatePromos:', err.message);

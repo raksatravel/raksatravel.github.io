@@ -933,21 +933,64 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(showNextBooking, toastInterval);
   }, toastInitialDelay);
 
-  // 12. Ergonomic Mobile Bottom Action Bar Injector
-  let mobileBar = document.querySelector('.mobile-bottom-bar');
-  if (!mobileBar) {
-    mobileBar = document.createElement('div');
-    mobileBar.className = 'mobile-bottom-bar';
-    mobileBar.innerHTML = `
-      <div class="mobile-bottom-bar-inner">
-        <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20ingin%20tanya%20dan%20pesan%20tiket" class="mobile-bar-btn mobile-bar-wa" target="_blank" rel="noopener">
-          <i class="fab fa-whatsapp"></i> <span>Pesan via WhatsApp</span>
-        </a>
-        <a href="cek-tiket" class="mobile-bar-btn mobile-bar-tickets">
-          <i class="fas fa-search"></i> <span>Cek Tiket</span>
-        </a>
-      </div>
-    `;
-    document.body.appendChild(mobileBar);
+  // 13. Dynamic Live Promo Loader from WhatsApp Channel (promos.json)
+  const promoGrid = document.getElementById('promoGrid');
+  if (promoGrid) {
+    fetch(`promos.json?_t=${Date.now()}`)
+      .then(res => {
+        if (!res.ok) throw new Error('Network error');
+        return res.json();
+      })
+      .then(promos => {
+        if (!Array.isArray(promos) || promos.length === 0) return;
+        
+        promoGrid.innerHTML = promos.map((p, idx) => {
+          const isShip = p.badgeType === 'ship' || (p.badge && p.badge.toLowerCase().includes('pelni'));
+          const cardTheme = isShip ? 'card-pelni' : (idx % 2 === 0 ? 'card-purple' : 'card-cyan');
+          const badgeTheme = isShip ? 'airline-pelni' : (idx % 2 === 0 ? 'airline-purple' : 'airline-cyan');
+          const icon = isShip ? 'fa-ship' : 'fa-plane';
+          const transitIcon = isShip ? 'fa-anchor' : (p.transit === 'Transit' ? 'fa-route' : 'fa-bolt');
+          
+          return `
+            <div class="promo-card ${cardTheme} reveal" style="animation-delay: ${idx * 0.1}s">
+              <div class="promo-card-top">
+                <span class="promo-badge ${badgeTheme}">${p.badge || 'TIKET PROMO'}</span>
+                <span class="promo-transit-tag"><i class="fas ${transitIcon}"></i> ${p.transit || (isShip ? 'Pelayaran Langsung' : 'Penerbangan Langsung')}</span>
+              </div>
+              <div class="promo-route">
+                <div class="promo-city">
+                  <span class="promo-city-name">${p.origin || 'Jayapura'}</span>
+                  <span class="promo-city-code">${p.originCode || 'DJJ'}</span>
+                </div>
+                <div class="promo-route-icon">
+                  <i class="fas ${icon}"></i>
+                </div>
+                <div class="promo-city" style="text-align: right;">
+                  <span class="promo-city-name">${p.destination || 'Makassar'}</span>
+                  <span class="promo-city-code">${p.destinationCode || 'UPG'}</span>
+                </div>
+              </div>
+              <div class="promo-details">
+                <div class="promo-meta-item">
+                  <i class="fas fa-calendar-day"></i> <span>${p.date || 'Keberangkatan Terdekat'}</span>
+                </div>
+                <div class="promo-meta-item">
+                  <i class="fas ${isShip ? 'fa-box-open' : 'fa-suitcase-rolling'}"></i> <span>${p.baggage || 'Bagasi Standar'}</span>
+                </div>
+              </div>
+              <div class="promo-price-wrapper">
+                <span class="promo-price-label">Tarif Promo:</span>
+                <span class="promo-price-value"><span class="promo-price-prefix">Rp </span>${p.price || '1.950.000'}</span>
+              </div>
+              <a href="https://wa.me/6282153043601?text=${p.waText || encodeURIComponent('Halo RaksaTravel, saya mau ambil tiket promo ' + (p.badge || '') + ' ' + (p.origin || '') + ' - ' + (p.destination || ''))}" class="btn-promo-wa" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp"></i> Ambil Promo Ini
+              </a>
+            </div>
+          `;
+        }).join('');
+      })
+      .catch(() => {
+        // Keeps existing static cards if offline
+      });
   }
 });
