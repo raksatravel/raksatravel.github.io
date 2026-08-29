@@ -1,5 +1,20 @@
 [
   {
+    "id": "promo-1787983344590",
+    "badge": "TIKET PROMO",
+    "badgeType": "airline",
+    "airlineLogo": "plane",
+    "origin": "Jayapura",
+    "originCode": "DJJ",
+    "destination": "Makassar",
+    "destinationCode": "UPG",
+    "transit": "Penerbangan Langsung",
+    "price": "6.000",
+    "date": "Keberangkatan Terdekat",
+    "baggage": "Termasuk Bagasi 10 KG",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20TIKET%20PROMO%20Jayapura%20-%20Makassar%20Rp%206.000%20(Keberangkatan%20Terdekat)"
+  },
+  {
     "id": "promo-sriwijaya-2970",
     "badge": "SRIWIJAYA TRANSIT",
     "badgeType": "airline",
@@ -28,20 +43,5 @@
     "date": "Tgl 30 Agustus",
     "baggage": "Termasuk Bagasi 10 KG",
     "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Lion%20Air%20Langsung%20Jayapura%20-%20Makassar%20Rp%202.090.000%20(Tgl%2030%20Agustus)"
-  },
-  {
-    "id": "promo-sriwijaya-2245",
-    "badge": "SRIWIJAYA AIR",
-    "badgeType": "airline",
-    "airlineLogo": "plane",
-    "origin": "Jayapura",
-    "originCode": "DJJ",
-    "destination": "Makassar",
-    "destinationCode": "UPG",
-    "transit": "Penerbangan Langsung",
-    "price": "2.245.000",
-    "date": "Tgl 1, 2, 3, 4, 5 September",
-    "baggage": "Termasuk Bagasi 15 KG",
-    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Sriwijaya%20Air%20Jayapura%20-%20Makassar%20Rp%202.245.000%20(Tgl%201%2C%202%2C%203%2C%204%2C%205%20September)"
   }
 ]
