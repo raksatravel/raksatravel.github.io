@@ -1,6 +1,21 @@
 [
   {
-    "id": "promo-1",
+    "id": "promo-lion-2090",
+    "badge": "LION AIR LANGSUNG",
+    "badgeType": "airline",
+    "airlineLogo": "plane",
+    "origin": "Jayapura",
+    "originCode": "DJJ",
+    "destination": "Makassar",
+    "destinationCode": "UPG",
+    "transit": "Penerbangan Langsung",
+    "price": "2.090.000",
+    "date": "Tgl 30 Agustus",
+    "baggage": "Termasuk Bagasi 10 KG",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Lion%20Air%20Langsung%20Jayapura%20-%20Makassar%20Rp%202.090.000%20tgl%2030%20Agustus"
+  },
+  {
+    "id": "promo-sriwijaya-2780",
     "badge": "SRIWIJAYA TRANSIT",
     "badgeType": "airline",
     "airlineLogo": "plane",
@@ -13,35 +28,5 @@
     "date": "Tgl 3, 4, 5 September",
     "baggage": "Termasuk Bagasi 15 KG",
     "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Sriwijaya%20Transit%20Makassar%20-%20Jayapura%20Rp%202.780.000%20tgl%203%2C4%2C5%20September"
-  },
-  {
-    "id": "promo-2",
-    "badge": "LION AIR LANGSUNG",
-    "badgeType": "airline",
-    "airlineLogo": "plane",
-    "origin": "Jayapura",
-    "originCode": "DJJ",
-    "destination": "Makassar",
-    "destinationCode": "UPG",
-    "transit": "Penerbangan Langsung",
-    "price": "1.960.000",
-    "date": "Tgl 30 Agustus",
-    "baggage": "Termasuk Bagasi 10 KG",
-    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Lion%20Air%20Langsung%20Jayapura%20-%20Makassar%20Rp%201.960.000%20tgl%2030%20Agustus"
-  },
-  {
-    "id": "promo-3",
-    "badge": "KAPAL PELNI",
-    "badgeType": "ship",
-    "airlineLogo": "ship",
-    "origin": "Jayapura",
-    "originCode": "DJJ",
-    "destination": "Makassar",
-    "destinationCode": "UPG",
-    "transit": "Pelayaran Langsung",
-    "price": "980.000",
-    "date": "Jadwal Kapal Terdekat",
-    "baggage": "Bebas Bagasi Besar",
-    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20tanya%20tiket%20promo%20Kapal%20PELNI%20Jayapura%20-%20Makassar"
   }
 ]
