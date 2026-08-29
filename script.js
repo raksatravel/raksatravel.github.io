@@ -352,7 +352,7 @@ const T = {
   contact_card_addr_title: { id: 'Lokasi Kantor', en: 'Office Location' },
   contact_card_addr_val: { id: 'Kompleks Asri Residence, Jayapura, Papua', en: 'Kompleks Asri Residence, Jayapura, Papua' },
   contact_card_hours_title: { id: 'Jam Operasional', en: 'Office Hours' },
-  contact_card_hours_val: { id: 'Senin – Sabtu, 08.00 – 20.00 WIT', en: 'Monday – Saturday, 08.00 – 20.00 WIT' },
+  contact_card_hours_val: { id: 'Senin - Sabtu, 08.00 - 20.00 WIT', en: 'Monday - Saturday, 08.00 - 20.00 WIT' },
 
   contact_form_title: { id: 'Tulis Pesan atau Pertanyaan Anda', en: 'Send an Inquiry' },
   contact_form_desc: { id: 'Isi pesan di bawah dan percakapan akan langsung tersambung ke admin WhatsApp kami untuk ditanggapi.', en: 'Fill out your message below to immediately connect with our WhatsApp admin for quick assistance.' },
