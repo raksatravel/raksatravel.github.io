@@ -1,6 +1,6 @@
 [
   {
-    "id": "promo-1787938110753",
+    "id": "promo-1787967313210",
     "badge": "TIKET PROMO",
     "badgeType": "airline",
     "airlineLogo": "plane",
@@ -15,23 +15,8 @@
     "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20TIKET%20PROMO%20Jayapura%20-%20Makassar%20Rp%201.950.000%20(Keberangkatan%20Terdekat)"
   },
   {
-    "id": "promo-1",
-    "badge": "SRIWIJAYA TRANSIT",
-    "badgeType": "airline",
-    "airlineLogo": "plane",
-    "origin": "Makassar",
-    "originCode": "UPG",
-    "destination": "Jayapura",
-    "destinationCode": "DJJ",
-    "transit": "Transit",
-    "price": "2.780.000",
-    "date": "Tgl 3, 4, 5 September",
-    "baggage": "Bagasi 15 KG",
-    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Sriwijaya%20Transit%20Makassar%20-%20Jayapura%20Rp%202.780.000"
-  },
-  {
-    "id": "promo-2",
-    "badge": "LION AIR LANGSUNG",
+    "id": "promo-1787967313193",
+    "badge": "TIKET PROMO",
     "badgeType": "airline",
     "airlineLogo": "plane",
     "origin": "Jayapura",
@@ -39,9 +24,24 @@
     "destination": "Makassar",
     "destinationCode": "UPG",
     "transit": "Penerbangan Langsung",
-    "price": "1.960.000",
-    "date": "Tgl 30 Agustus",
-    "baggage": "Bagasi 10 KG",
-    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Lion%20Air%20Langsung%20Jayapura%20-%20Makassar%20Rp%201.960.000%20tgl%2030%20Agustus"
+    "price": "1.950.000",
+    "date": "Keberangkatan Terdekat",
+    "baggage": "Bagasi Standar",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20TIKET%20PROMO%20Jayapura%20-%20Makassar%20Rp%201.950.000%20(Keberangkatan%20Terdekat)"
+  },
+  {
+    "id": "promo-1787938110753",
+    "badge": "TIKET PROMO",
+    "badgeType": "airline",
+    "airlineLogo": "plane",
+    "origin": "Jayapura",
+    "originCode": "DJJ",
+    "destination": "Makassar",
+    "destinationCode": "UPG",
+    "transit": "Penerbangan Langsung",
+    "price": "1.950.000",
+    "date": "Keberangkatan Terdekat",
+    "baggage": "Bagasi Standar",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20TIKET%20PROMO%20Jayapura%20-%20Makassar%20Rp%201.950.000%20(Keberangkatan%20Terdekat)"
   }
 ]
