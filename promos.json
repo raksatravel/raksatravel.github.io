@@ -1,5 +1,20 @@
 [
   {
+    "id": "promo-sriwijaya-2970",
+    "badge": "SRIWIJAYA TRANSIT",
+    "badgeType": "airline",
+    "airlineLogo": "plane",
+    "origin": "Makassar",
+    "originCode": "UPG",
+    "destination": "Jayapura",
+    "destinationCode": "DJJ",
+    "transit": "Transit Makassar",
+    "price": "2.970.000",
+    "date": "Tgl 2 September",
+    "baggage": "Termasuk Bagasi 15 KG",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Sriwijaya%20Transit%20Makassar%20-%20Jayapura%20Rp%202.970.000%20(Tgl%202%20September)"
+  },
+  {
     "id": "promo-lion-2090",
     "badge": "LION AIR LANGSUNG",
     "badgeType": "airline",
@@ -15,8 +30,8 @@
     "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Lion%20Air%20Langsung%20Jayapura%20-%20Makassar%20Rp%202.090.000%20(Tgl%2030%20Agustus)"
   },
   {
-    "id": "promo-lion-1960",
-    "badge": "LION AIR LANGSUNG",
+    "id": "promo-sriwijaya-2245",
+    "badge": "SRIWIJAYA AIR",
     "badgeType": "airline",
     "airlineLogo": "plane",
     "origin": "Jayapura",
@@ -24,24 +39,9 @@
     "destination": "Makassar",
     "destinationCode": "UPG",
     "transit": "Penerbangan Langsung",
-    "price": "1.960.000",
-    "date": "Tgl 30 Agustus",
-    "baggage": "Termasuk Bagasi 10 KG",
-    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Lion%20Air%20Langsung%20Jayapura%20-%20Makassar%20Rp%201.960.000%20(Tgl%2030%20Agustus)"
-  },
-  {
-    "id": "promo-sriwijaya-2780",
-    "badge": "SRIWIJAYA TRANSIT",
-    "badgeType": "airline",
-    "airlineLogo": "plane",
-    "origin": "Makassar",
-    "originCode": "UPG",
-    "destination": "Jayapura",
-    "destinationCode": "DJJ",
-    "transit": "Transit Makassar",
-    "price": "2.780.000",
-    "date": "Tgl 3, 4, 5 September",
+    "price": "2.245.000",
+    "date": "Tgl 1, 2, 3, 4, 5 September",
     "baggage": "Termasuk Bagasi 15 KG",
-    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Sriwijaya%20Transit%20Makassar%20-%20Jayapura%20Rp%202.780.000%20(Tgl%203%2C%204%2C%205%20September)"
+    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Sriwijaya%20Air%20Jayapura%20-%20Makassar%20Rp%202.245.000%20(Tgl%201%2C%202%2C%203%2C%204%2C%205%20September)"
   }
 ]
