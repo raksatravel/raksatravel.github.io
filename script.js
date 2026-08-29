@@ -952,9 +952,9 @@ document.addEventListener('DOMContentLoaded', () => {
           const waLink = `https://wa.me/6282153043601?text=${p.waText || encodeURIComponent('Halo RaksaTravel, saya tertarik promo ' + title)}`;
 
           return `
-            <div class="promo-poster-card reveal delay-${idx + 1}">
+            <div class="promo-poster-card visible">
               <div class="promo-poster-img">
-                <img src="${p.image}" alt="${title}" loading="lazy" decoding="async">
+                <img src="${p.image}" alt="${title}" loading="eager" decoding="async">
               </div>
               <div class="promo-poster-body">
                 <span class="promo-poster-tag"><i class="fas ${icon}"></i> ${badgeLabel}</span>

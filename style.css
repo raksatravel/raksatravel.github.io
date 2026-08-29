@@ -3751,12 +3751,23 @@ button:active,
 }
 
 /* --- Promo Poster Cards (Home Page Image Promos) --- */
+.promo-poster-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
 .promo-poster-card {
   background: var(--bg-card);
   border-radius: var(--radius-xl);
   overflow: hidden;
   border: 1.5px solid var(--border-card);
   box-shadow: var(--card-shadow);
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: flex;
+  flex-direction: column;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.35s ease;
