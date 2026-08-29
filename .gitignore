@@ -4,9 +4,9 @@ node_modules/
 wa-bot/.wwebjs_auth/
 wa-bot/.wwebjs_cache/
 wa-bot/node_modules/
+wa-bot/config.json
 wa-bot/qr.html
 *.log
 .agents/
 copy website raksa travel 3/
 skills-lock.json
-

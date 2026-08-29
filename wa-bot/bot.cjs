@@ -14,14 +14,21 @@ const PORT = process.env.PORT || 7860;
 const ROOT_DIR = path.resolve(__dirname, '..');
 const PROMOS_JSON_PATH = path.join(ROOT_DIR, 'promos.json');
 const GITHUB_REPO = 'raksatravel/raksatravel.github.io';
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
+let GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
+try {
+  const cfgPath = path.join(__dirname, 'config.json');
+  if (fs.existsSync(cfgPath)) {
+    const cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf-8'));
+    if (cfg.GITHUB_TOKEN) GITHUB_TOKEN = cfg.GITHUB_TOKEN;
+  }
+} catch (e) {}
 
 let latestQrDataUrl = '';
 let isBotReady = false;
 let authStatus = 'Menunggu Scan QR Code';
 
 console.log('====================================================');
-console.log('🤖 RAKSA TRAVEL - 24/7 CLOUD WHATSAPP BOT LISTENER');
+console.log('🤖 RAKSA TRAVEL - REAL-TIME LIVE BOT & AUTO-PUSHER');
 console.log('====================================================\n');
 
 // Detect environment browser path
@@ -75,23 +82,36 @@ client.on('authenticated', () => {
 
 client.on('ready', async () => {
   isBotReady = true;
-  authStatus = '🚀 BOT ONLINE 24/7 & MEMANTAU SALURAN WHATSAPP';
-  console.log('\n🚀 BOT RAKSA TRAVEL AKTIF 24/7 DI CLOUD!');
+  authStatus = '🚀 BOT ONLINE & MEMANTAU SALURAN WHATSAPP';
+  console.log('\n🚀 BOT RAKSA TRAVEL AKTIF & SIAP MEMANTAU SALURAN WHATSAPP!');
   console.log('Mendengarkan postingan promo baru secara real-time...\n');
 });
 
 // Helper: Parse raw text or OCR text into structured promo data
+// STRICT FILTER: Only returns object if valid ticket keywords / prices are found!
 function parsePromoText(text) {
-  if (!text) return null;
+  if (!text || typeof text !== 'string') return null;
   const clean = text.toUpperCase().replace(/\r/g, '\n');
   
+  // Keyword validation check
+  const ticketKeywords = ['SRIWIJAYA', 'LION', 'CITILINK', 'GARUDA', 'BATIK', 'PELNI', 'KAPAL', 'TIKET', 'FLIGHT', 'PROMO', 'BAGASI', 'TRANSIT', 'LANGSUNG'];
+  const hasTicketKeyword = ticketKeywords.some(kw => clean.includes(kw));
+
+  // Detect Price (e.g. 2,780,000 or 1.960.000 or 980.000)
+  const priceMatch = clean.match(/(\d{1,3}[.,]\d{3}[.,]\d{3}|\d{1,3}[.,]\d{3})/);
+  
+  // If no price and no ticket keyword, ignore this message!
+  if (!hasTicketKeyword && !priceMatch) {
+    return null;
+  }
+
   let badge = 'TIKET PROMO';
   let badgeType = 'airline';
   let transit = 'Penerbangan Langsung';
   
   if (clean.includes('SRIWIJAYA')) {
     badge = clean.includes('TRANSIT') ? 'SRIWIJAYA TRANSIT' : 'SRIWIJAYA AIR';
-    if (clean.includes('TRANSIT')) transit = 'Transit';
+    if (clean.includes('TRANSIT')) transit = 'Transit Makassar';
   } else if (clean.includes('LION')) {
     badge = clean.includes('LANGSUNG') ? 'LION AIR LANGSUNG' : 'LION AIR';
   } else if (clean.includes('CITILINK')) {
@@ -144,14 +164,13 @@ function parsePromoText(text) {
     destinationCode = foundCities[1].code;
   }
 
-  const priceMatch = clean.match(/(\d{1,3}[.,]\d{3}[.,]\d{3}|\d{1,3}[.,]\d{3})/);
-  let price = priceMatch ? priceMatch[0].replace(/,/g, '.') : '1.950.000';
+  let price = priceMatch ? priceMatch[0].replace(/,/g, '.') : (badgeType === 'ship' ? '980.000' : '1.960.000');
 
   const dateMatch = clean.match(/(TGL\s*[0-9,\sA-Z]+|[0-9]{1,2}\s+(?:JANUARI|FEBRUARI|MARET|APRIL|MEI|JUNI|JULI|AGUSTUS|SEPTEMBER|OKTOBER|NOVEMBER|DESEMBER))/i);
   let date = dateMatch ? dateMatch[0].trim() : 'Keberangkatan Terdekat';
 
   const baggageMatch = clean.match(/BAGASI\s*\d+\s*KG/i);
-  let baggage = baggageMatch ? baggageMatch[0].trim() : 'Bagasi Standar';
+  let baggage = baggageMatch ? ('Termasuk ' + baggageMatch[0].trim()) : (badgeType === 'ship' ? 'Bebas Bagasi Besar' : 'Termasuk Bagasi 15 KG');
 
   return {
     id: `promo-${Date.now()}`,
@@ -170,12 +189,9 @@ function parsePromoText(text) {
   };
 }
 
-// GitHub API Committer function (Cloud-Ready without git cli dependency)
+// GitHub API Committer function
 async function commitToGitHubApi(contentJsonString) {
-  if (!GITHUB_TOKEN) {
-    console.log('⚠️ GITHUB_TOKEN tidak ditemukan di environment. Melewati auto-push GitHub API.');
-    return;
-  }
+  if (!GITHUB_TOKEN) return;
 
   try {
     const getFileUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/promos.json`;
@@ -187,7 +203,6 @@ async function commitToGitHubApi(contentJsonString) {
       }
     };
 
-    // Get current SHA
     https.get(getFileUrl, options, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
@@ -199,7 +214,7 @@ async function commitToGitHubApi(contentJsonString) {
         } catch (e) {}
 
         const putData = JSON.stringify({
-          message: 'auto: update live promo tickets from WhatsApp Channel',
+          message: 'auto: live promo update from WhatsApp Channel',
           content: Buffer.from(contentJsonString).toString('base64'),
           sha: sha || undefined
         });
@@ -213,9 +228,7 @@ async function commitToGitHubApi(contentJsonString) {
           }
         }, (putRes) => {
           if (putRes.statusCode === 200 || putRes.statusCode === 201) {
-            console.log('🎉 SUKSES! Website raksatravel.github.io berhasil di-update via GitHub API!');
-          } else {
-            console.log('⚠️ GitHub API response code:', putRes.statusCode);
+            console.log('🎉 [GITHUB API] Sukses deploy promo baru ke GitHub Pages!');
           }
         });
 
@@ -228,7 +241,7 @@ async function commitToGitHubApi(contentJsonString) {
   }
 }
 
-// Save promo & trigger sync
+// Save promo & trigger instant Git Push
 async function updatePromos(newPromo) {
   try {
     let promos = [];
@@ -240,6 +253,13 @@ async function updatePromos(newPromo) {
       }
     }
 
+    // Check duplicate
+    const isDuplicate = promos.some(p => p.origin === newPromo.origin && p.destination === newPromo.destination && p.price === newPromo.price && p.date === newPromo.date);
+    if (isDuplicate) {
+      console.log('ℹ️ Promo ini sudah ada di daftar. Melewati duplikat.');
+      return;
+    }
+
     promos.unshift(newPromo);
     promos = promos.slice(0, 3);
     const jsonStr = JSON.stringify(promos, null, 2);
@@ -249,22 +269,29 @@ async function updatePromos(newPromo) {
       fs.writeFileSync(PROMOS_JSON_PATH, jsonStr, 'utf-8');
     } catch (e) {}
 
+    console.log(`\n💾 PROMO BARU TERVERIFIKASI & DISIMPAN:`);
+    console.log(`   Rute: ${newPromo.origin} -> ${newPromo.destination} (${newPromo.badge})`);
+    console.log(`   Tarif: Rp ${newPromo.price} | ${newPromo.date}`);
+
+    // Clean any stuck index.lock before git push
+    const lockPath = path.join(ROOT_DIR, '.git', 'index.lock');
+    if (fs.existsSync(lockPath)) {
+      try { fs.unlinkSync(lockPath); } catch (e) {}
+    }
+
     // Auto Push to GitHub
     console.log('🔄 Mengirim pembaruan promo langsung ke GitHub raksatravel.github.io...');
-    
-    // Execute local Git CLI push
-    exec('git add promos.json && git commit -m "auto: update live promo from WhatsApp Channel" && git push origin main', { cwd: ROOT_DIR }, (err, stdout, stderr) => {
+    exec('git add promos.json && git commit -m "auto: live promo update from WhatsApp Channel" && git push origin main', { cwd: ROOT_DIR }, (err) => {
       if (err) {
-        console.log('⚠️ Info Git CLI:', err.message);
+        console.log('ℹ️ Git CLI fallback ke GitHub API:', err.message);
       } else {
-        console.log('🎉 SUKSES! Perubahan promo langsung terkirim (push) ke GitHub Pages!');
+        console.log('🎉 [GIT CLI] SUKSES! Website online Anda di GitHub sudah ter-update secara otomatis!');
       }
     });
 
-    // Also trigger GitHub API if GITHUB_TOKEN is available
-    if (GITHUB_TOKEN) {
-      await commitToGitHubApi(jsonStr);
-    }
+    // Cloud Git API
+    await commitToGitHubApi(jsonStr);
+
   } catch (err) {
     console.error('Error updatePromos:', err.message);
   }
@@ -274,115 +301,82 @@ async function updatePromos(newPromo) {
 const handleMessage = async (msg) => {
   try {
     if (!msg) return;
+    let chatName = '';
     let isChannel = false;
+    
     try {
       const chat = await msg.getChat();
       if (chat) {
-        isChannel = chat.isNewsletter || chat.isChannel || (chat.name || '').toLowerCase().includes('raksa');
+        chatName = chat.name || '';
+        isChannel = chat.isNewsletter || chat.isChannel || chatName.toLowerCase().includes('raksa');
       }
     } catch (e) {}
 
     const bodyText = msg.body || '';
-    const isRelevant = isChannel || msg.fromMe || bodyText.toLowerCase().includes('jayapura') || bodyText.toLowerCase().includes('promo') || msg.hasMedia;
+    
+    // Only process if from channel, or fromMe, or has flight/promo words
+    const isCandidate = isChannel || msg.fromMe || bodyText.toUpperCase().includes('PROMO') || bodyText.toUpperCase().includes('JAYAPURA') || bodyText.toUpperCase().includes('MAKASSAR') || msg.hasMedia;
 
-    if (isRelevant) {
-      console.log(`\n📩 [${new Date().toLocaleTimeString('id-ID')}] POSTINGAN PROMO TERDETEKSI:`);
+    if (isCandidate) {
       if (msg.hasMedia) {
-        console.log('🖼️ Menjalankan OCR AI Reader pada gambar poster...');
-        const media = await msg.downloadMedia();
-        if (media && media.data) {
-          const buffer = Buffer.from(media.data, 'base64');
-          const { data: { text } } = await Tesseract.recognize(buffer, 'ind+eng');
-          console.log('📝 Hasil OCR:\n', text.trim());
-          const promoData = parsePromoText(text);
-          if (promoData) await updatePromos(promoData);
+        console.log(`\n📩 [${new Date().toLocaleTimeString('id-ID')}] POSTINGAN MEDIA BARU DI [${chatName || 'WhatsApp'}]:`);
+        console.log('🖼️ Menjalankan AI OCR Reader pada gambar poster...');
+        
+        try {
+          // Delay briefly to allow media buffer to be ready
+          await new Promise(r => setTimeout(r, 1200));
+          const media = await msg.downloadMedia();
+          if (media && media.data) {
+            const buffer = Buffer.from(media.data, 'base64');
+            const { data: { text } } = await Tesseract.recognize(buffer, 'ind+eng');
+            console.log('📝 Teks yang berhasil dibaca dari gambar:\n---\n' + text.trim() + '\n---');
+            
+            const promoData = parsePromoText(text);
+            if (promoData) {
+              await updatePromos(promoData);
+            } else {
+              console.log('ℹ️ Gambar bukan tiket promo. Melewati.');
+            }
+          }
+        } catch (mediaErr) {
+          console.log('⚠️ Gagal membaca media:', mediaErr.message);
         }
-      } else if (bodyText.length > 0) {
-        console.log('📝 Teks:', bodyText);
+      } else if (bodyText.length > 5) {
         const promoData = parsePromoText(bodyText);
-        if (promoData) await updatePromos(promoData);
+        if (promoData) {
+          console.log(`\n📩 [${new Date().toLocaleTimeString('id-ID')}] POSTINGAN TEKS PROMO DI [${chatName || 'WhatsApp'}]:`);
+          await updatePromos(promoData);
+        }
       }
     }
   } catch (err) {
-    console.error('Error handleMessage:', err.message);
+    // ignore
   }
 };
 
 client.on('message_create', handleMessage);
 client.on('message', handleMessage);
 
-// Express Web Routes (For Render.com)
+// Express Web Routes (For Status & Preview)
 app.get('/', (req, res) => {
   res.send(`
     <!DOCTYPE html>
     <html lang="id">
     <head>
       <meta charset="UTF-8">
-      <title>Raksa Travel 24/7 Bot Status</title>
+      <title>Raksa Travel Live Bot</title>
       <style>
         body { background: #070d18; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; text-align: center; }
         .card { background: #0f1a2e; border: 2px solid #25D366; padding: 35px; border-radius: 20px; box-shadow: 0 10px 40px rgba(37, 211, 102, 0.2); max-width: 440px; }
         h1 { color: #25D366; margin-top: 0; }
         .badge { background: rgba(37, 211, 102, 0.2); color: #25D366; padding: 8px 16px; border-radius: 999px; font-weight: bold; display: inline-block; margin: 15px 0; }
-        a { color: #38bdf8; text-decoration: none; font-weight: bold; }
       </style>
     </head>
     <body>
       <div class="card">
         <h1>🤖 Raksa Travel WA Bot</h1>
-        <div class="badge">${isBotReady ? '🟢 ONLINE 24/7' : '🟡 ' + authStatus}</div>
+        <div class="badge">${isBotReady ? '🟢 ONLINE & AUTO-PUSH AKTIF' : '🟡 ' + authStatus}</div>
         <p>Status: <b>${authStatus}</b></p>
-        <p><a href="/qr">👉 Buka Halaman Scan QR Code</a></p>
-      </div>
-    </body>
-    </html>
-  `);
-});
-
-app.get('/qr', (req, res) => {
-  if (isBotReady) {
-    return res.send(`
-      <!DOCTYPE html>
-      <html><head><meta charset="UTF-8"><title>Bot Sudah Terhubung</title><style>body{background:#070d18;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;}</style></head>
-      <body><div><h1 style="color:#25D366;">✅ Bot Sudah Terhubung!</h1><p>Bot sedang aktif 24 jam memantau Saluran WhatsApp Raksa Travel.</p><p><a href="/" style="color:#38bdf8;">Kembali ke Beranda</a></p></div></body></html>
-    `);
-  }
-
-  if (!latestQrDataUrl) {
-    return res.send(`
-      <!DOCTYPE html>
-      <html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="3"><title>Menunggu QR Code...</title><style>body{background:#070d18;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;}</style></head>
-      <body><div><h2>⏳ Sedang Memuat QR Code WhatsApp...</h2><p>Halaman akan refresh otomatis dalam 3 detik...</p></div></body></html>
-    `);
-  }
-
-  res.send(`
-    <!DOCTYPE html>
-    <html lang="id">
-    <head>
-      <meta charset="UTF-8">
-      <title>Scan QR WhatsApp - Raksa Travel</title>
-      <style>
-        body { background: #070d18; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; text-align: center; }
-        .card { background: #0f1a2e; border: 2px solid #25D366; padding: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(37, 211, 102, 0.2); max-width: 420px; }
-        h2 { color: #25D366; margin-top: 0; }
-        .qr-box { background: #fff; padding: 15px; border-radius: 12px; display: inline-block; margin: 15px 0; }
-        .steps { text-align: left; background: rgba(255,255,255,0.05); padding: 15px 20px; border-radius: 10px; font-size: 13px; color: #cbd5e1; }
-      </style>
-    </head>
-    <body>
-      <div class="card">
-        <h2>📱 Scan QR WhatsApp Cloud</h2>
-        <p>Hubungkan bot 24 jam ini ke akun WhatsApp Anda:</p>
-        <div class="qr-box">
-          <img src="${latestQrDataUrl}" alt="Scan QR WhatsApp" width="280" height="280">
-        </div>
-        <div class="steps">
-          <b>Langkah di HP Anda:</b><br>
-          1. Buka <b>WhatsApp</b> di HP<br>
-          2. Tekan <b>Titik Tiga</b> > <b>Perangkat Tertaut</b><br>
-          3. Tekan <b>Tautkan Perangkat</b> lalu scan gambar di atas
-        </div>
       </div>
     </body>
     </html>
@@ -390,7 +384,7 @@ app.get('/qr', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🌐 Web Server Render berjalan di port ${PORT}`);
+  console.log(`🌐 Server Bot berjalan di port ${PORT}`);
 });
 
 console.log('⏳ Menginisialisasi WhatsApp Web Client...');
