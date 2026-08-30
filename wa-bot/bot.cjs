@@ -634,90 +634,116 @@ client.on('message_create', async (msg) => {
 // Express Web Routes (For Status & Manual Sync Trigger)
 app.get('/api/debug-channel', async (req, res) => {
   try {
-    if (!isBotReady || !client.pupPage || client.pupPage.isClosed()) {
+    if (!isBotReady) {
       return res.json({ success: false, message: 'Bot / browser belum siap' });
     }
 
-    const debugInfo = await client.pupPage.evaluate(() => {
-      const titles = Array.from(document.querySelectorAll('span[title], div[title]')).map(el => el.getAttribute('title') || el.innerText).filter(Boolean);
-      const imgCount = document.querySelectorAll('img').length;
-      return { titles: titles.slice(0, 30), imgCount };
+    const pages = await client.pupBrowser.pages();
+    const activeWAPage = pages.find(p => p.url().includes('web.whatsapp.com')) || client.pupPage;
+
+    // Direct chats list via WhatsApp Web API internal
+    const chatsData = await activeWAPage.evaluate(async () => {
+      try {
+        const chats = await window.Store.Chat.getModelsArray();
+        return chats.map(c => ({
+          id: c.id._serialized,
+          name: c.name || c.formattedTitle || '',
+          isChannel: c.isNewsletter || false,
+          unreadCount: c.unreadCount || 0
+        })).filter(c => c.name || c.isChannel);
+      } catch (e) {
+        return { error: e.message };
+      }
     });
 
-    res.json({ success: true, debugInfo });
+    res.json({ success: true, chats: chatsData });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 app.get('/api/sync-channel', async (req, res) => {
   try {
     if (!isBotReady) {
       return res.json({ success: false, message: 'Bot belum siap' });
     }
 
-    let pageTarget = client.pupPage;
-    try {
-      const pages = await client.pupBrowser.pages();
-      const activeWAPage = pages.find(p => p.url().includes('web.whatsapp.com'));
-      if (activeWAPage && !activeWAPage.isClosed()) {
-        pageTarget = activeWAPage;
-        client.pupPage = activeWAPage;
-      }
-    } catch (e) {}
+    const pages = await client.pupBrowser.pages();
+    const activeWAPage = pages.find(p => p.url().includes('web.whatsapp.com')) || client.pupPage;
 
-    if (!pageTarget || pageTarget.isClosed()) {
-      return res.json({ success: false, message: 'Halaman browser WhatsApp tidak aktif' });
-    }
+    console.log('\n🔄 [MANUAL SYNC TRIGGERED]: Mengambil pesan terbaru dari Saluran...');
 
-    console.log('\n🔄 [MANUAL SYNC TRIGGERED]: Membuka saluran RAKSA TRAVEL & mengambil poster...');
+    // Extract recent channel messages via internal store
+    const recentMessages = await activeWAPage.evaluate(async () => {
+      try {
+        const chats = await window.Store.Chat.getModelsArray();
+        const channelChat = chats.find(c => (c.name && c.name.toLowerCase().includes('raksa')) || c.isNewsletter);
+        if (!channelChat) return { error: 'Channel chat tidak ditemukan di store' };
 
-    // Extract all images rendered on page
-    const channelImages = await pageTarget.evaluate(() => {
-      const imgs = document.querySelectorAll('img');
-      const results = [];
-      for (const img of Array.from(imgs)) {
-        try {
-          const src = img.src || '';
-          if (src.startsWith('blob:') || src.includes('whatsapp.net') || src.startsWith('data:image')) {
-            const w = img.naturalWidth || img.width || 0;
-            const h = img.naturalHeight || img.height || 0;
-            if (w >= 120 && h >= 120) {
-              const canvas = document.createElement('canvas');
-              canvas.width = w;
-              canvas.height = h;
-              const ctx = canvas.getContext('2d');
-              ctx.drawImage(img, 0, 0);
-              results.push(canvas.toDataURL('image/jpeg', 0.95));
+        const msgs = channelChat.msgs.models || [];
+        const result = [];
+
+        for (const m of msgs.slice(-10)) {
+          const body = m.body || m.caption || '';
+          let mediaBase64 = null;
+          try {
+            if (m.type === 'image' && m.mediaData && m.mediaData.data) {
+              mediaBase64 = m.mediaData.data;
             }
-          }
-        } catch (e) {}
+          } catch (e) {}
+
+          result.push({
+            id: m.id._serialized,
+            type: m.type,
+            body: body,
+            hasMedia: !!mediaBase64,
+            mediaData: mediaBase64
+          });
+        }
+        return result;
+      } catch (e) {
+        return { error: e.message };
       }
-      return results;
     });
 
-    console.log(`🖼️ Total image poster terdeteksi: ${channelImages.length}`);
+    console.log('📬 Pesan channel terdeteksi:', Array.isArray(recentMessages) ? recentMessages.length : recentMessages);
 
     let countUpdated = 0;
     const processedPromos = [];
 
-    for (const imgDataUrl of channelImages.slice(-6).reverse()) {
-      try {
-        const base64Data = imgDataUrl.replace(/^data:image\/[a-z]+;base64,/, '');
-        const promo = await analyzeImageWithAiVision(base64Data);
-        if (promo) {
-          console.log(`✅ AI Vision berhasil ekstrak: ${promo.badge} | ${promo.origin} -> ${promo.destination} | Rp ${promo.price}`);
-          await updatePromos(promo, base64Data);
-          processedPromos.push(promo);
-          countUpdated++;
-          if (countUpdated >= 3) break;
-        }
-      } catch (e) {}
+    if (Array.isArray(recentMessages)) {
+      for (const m of recentMessages.reverse()) {
+        try {
+          let promoData = null;
+          let base64 = m.mediaData;
+
+          if (base64) {
+            promoData = await analyzeImageWithAiVision(base64);
+            if (!promoData) {
+              const buffer = Buffer.from(base64, 'base64');
+              const { data: { text } } = await Tesseract.recognize(buffer, 'ind+eng');
+              promoData = parsePromoText(text);
+            }
+          } else if (m.body && m.body.length > 5) {
+            promoData = parsePromoText(m.body);
+          }
+
+          if (promoData) {
+            console.log(`✅ Promo tervalidasi: ${promoData.badge} | ${promoData.origin} -> ${promoData.destination} | Rp ${promoData.price}`);
+            await updatePromos(promoData, base64);
+            processedPromos.push(promoData);
+            countUpdated++;
+            if (countUpdated >= 3) break;
+          }
+        } catch (e) {}
+      }
     }
 
     res.json({
       success: true,
-      message: `Sync selesai! Berhasil memproses ${countUpdated} promo via AI Vision.`,
-      promos: processedPromos
+      countUpdated,
+      promos: processedPromos,
+      rawDetected: recentMessages
     });
   } catch (err) {
     console.error('Error manual sync:', err);
