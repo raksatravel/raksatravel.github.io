@@ -513,25 +513,36 @@ client.on('ready', async () => {
     try {
       if (!client.pupPage || client.pupPage.isClosed()) return;
 
-      // 1. Check & click newsletter tab in WhatsApp Web to make sure channels are active in view
-      await client.pupPage.evaluate(() => {
+      // Handle re-navigating/re-binding if frame was detached
+      let pageTarget = client.pupPage;
+      try {
+        const pages = await client.pupBrowser.pages();
+        const activeWAPage = pages.find(p => p.url().includes('web.whatsapp.com'));
+        if (activeWAPage && !activeWAPage.isClosed()) {
+          pageTarget = activeWAPage;
+          client.pupPage = activeWAPage;
+        }
+      } catch (e) {}
+
+      // 1. Check & click newsletter/channel tab in WhatsApp Web
+      await pageTarget.evaluate(() => {
         try {
-          const channelElements = document.querySelectorAll('div[data-testid="cell-frame-title"] span[title*="Raksa"], div[title*="Raksa"]');
+          const channelElements = document.querySelectorAll('div[data-testid="cell-frame-title"] span[title*="Raksa"], div[title*="Raksa"], span[title*="RAKSA"]');
           if (channelElements.length > 0) {
-            channelElements[0].closest('div[role="listitem"], div[role="button"]')?.click();
+            channelElements[0].closest('div[role="listitem"], div[role="button"], div[tabindex]')?.click();
           }
         } catch (e) {}
       });
 
       // 2. Extract high-res images from DOM
-      const highResImages = await client.pupPage.evaluate(() => {
+      const highResImages = await pageTarget.evaluate(() => {
         const results = [];
         const imgs = document.querySelectorAll('img[src^="blob:"], img[src*="whatsapp.net"], img[src^="data:image"]');
         for (const img of Array.from(imgs)) {
           try {
             const w = img.naturalWidth || img.width || 0;
             const h = img.naturalHeight || img.height || 0;
-            if (w >= 180 && h >= 180) {
+            if (w >= 140 && h >= 140) {
               const canvas = document.createElement('canvas');
               canvas.width = w;
               canvas.height = h;
@@ -640,14 +651,28 @@ app.get('/api/debug-channel', async (req, res) => {
 });
 app.get('/api/sync-channel', async (req, res) => {
   try {
-    if (!isBotReady || !client.pupPage || client.pupPage.isClosed()) {
-      return res.json({ success: false, message: 'Bot belum siap atau browser tidak aktif' });
+    if (!isBotReady) {
+      return res.json({ success: false, message: 'Bot belum siap' });
+    }
+
+    let pageTarget = client.pupPage;
+    try {
+      const pages = await client.pupBrowser.pages();
+      const activeWAPage = pages.find(p => p.url().includes('web.whatsapp.com'));
+      if (activeWAPage && !activeWAPage.isClosed()) {
+        pageTarget = activeWAPage;
+        client.pupPage = activeWAPage;
+      }
+    } catch (e) {}
+
+    if (!pageTarget || pageTarget.isClosed()) {
+      return res.json({ success: false, message: 'Halaman browser WhatsApp tidak aktif' });
     }
 
     console.log('\n🔄 [MANUAL SYNC TRIGGERED]: Membuka saluran RAKSA TRAVEL & mengambil poster...');
 
     // Extract all images rendered on page
-    const channelImages = await client.pupPage.evaluate(() => {
+    const channelImages = await pageTarget.evaluate(() => {
       const imgs = document.querySelectorAll('img');
       const results = [];
       for (const img of Array.from(imgs)) {
