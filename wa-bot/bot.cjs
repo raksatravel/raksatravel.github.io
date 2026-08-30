@@ -477,11 +477,11 @@ async function updatePromos(newPromo, imageBase64) {
       try { fs.unlinkSync(lockPath); } catch (e) {}
     }
 
-    // Auto Push to GitHub
+    // Auto Push to GitHub (Both promos.json and promo-posters.json + images)
     console.log('🔄 Mengirim pembaruan promo langsung ke GitHub raksatravel.github.io...');
-    exec('git add promos.json && git commit -m "auto: live promo update from WhatsApp Channel" && git push origin main', { cwd: ROOT_DIR }, (err) => {
+    exec('git add promos.json promo-posters.json images/ && git commit -m "auto: live promo & poster update from WhatsApp Channel" && git push origin main', { cwd: ROOT_DIR }, (err) => {
       if (err) {
-        console.log('ℹ️ Git CLI fallback ke GitHub API:', err.message);
+        console.log('ℹ️ Git CLI notice:', err.message);
       } else {
         console.log('🎉 [GIT CLI] SUKSES! Website online Anda di GitHub sudah ter-update secara otomatis!');
       }
