@@ -1,7 +1,7 @@
 [
   {
-    "id": "promo-1787983571724",
-    "badge": "TIKET PROMO",
+    "id": "promo-lion-direct-sept",
+    "badge": "LION LANGSUNG",
     "badgeType": "airline",
     "airlineLogo": "plane",
     "origin": "Jayapura",
@@ -9,25 +9,10 @@
     "destination": "Makassar",
     "destinationCode": "UPG",
     "transit": "Penerbangan Langsung",
-    "price": "1.960.000",
-    "date": "Keberangkatan Terdekat",
+    "price": "2.090.000",
+    "date": "Tgl 1, 3, 5, 10, 12 September",
     "baggage": "Termasuk Bagasi 10 KG",
-    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20TIKET%20PROMO%20Jayapura%20-%20Makassar%20Rp%201.960.000%20(Keberangkatan%20Terdekat)"
-  },
-  {
-    "id": "promo-1787983344590",
-    "badge": "TIKET PROMO",
-    "badgeType": "airline",
-    "airlineLogo": "plane",
-    "origin": "Jayapura",
-    "originCode": "DJJ",
-    "destination": "Makassar",
-    "destinationCode": "UPG",
-    "transit": "Penerbangan Langsung",
-    "price": "6.000",
-    "date": "Keberangkatan Terdekat",
-    "baggage": "Termasuk Bagasi 10 KG",
-    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20TIKET%20PROMO%20Jayapura%20-%20Makassar%20Rp%206.000%20(Keberangkatan%20Terdekat)"
+    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20pesan%20tiket%20promo%20Lion%20Langsung%20Jayapura%20-%20Makassar%20Rp%202.090.000%20(Tgl%201%2C3%2C5%2C10%2C12%20September)"
   },
   {
     "id": "promo-sriwijaya-2970",
@@ -43,5 +28,20 @@
     "date": "Tgl 2 September",
     "baggage": "Termasuk Bagasi 15 KG",
     "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Sriwijaya%20Transit%20Makassar%20-%20Jayapura%20Rp%202.970.000%20(Tgl%202%20September)"
+  },
+  {
+    "id": "promo-1787983571724",
+    "badge": "CITILINK PROMO",
+    "badgeType": "airline",
+    "airlineLogo": "plane",
+    "origin": "Jayapura",
+    "originCode": "DJJ",
+    "destination": "Makassar",
+    "destinationCode": "UPG",
+    "transit": "Penerbangan Langsung",
+    "price": "1.960.000",
+    "date": "Keberangkatan Terdekat",
+    "baggage": "Termasuk Bagasi 10 KG",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20Citilink%20Jayapura%20-%20Makassar%20Rp%201.960.000%20(Keberangkatan%20Terdekat)"
   }
 ]
