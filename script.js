@@ -515,28 +515,129 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
 
-  // 3. Quick Booking Widget Handlers (Hero & Cek-Tiket)
-  const heroFastForm = document.getElementById('heroFastForm');
-  if (heroFastForm) {
-    // Set default tomorrow date
-    const dateInput = document.getElementById('heroTravelDate');
-    if (dateInput && !dateInput.value) {
-      const tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      dateInput.value = tomorrow.toISOString().split('T')[0];
+  // 3. 3D Interactive Hologram Logo Physics Engine (Hero Section - Lightweight & Android/Battery-Friendly)
+  const hero3DStage = document.getElementById('hero3DStage');
+  const hero3DCard = document.getElementById('hero3DCard');
+  const heroLogoShine = document.getElementById('heroLogoShine');
+
+  if (hero3DStage && hero3DCard) {
+    let currentX = 0, currentY = 0;
+    let targetX = 0, targetY = 0;
+    let currentZ = 0, targetZ = 0;
+    let isHovered = false;
+    let idleAngle = 0;
+    let isStageInView = true;
+    let animationFrameId = null;
+
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 768);
+
+    // Viewport Liveness Observer (Zero CPU & Battery consumption on Android/Mobile when scrolled away)
+    if ('IntersectionObserver' in window) {
+      const stageObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            isStageInView = entry.isIntersecting;
+            hero3DCard.style.animationPlayState = isStageInView ? 'running' : 'paused';
+            if (isStageInView && !animationFrameId && !isTouchDevice) {
+              animate3D();
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      stageObserver.observe(hero3DStage);
     }
 
-    heroFastForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const type = document.getElementById('heroTransportType')?.value || 'Pesawat Terbang';
-      const from = document.getElementById('heroFromCity')?.value.trim() || 'Jayapura';
-      const to = document.getElementById('heroToCity')?.value.trim() || 'Makassar';
-      const date = document.getElementById('heroTravelDate')?.value || '';
-      const pax = document.getElementById('heroPassengers')?.value || '1';
+    const handlePointerMove = (clientX, clientY) => {
+      const rect = hero3DStage.getBoundingClientRect();
+      const x = clientX - (rect.left + rect.width / 2);
+      const y = clientY - (rect.top + rect.height / 2);
+      targetX = Math.max(Math.min((y / (rect.height / 2)) * -16, 16), -16);
+      targetY = Math.max(Math.min((x / (rect.width / 2)) * 16, 16), -16);
+      targetZ = 20;
 
-      const waMsg = `Halo RaksaTravel, saya ingin cek jadwal & pesan tiket:\n- Transport: ${type}\n- Dari: ${from}\n- Tujuan: ${to}\n- Tanggal: ${date}\n- Penumpang: ${pax} Orang\n\nMohon info jadwal dan harga terbaiknya. Terima kasih!`;
-      window.open(`https://wa.me/6282153043601?text=${encodeURIComponent(waMsg)}`, '_blank');
-    });
+      if (heroLogoShine) {
+        const shineX = 50 + (x / (rect.width / 2)) * 35;
+        const shineY = 50 + (y / (rect.height / 2)) * 35;
+        heroLogoShine.style.background = `radial-gradient(circle at ${shineX.toFixed(1)}% ${shineY.toFixed(1)}%, rgba(255, 255, 255, 0.6) 0%, transparent 65%)`;
+      }
+    };
+
+    if (!isTouchDevice) {
+      const heroSection = document.querySelector('.hero');
+      if (heroSection) {
+        heroSection.addEventListener('mousemove', (e) => {
+          const rect = hero3DStage.getBoundingClientRect();
+          if (
+            e.clientX >= rect.left - 150 &&
+            e.clientX <= rect.right + 150 &&
+            e.clientY >= rect.top - 150 &&
+            e.clientY <= rect.bottom + 150
+          ) {
+            isHovered = true;
+            handlePointerMove(e.clientX, e.clientY);
+          } else {
+            isHovered = false;
+            targetZ = 0;
+          }
+        }, { passive: true });
+
+        heroSection.addEventListener('mouseleave', () => {
+          isHovered = false;
+          targetZ = 0;
+        });
+      }
+
+      hero3DStage.addEventListener('mousedown', () => { targetZ = -10; });
+      window.addEventListener('mouseup', () => { if (isHovered) targetZ = 20; });
+
+      // High performance smooth spring render loop on desktop
+      const animate3D = () => {
+        if (!isStageInView) {
+          animationFrameId = null;
+          return;
+        }
+
+        if (isHovered) {
+          currentX += (targetX - currentX) * 0.1;
+          currentY += (targetY - currentY) * 0.1;
+          currentZ += (targetZ - currentZ) * 0.1;
+        } else {
+          idleAngle += 0.02;
+          const idleTiltX = Math.sin(idleAngle) * 4.5;
+          const idleTiltY = Math.cos(idleAngle * 0.7) * 6;
+          currentX += (idleTiltX - currentX) * 0.04;
+          currentY += (idleTiltY - currentY) * 0.04;
+          currentZ += (0 - currentZ) * 0.05;
+        }
+
+        hero3DCard.style.transform = `rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg) translateZ(${currentZ.toFixed(1)}px)`;
+        animationFrameId = requestAnimationFrame(animate3D);
+      };
+
+      animate3D();
+    } else {
+      // Fluid mobile / Android touch 3D gesture
+      hero3DStage.addEventListener('touchstart', (e) => {
+        if (e.touches.length > 0) {
+          hero3DCard.style.animationPlayState = 'paused';
+          handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+          hero3DCard.style.transform = `rotateX(${targetX.toFixed(2)}deg) rotateY(${targetY.toFixed(2)}deg) translateZ(8px)`;
+        }
+      }, { passive: true });
+
+      hero3DStage.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+          handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+          hero3DCard.style.transform = `rotateX(${targetX.toFixed(2)}deg) rotateY(${targetY.toFixed(2)}deg) translateZ(8px)`;
+        }
+      }, { passive: true });
+
+      hero3DStage.addEventListener('touchend', () => {
+        hero3DCard.style.transform = '';
+        hero3DCard.style.animationPlayState = isStageInView ? 'running' : 'paused';
+      }, { passive: true });
+    }
   }
 
   // 4. Mobile Menu Navigation
