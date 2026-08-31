@@ -515,136 +515,28 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
 
-  // Smooth Card Interactive Tilt Effect & 21st.dev Specular Light Tracker
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    // 1. Bento & High-End Cards (Specular light calculation + 3D Spring tilt)
-    const interactiveCards = document.querySelectorAll('.bento-card, .dest-card, .dest-showcase-card, .service-card, .card, .promo-poster-card');
-    interactiveCards.forEach((card) => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        // Update CSS Variables for Specular Border and Glare
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -6;
-        const rotateY = ((x - centerX) / centerX) * 6;
-        card.style.transform = `perspective(1000px) translateY(-6px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
-  }
-
-  // 3D Interactive Hologram Logo Physics Engine (Hero Section - Lightweight & Battery-Friendly)
-  const hero3DStage = document.getElementById('hero3DStage');
-  const hero3DCard = document.getElementById('hero3DCard');
-  const heroLogoShine = document.getElementById('heroLogoShine');
-
-  if (hero3DStage && hero3DCard) {
-    let currentX = 0, currentY = 0;
-    let targetX = 0, targetY = 0;
-    let currentZ = 0, targetZ = 0;
-    let isHovered = false;
-    let idleAngle = 0;
-    let isStageInView = true;
-    let animationFrameId = null;
-
-    // Viewport Liveness Observer (Zero CPU & Battery consumption when scrolled away)
-    if ('IntersectionObserver' in window) {
-      const stageObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            isStageInView = entry.isIntersecting;
-            hero3DCard.style.animationPlayState = isStageInView ? 'running' : 'paused';
-            if (isStageInView && !animationFrameId) {
-              animate3D();
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-      stageObserver.observe(hero3DStage);
+  // 3. Quick Booking Widget Handlers (Hero & Cek-Tiket)
+  const heroFastForm = document.getElementById('heroFastForm');
+  if (heroFastForm) {
+    // Set default tomorrow date
+    const dateInput = document.getElementById('heroTravelDate');
+    if (dateInput && !dateInput.value) {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      dateInput.value = tomorrow.toISOString().split('T')[0];
     }
 
-    const handlePointerMove = (clientX, clientY) => {
-      const rect = hero3DStage.getBoundingClientRect();
-      const x = clientX - (rect.left + rect.width / 2);
-      const y = clientY - (rect.top + rect.height / 2);
-      
-      // Calculate responsive tilt angles with smooth limits
-      targetX = Math.max(Math.min((y / (rect.height / 2)) * -22, 22), -22);
-      targetY = Math.max(Math.min((x / (rect.width / 2)) * 22, 22), -22);
-      targetZ = 30;
+    heroFastForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const type = document.getElementById('heroTransportType')?.value || 'Pesawat Terbang';
+      const from = document.getElementById('heroFromCity')?.value.trim() || 'Jayapura';
+      const to = document.getElementById('heroToCity')?.value.trim() || 'Makassar';
+      const date = document.getElementById('heroTravelDate')?.value || '';
+      const pax = document.getElementById('heroPassengers')?.value || '1';
 
-      if (heroLogoShine) {
-        const shineX = 50 + (x / (rect.width / 2)) * 40;
-        const shineY = 50 + (y / (rect.height / 2)) * 40;
-        heroLogoShine.style.background = `radial-gradient(circle at ${shineX.toFixed(1)}% ${shineY.toFixed(1)}%, rgba(255, 255, 255, 0.7) 0%, transparent 60%)`;
-      }
-    };
-
-    // Track mouse anywhere inside the hero section for a wide, responsive capture zone
-    window.addEventListener('mousemove', (e) => {
-      if (!isStageInView) return;
-      const rect = hero3DStage.getBoundingClientRect();
-      const distance = Math.hypot(e.clientX - (rect.left + rect.width / 2), e.clientY - (rect.top + rect.height / 2));
-      
-      if (distance < 500) {
-        isHovered = true;
-        handlePointerMove(e.clientX, e.clientY);
-      } else {
-        isHovered = false;
-        targetZ = 0;
-      }
-    }, { passive: true });
-
-    hero3DStage.addEventListener('mousedown', () => { targetZ = -15; });
-    window.addEventListener('mouseup', () => { if (isHovered) targetZ = 30; });
-
-    // High performance smooth render loop
-    const animate3D = () => {
-      if (!isStageInView) {
-        animationFrameId = null;
-        return;
-      }
-
-      if (isHovered) {
-        currentX += (targetX - currentX) * 0.12;
-        currentY += (targetY - currentY) * 0.12;
-        currentZ += (targetZ - currentZ) * 0.12;
-      } else {
-        idleAngle += 0.025;
-        const idleTiltX = Math.sin(idleAngle) * 6;
-        const idleTiltY = Math.cos(idleAngle * 0.8) * 8;
-        currentX += (idleTiltX - currentX) * 0.05;
-        currentY += (idleTiltY - currentY) * 0.05;
-        currentZ += (0 - currentZ) * 0.06;
-      }
-
-      hero3DCard.style.transform = `perspective(1000px) rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg) translateZ(${currentZ.toFixed(1)}px)`;
-      animationFrameId = requestAnimationFrame(animate3D);
-    };
-
-    animate3D();
-
-    // Mobile touch support
-    hero3DStage.addEventListener('touchmove', (e) => {
-      if (e.touches.length > 0) {
-        isHovered = true;
-        handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
-      }
-    }, { passive: true });
-
-    hero3DStage.addEventListener('touchend', () => {
-      isHovered = false;
-    }, { passive: true });
+      const waMsg = `Halo RaksaTravel, saya ingin cek jadwal & pesan tiket:\n- Transport: ${type}\n- Dari: ${from}\n- Tujuan: ${to}\n- Tanggal: ${date}\n- Penumpang: ${pax} Orang\n\nMohon info jadwal dan harga terbaiknya. Terima kasih!`;
+      window.open(`https://wa.me/6282153043601?text=${encodeURIComponent(waMsg)}`, '_blank');
+    });
   }
 
   // 4. Mobile Menu Navigation
@@ -940,161 +832,5 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(() => {});
     }
 
-  // ===================================================
-  // 15. PC Motion Cursor & Magnetic Physics Engine (Framer Motion Inspired)
-  // ===================================================
-  const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 992px)').matches;
-  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (isFinePointer && !isReducedMotion) {
-    // Inject Cursor DOM
-    const dot = document.createElement('div');
-    dot.className = 'motion-cursor-dot';
-    const ring = document.createElement('div');
-    ring.className = 'motion-cursor-ring';
-    const glow = document.createElement('div');
-    glow.className = 'motion-cursor-glow';
-
-    document.body.appendChild(glow);
-    document.body.appendChild(ring);
-    document.body.appendChild(dot);
-
-    let mouseX = -200, mouseY = -200;
-    let dotX = -200, dotY = -200;
-    let ringX = -200, ringY = -200;
-    let glowX = -200, glowY = -200;
-    let isVisible = false;
-    let isHovering = false;
-
-    // Smooth Spring Lerp interpolation (mass/damping model)
-    const lerp = (start, end, factor) => start + (end - start) * factor;
-
-    // Motion Loop
-    const renderMotionCursor = () => {
-      // Dot follows immediately with tight spring
-      dotX = lerp(dotX, mouseX, 0.45);
-      dotY = lerp(dotY, mouseY, 0.45);
-      dot.style.transform = `translate3d(${dotX - 4}px, ${dotY - 4}px, 0)`;
-
-      // Ring trails with smooth physics easing
-      ringX = lerp(ringX, mouseX, isHovering ? 0.28 : 0.18);
-      ringY = lerp(ringY, mouseY, isHovering ? 0.28 : 0.18);
-      ring.style.transform = `translate3d(${ringX - 19}px, ${ringY - 19}px, 0)`;
-
-      // Ambient glow follows lazily
-      glowX = lerp(glowX, mouseX, 0.08);
-      glowY = lerp(glowY, mouseY, 0.08);
-      glow.style.transform = `translate3d(${glowX - 160}px, ${glowY - 160}px, 0)`;
-
-      requestAnimationFrame(renderMotionCursor);
-    };
-
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-
-      if (!isVisible) {
-        isVisible = true;
-        dotX = mouseX;
-        dotY = mouseY;
-        ringX = mouseX;
-        ringY = mouseY;
-        glowX = mouseX;
-        glowY = mouseY;
-        glow.style.opacity = '1';
-        dot.classList.remove('motion-cursor-hidden');
-        ring.classList.remove('motion-cursor-hidden');
-      }
-    }, { passive: true });
-
-    document.addEventListener('mouseleave', () => {
-      isVisible = false;
-      glow.style.opacity = '0';
-      dot.classList.add('motion-cursor-hidden');
-      ring.classList.add('motion-cursor-hidden');
-    });
-
-    document.addEventListener('mouseenter', () => {
-      isVisible = true;
-      glow.style.opacity = '1';
-      dot.classList.remove('motion-cursor-hidden');
-      ring.classList.remove('motion-cursor-hidden');
-    });
-
-    // Interactive Hover Elements (Links, Buttons, Cards, Inputs)
-    const interactiveSelector = 'a, button, input, select, textarea, .card, .dest-card, .dest-showcase-card, .service-card, .faq-question, .contact-card, .badge, .hero-search-btn';
-    
-    document.addEventListener('mouseover', (e) => {
-      const target = e.target.closest(interactiveSelector);
-      if (target) {
-        isHovering = true;
-        ring.classList.add('cursor-hover');
-        dot.classList.add('cursor-hover');
-      }
-    });
-
-    document.addEventListener('mouseout', (e) => {
-      const target = e.target.closest(interactiveSelector);
-      if (target) {
-        isHovering = false;
-        ring.classList.remove('cursor-hover');
-        dot.classList.remove('cursor-hover');
-      }
-    });
-
-    // Click micro-motion
-    document.addEventListener('mousedown', () => {
-      ring.classList.add('cursor-active');
-      dot.classList.add('cursor-active');
-    });
-
-    document.addEventListener('mouseup', () => {
-      ring.classList.remove('cursor-active');
-      dot.classList.remove('cursor-active');
-    });
-
-    // Magnetic pull effect on primary buttons
-    const magneticBtns = document.querySelectorAll('.btn, .theme-toggle-btn, .lang-toggle-btn, .nav-logo');
-    magneticBtns.forEach((btn) => {
-      btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const pullX = (e.clientX - centerX) * 0.22;
-        const pullY = (e.clientY - centerY) * 0.22;
-        btn.style.transform = `translate3d(${pullX.toFixed(2)}px, ${pullY.toFixed(2)}px, 0)`;
-      });
-
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transform = '';
-      });
-    });
-
-    // Particle ripple burst on click
-    document.addEventListener('click', (e) => {
-      const colors = ['#60A5FA', '#3B82F6', '#F97316', '#38BDF8'];
-      for (let i = 0; i < 5; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'motion-click-particle';
-        particle.style.background = colors[i % colors.length];
-        document.body.appendChild(particle);
-
-        const angle = (Math.PI * 2 * i) / 5;
-        const distance = 24 + Math.random() * 18;
-        const targetX = e.clientX + Math.cos(angle) * distance;
-        const targetY = e.clientY + Math.sin(angle) * distance;
-
-        particle.animate([
-          { transform: `translate3d(${e.clientX}px, ${e.clientY}px, 0) scale(1)`, opacity: 0.9 },
-          { transform: `translate3d(${targetX}px, ${targetY}px, 0) scale(0)`, opacity: 0 }
-        ], {
-          duration: 450,
-          easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
-        }).onfinish = () => particle.remove();
-      }
-    });
-
-    // Start requestAnimationFrame loop
-    renderMotionCursor();
-  }
+  // End of core client logic
 });

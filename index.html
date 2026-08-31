@@ -87,12 +87,7 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-decor">
-      <div class="hero-circle hero-circle-1"></div>
-      <div class="hero-circle hero-circle-2"></div>
-      <div class="hero-circle hero-circle-3"></div>
       <div class="hero-dots"></div>
-      <div class="hero-gradient-orb hero-gradient-orb-1"></div>
-      <div class="hero-gradient-orb hero-gradient-orb-2"></div>
     </div>
 
     <div class="container">
@@ -111,8 +106,8 @@
               class="btn btn-accent btn-lg" target="_blank" rel="noopener">
               <i class="fab fa-whatsapp"></i> <span data-i18n="home_hero_cta_wa">Pesan Tiket via WhatsApp</span>
             </a>
-            <a href="layanan" class="btn btn-outline btn-lg">
-              <span data-i18n="home_hero_cta_services">Lihat Pilihan Layanan</span> <i class="fas fa-arrow-right"></i>
+            <a href="cek-tiket" class="btn btn-outline btn-lg">
+              <span data-i18n="home_hero_cta_services">Cek Tiket Promo</span> <i class="fas fa-arrow-right"></i>
             </a>
           </div>
 
@@ -146,66 +141,62 @@
           </div>
         </div>
 
-        <!-- Right Side 3D Interactive Logo Hologram Model -->
+        <!-- Right Side Hero Card: Fast Ticket Finder Widget (Agency-Grade Practical UX) -->
         <div class="hero-showcase reveal delay-2">
-          <div class="hero-3d-stage" id="hero3DStage">
-            <!-- 3D Orbiting Gyroscope Rings with Glowing Photons -->
-            <div class="hero-3d-orbit-ring orbit-ring-1">
-              <span class="orbit-photon photon-blue"></span>
-            </div>
-            <div class="hero-3d-orbit-ring orbit-ring-2">
-              <span class="orbit-photon photon-amber"></span>
-            </div>
-            <div class="hero-3d-orbit-ring orbit-ring-3">
-              <span class="orbit-photon photon-emerald"></span>
-            </div>
-            <div class="hero-3d-pedestal"></div>
-
-            <!-- Ambient 3D Hologram Sparkles -->
-            <div class="hero-3d-sparkle sparkle-1"><i class="fas fa-sparkles"></i></div>
-            <div class="hero-3d-sparkle sparkle-2"><i class="fas fa-star"></i></div>
-            <div class="hero-3d-sparkle sparkle-3"><i class="fas fa-sparkle"></i></div>
-
-            <div class="hero-3d-card" id="hero3DCard">
-              <div class="hero-showcase-glow"></div>
-              <div class="hero-3d-light-beam"></div>
-
-              <div class="hero-logo-frame">
-                <img src="logo.png" alt="RaksaTravel Logo" class="hero-showcase-logo">
-                <div class="hero-logo-shine" id="heroLogoShine"></div>
+          <div class="hero-booking-card">
+            <div class="hero-card-header">
+              <div class="hero-card-title-group">
+                <span class="hero-card-badge"><i class="fas fa-bolt"></i> FAST BOOKING</span>
+                <h3 class="hero-card-title">Cari Tiket Langsung</h3>
               </div>
-
-              <!-- Floating 3D Airplane Chip -->
-              <div class="hero-floating-chip chip-plane" title="Tiket Pesawat">
-                <i class="fas fa-plane"></i>
-              </div>
-
-              <!-- Floating 3D Ship Chip -->
-              <div class="hero-floating-chip chip-ship" title="Tiket Kapal Laut">
-                <i class="fas fa-ship"></i>
-              </div>
-
-              <!-- Floating 3D Verified Shield Chip -->
-              <div class="hero-floating-chip chip-shield" title="Resmi & Terpercaya">
-                <i class="fas fa-shield-alt"></i>
+              <div class="hero-card-brand-logo">
+                <img src="logo.png" alt="Raksa Travel">
               </div>
             </div>
-          </div>
 
-          <div class="hero-showcase-text">
-            <h2 class="hero-showcase-title">RAKSA TRAVEL</h2>
-            <p class="hero-showcase-subtitle" data-i18n="hero_logo_tag">Pemesanan Tiket Pesawat &amp; Kapal Pelni</p>
+            <form id="heroFastForm" class="hero-fast-form">
+              <div class="fast-form-group">
+                <label><i class="fas fa-ticket-alt"></i> Jenis Tiket</label>
+                <select id="heroTransportType" class="fast-form-select">
+                  <option value="Pesawat Terbang">✈️ Pesawat Terbang (Semua Maskapai)</option>
+                  <option value="Kapal Laut PELNI">🚢 Kapal Laut PELNI / Perintis</option>
+                </select>
+              </div>
+
+              <div class="fast-form-row">
+                <div class="fast-form-group">
+                  <label><i class="fas fa-plane-departure"></i> Dari</label>
+                  <input type="text" id="heroFromCity" class="fast-form-input" placeholder="Jayapura (DJJ)" required>
+                </div>
+                <div class="fast-form-group">
+                  <label><i class="fas fa-plane-arrival"></i> Tujuan</label>
+                  <input type="text" id="heroToCity" class="fast-form-input" placeholder="Makassar (UPG)" required>
+                </div>
+              </div>
+
+              <div class="fast-form-row">
+                <div class="fast-form-group">
+                  <label><i class="far fa-calendar-alt"></i> Tanggal</label>
+                  <input type="date" id="heroTravelDate" class="fast-form-input" required>
+                </div>
+                <div class="fast-form-group">
+                  <label><i class="fas fa-user-friends"></i> Pax</label>
+                  <input type="number" id="heroPassengers" class="fast-form-input" min="1" max="50" value="1" required>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-accent btn-block hero-submit-btn">
+                <i class="fab fa-whatsapp"></i> Cek Jadwal &amp; Harga Resmi
+              </button>
+            </form>
+
+            <div class="hero-card-footer">
+              <span><i class="fas fa-shield-alt"></i> E-Ticket Resmi Maskapai &amp; PELNI</span>
+              <span><i class="fas fa-headset"></i> Respon &lt; 5 Menit</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="wave-divider">
-      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path
-          d="M0,24L48,29.3C96,35,192,45,288,50.7C384,56,480,56,576,45.3C672,35,768,13,864,10.7C960,8,1056,24,1152,32C1248,40,1344,40,1392,40L1440,40L1440,80L1392,80C1344,80,1248,80,1152,80C1056,80,960,80,864,80C768,80,672,80,576,80C480,80,384,80,288,80C192,80,96,80,48,80L0,80Z">
-        </path>
-      </svg>
     </div>
   </section>
 
@@ -279,11 +270,6 @@
       <div class="bento-grid">
         <!-- Card 1: Official PNR Validation -->
         <div class="bento-card bento-col-4 reveal delay-1">
-          <div class="bento-specular-glare"></div>
-          <div class="bento-live-badge">
-            <span class="bento-pulse-dot"></span>
-            <span>Resmi &amp; Terverifikasi</span>
-          </div>
           <div class="card-icon" style="margin-bottom: 1.25rem;"><i class="fas fa-shield-halved"></i></div>
           <h3 class="card-title" data-i18n="home_why_card1_title">Tiket Resmi Berkode PNR</h3>
           <p class="card-text" data-i18n="home_why_card1_desc">Setiap tiket pesawat dan kapal langsung terdaftar di
@@ -292,11 +278,6 @@
 
         <!-- Card 2: Transparent Cost -->
         <div class="bento-card bento-col-4 reveal delay-2">
-          <div class="bento-specular-glare"></div>
-          <div class="bento-live-badge">
-            <span class="bento-pulse-dot"></span>
-            <span>Tanpa Biaya Tersembunyi</span>
-          </div>
           <div class="card-icon" style="margin-bottom: 1.25rem;"><i class="fas fa-receipt"></i></div>
           <h3 class="card-title" data-i18n="home_why_card2_title">Rincian Biaya Terbuka</h3>
           <p class="card-text" data-i18n="home_why_card2_desc">Harga yang kami sampaikan di awal sudah termasuk pajak
@@ -305,11 +286,6 @@
 
         <!-- Card 3: Real Human Support -->
         <div class="bento-card bento-col-4 reveal delay-3">
-          <div class="bento-specular-glare"></div>
-          <div class="bento-live-badge">
-            <span class="bento-pulse-dot"></span>
-            <span>Respon Cepat WhatsApp</span>
-          </div>
           <div class="card-icon" style="margin-bottom: 1.25rem;"><i class="fab fa-whatsapp"></i></div>
           <h3 class="card-title" data-i18n="home_why_card3_title">Dibantu Staf Berpengalaman</h3>
           <p class="card-text" data-i18n="home_why_card3_desc">Kalau butuh ubah tanggal keberangkatan, salah ketik nama,
@@ -318,11 +294,6 @@
 
         <!-- Card 4: Wide Live Route Stream (70% Split) -->
         <div class="bento-card bento-col-8 reveal delay-1">
-          <div class="bento-specular-glare"></div>
-          <div class="bento-live-badge">
-            <span class="bento-pulse-dot"></span>
-            <span>Live Feed Penerbangan</span>
-          </div>
           <h3 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.5rem;">Koneksi Jadwal &amp; Rute Terbanyak dari Papua</h3>
           <p class="card-text" style="margin-bottom: 1.5rem;">Penerbangan harian Lion Group, Garuda Indonesia, Citilink, Sriwijaya Air, serta Kapal Penumpang PELNI &amp; Perintis.</p>
           
@@ -346,16 +317,16 @@
 
         <!-- Card 5: Fast Direct Booking Action (30% Split) -->
         <div class="bento-card bento-col-4 reveal delay-2" style="display: flex; flex-direction: column; justify-content: space-between;">
-          <div class="bento-specular-glare"></div>
           <div>
-            <div class="bento-live-badge">
-              <span class="bento-pulse-dot"></span>
-              <span>1-Click Konsultasi</span>
-            </div>
             <h3 class="card-title" style="font-size: 1.25rem;">Mau Cek Rute Spesifik?</h3>
             <p class="card-text" style="font-size: 0.9rem;">Ketik kota tujuan &amp; tanggal berangkat, staf kami langsung carikan tiket termurah.</p>
           </div>
           <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20mau%20konsultasi%20rute%20dan%20harga%20tiket" 
+             class="btn btn-primary btn-sm" target="_blank" rel="noopener" style="margin-top: 1.25rem; width: 100%; justify-content: center;">
+            <i class="fab fa-whatsapp"></i> Chat Admin Sekarang
+          </a>
+        </div>
+      </div> 
              class="btn btn-primary btn-sm" target="_blank" rel="noopener" style="margin-top: 1.25rem; width: 100%; justify-content: center;">
             <i class="fab fa-whatsapp"></i> Chat Admin Sekarang
           </a>
@@ -390,10 +361,6 @@
 
   <!-- CTA Section -->
   <section class="cta-section">
-    <div class="hero-decor">
-      <div class="hero-circle hero-circle-2"></div>
-      <div class="hero-circle hero-circle-3"></div>
-    </div>
     <div class="container">
       <div class="reveal">
         <h2 data-i18n="home_cta_title">Sudah Tahu Mau Berangkat Kapan?</h2>
