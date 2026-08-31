@@ -1,7 +1,7 @@
 [
   {
     "id": "poster-batik-sept",
-    "image": "images/promo-opentrip.jpeg",
+    "image": "images/promo-batik.jpeg",
     "badge": "BATIK LANGSUNG",
     "badgeType": "airline",
     "title": "Batik Langsung Jayapura - Makassar",
@@ -13,7 +13,7 @@
   },
   {
     "id": "poster-lion-sept",
-    "image": "images/promo-pesawat.jpeg",
+    "image": "images/promo-lion.jpeg",
     "badge": "LION LANGSUNG",
     "badgeType": "airline",
     "title": "Lion Langsung Jayapura - Makassar",
@@ -25,7 +25,7 @@
   },
   {
     "id": "poster-sriwijaya-sept",
-    "image": "images/promo-kapal.jpeg",
+    "image": "images/promo-sriwijaya.jpeg",
     "badge": "SRIWIJAYA TRANSIT",
     "badgeType": "airline",
     "title": "Sriwijaya Transit Makassar - Jayapura",
