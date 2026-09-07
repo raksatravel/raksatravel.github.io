@@ -1,5 +1,17 @@
 [
   {
+    "id": "poster-1788811275569",
+    "image": "images/promo-1788811275569.jpeg",
+    "badge": "BATIK AIR",
+    "badgeType": "airline",
+    "title": "BATIK AIR Jayapura - Makassar",
+    "desc": "Rp 2.290.000 • TGL 10 SEPETEMBER • Penerbangan Langsung • BAGASI 20 KG",
+    "price": "2.290.000",
+    "date": "TGL 10 SEPETEMBER",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20BATIK%20AIR%20Jayapura%20-%20Makassar%20Rp%202.290.000%20(TGL%2010%20SEPETEMBER)",
+    "addedAt": "2026-09-07T20:01:15.570Z"
+  },
+  {
     "id": "poster-1788811272458",
     "image": "images/promo-1788811272458.jpeg",
     "badge": "LION AIR",
