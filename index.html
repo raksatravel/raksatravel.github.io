@@ -106,8 +106,8 @@
               class="btn btn-accent btn-lg" target="_blank" rel="noopener">
               <i class="fab fa-whatsapp"></i> <span data-i18n="home_hero_cta_wa">Pesan Tiket via WhatsApp</span>
             </a>
-            <a href="cek-tiket" class="btn btn-outline btn-lg">
-              <span data-i18n="home_hero_cta_services">Cek Tiket Promo</span> <i class="fas fa-arrow-right"></i>
+            <a href="#promoSection" class="btn btn-outline btn-lg">
+              <span data-i18n="home_hero_cta_services">Cek Tiket Promo</span> <i class="fas fa-arrow-down"></i>
             </a>
           </div>
 
@@ -190,6 +190,89 @@
           <div class="hero-showcase-text">
             <h2 class="hero-showcase-title">RAKSA TRAVEL</h2>
             <p class="hero-showcase-subtitle" data-i18n="hero_logo_tag">Pemesanan Tiket Pesawat &amp; Kapal Pelni</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       LIVE PROMO FROM WHATSAPP CHANNEL (Realtime Auto-Updated)
+       =================================================== -->
+  <section class="promo-section" id="promoSection" style="padding-top: 3.5rem; padding-bottom: 2rem;">
+    <div class="container">
+      <!-- WhatsApp Channel Invite Banner -->
+      <div class="promo-channel-banner reveal">
+        <div class="promo-channel-info">
+          <div class="promo-channel-avatar">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <div class="promo-channel-text">
+            <h3><span class="promo-live-dot"></span> Saluran WhatsApp Resmi Raksa Travel</h3>
+            <p>Update tiket promo penerbangan &amp; kapal laut terbit setiap hari. Kuota kursi terbatas!</p>
+          </div>
+        </div>
+        <a href="https://whatsapp.com/channel/0029VbCYmHQ9WtBxoi1pjH0f" class="btn-channel-follow" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i> Gabung Saluran WA <i class="fas fa-arrow-up-right-from-square" style="font-size: 0.8rem;"></i>
+        </a>
+      </div>
+
+      <div class="section-header reveal" style="text-align: left; margin-bottom: 1.75rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span class="section-label" style="background: rgba(249, 115, 22, 0.15); color: #F97316; border-color: rgba(249, 115, 22, 0.3);">
+              <i class="fas fa-fire"></i> UPDATE PROMO LANGSUNG DARI SALURAN WA
+            </span>
+            <h2 class="section-title" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Tiket Promo Hari Ini</h2>
+            <p class="section-desc" style="margin-left: 0;">Dipindai otomatis &amp; langsung sinkron dari Saluran WhatsApp kami. Klik untuk langsung pesan ke admin:</p>
+          </div>
+          <a href="cek-tiket" class="btn btn-outline btn-sm" style="margin-bottom: 0.5rem;">
+            Lihat Semua Promo <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Poster Promo dari WhatsApp Channel (loaded dynamically) -->
+      <div class="grid grid-3 promo-poster-grid" id="promoPosterGrid">
+        <div class="promo-poster-card visible">
+          <div class="promo-poster-img">
+            <img src="images/promo-1788811283363.jpeg" alt="BATIK AIR Jayapura - Makassar" loading="eager" decoding="async">
+          </div>
+          <div class="promo-poster-body">
+            <span class="promo-poster-tag"><i class="fas fa-plane"></i> BATIK AIR</span>
+            <h3>BATIK AIR Jayapura - Makassar</h3>
+            <p>Rp 2.290.000 • Tgl 8, 10 September • Penerbangan Langsung • Termasuk Bagasi 20 KG</p>
+            <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20BATIK%20AIR%20Jayapura%20-%20Makassar%20Rp%202.290.000%20(Tgl%208%2C%2010%20September)" class="btn btn-accent btn-sm" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp"></i> Pesan Sekarang
+            </a>
+          </div>
+        </div>
+
+        <div class="promo-poster-card visible">
+          <div class="promo-poster-img">
+            <img src="images/promo-1788811282229.jpeg" alt="LION AIR Jayapura - Makassar" loading="eager" decoding="async">
+          </div>
+          <div class="promo-poster-body">
+            <span class="promo-poster-tag"><i class="fas fa-plane"></i> LION AIR</span>
+            <h3>LION AIR Jayapura - Makassar</h3>
+            <p>Rp 2.090.000 • Tgl 8, 10 September • Transit • Termasuk Bagasi 10 KG</p>
+            <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20LION%20AIR%20Jayapura%20-%20Makassar%20Rp%202.090.000%20(Tgl%208%2C%2010%20September)" class="btn btn-accent btn-sm" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp"></i> Pesan Sekarang
+            </a>
+          </div>
+        </div>
+
+        <div class="promo-poster-card visible">
+          <div class="promo-poster-img">
+            <img src="images/promo-1788811281789.jpeg" alt="LION AIR Makassar - Jayapura" loading="eager" decoding="async">
+          </div>
+          <div class="promo-poster-body">
+            <span class="promo-poster-tag"><i class="fas fa-plane"></i> LION AIR</span>
+            <h3>LION AIR Makassar - Jayapura</h3>
+            <p>Rp 3.305.000 • Tgl 10 s/d 30 September • Penerbangan Langsung • Termasuk Bagasi 10 KG</p>
+            <a href="https://wa.me/6282153043601?text=Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20LION%20AIR%20Makassar%20-%20Jayapura%20Rp%203.305.000%20(Tgl%2010%20s%2Fd%2030%20September)" class="btn btn-accent btn-sm" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp"></i> Pesan Sekarang
+            </a>
           </div>
         </div>
       </div>

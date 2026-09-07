@@ -176,10 +176,19 @@ HANYA KEMBALIKAN JSON VALID TANPA MARKDOWN ATAU PENJELASAN LAIN.`;
       content = jsonRes.choices?.[0]?.message?.content || "";
     }
 
+function formatRupiahPrice(val) {
+  if (!val) return '1.960.000';
+  let str = String(val).replace(/[^0-9]/g, '');
+  if (!str) return '1.960.000';
+  return str.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
     content = content.replace(/```json/g, "").replace(/```/g, "").trim();
     const data = JSON.parse(content);
     
     if (!data.origin || !data.destination || !data.price) return null;
+
+    const formattedPrice = formatRupiahPrice(data.price);
 
     return {
       id: `promo-${Date.now()}`,
@@ -191,10 +200,10 @@ HANYA KEMBALIKAN JSON VALID TANPA MARKDOWN ATAU PENJELASAN LAIN.`;
       destination: data.destination || "Makassar",
       destinationCode: data.destinationCode || "UPG",
       transit: data.transit || "Penerbangan Langsung",
-      price: String(data.price || "1.960.000").replace(/Rp\s*/i, "").trim(),
+      price: formattedPrice,
       date: data.date || "Keberangkatan Terdekat",
       baggage: data.baggage || "Termasuk Bagasi",
-      waText: encodeURIComponent(`Halo RaksaTravel, saya mau ambil tiket promo ${data.badge || ''} ${data.origin || ''} - ${data.destination || ''} Rp ${data.price || ''} (${data.date || ''})`)
+      waText: encodeURIComponent(`Halo RaksaTravel, saya mau ambil tiket promo ${data.badge || ''} ${data.origin || ''} - ${data.destination || ''} Rp ${formattedPrice} (${data.date || ''})`)
     };
   } catch (err) {
     return null;
@@ -487,6 +496,31 @@ async function uploadPosterToGitHub(base64ImageData, promoData) {
   }
 }
 
+let gitPushQueue = Promise.resolve();
+
+function executeGitPush() {
+  gitPushQueue = gitPushQueue.then(() => {
+    return new Promise((resolve) => {
+      const lockPath = path.join(ROOT_DIR, '.git', 'index.lock');
+      if (fs.existsSync(lockPath)) {
+        try { fs.unlinkSync(lockPath); } catch (e) {}
+      }
+      logSync('🔄 Mengirim pembaruan langsung ke GitHub raksatravel.github.io...');
+      exec('git add promos.json promo-posters.json index.html cek-tiket.html images/ && git commit -m "auto: live promo & poster update from WhatsApp Channel" && git push origin main', { cwd: ROOT_DIR }, (err, stdout) => {
+        if (err) {
+          if (!err.message.includes('nothing to commit')) {
+            logSync(`ℹ️ Git CLI: ${err.message.substring(0, 120)}`);
+          }
+        } else {
+          logSync('🚀 [GIT CLI PUSH SUKSES] Website raksatravel.github.io sudah ter-update secara online!');
+        }
+        resolve();
+      });
+    });
+  }).catch(() => {});
+  return gitPushQueue;
+}
+
 // Save promo & trigger Git CLI push
 async function updatePromos(newPromo, imageBase64) {
   try {
@@ -520,21 +554,8 @@ async function updatePromos(newPromo, imageBase64) {
       await uploadPosterToGitHub(imageBase64, newPromo);
     }
 
-    // 2. Clean index.lock if present
-    const lockPath = path.join(ROOT_DIR, '.git', 'index.lock');
-    if (fs.existsSync(lockPath)) {
-      try { fs.unlinkSync(lockPath); } catch (e) {}
-    }
-
-    // 3. Git CLI Auto Push (now both promos.json, promo-posters.json, and images/ are ready on disk)
-    logSync('🔄 Mengirim pembaruan langsung ke GitHub raksatravel.github.io...');
-    exec('git add promos.json promo-posters.json images/ && git commit -m "auto: live promo & poster update from WhatsApp Channel" && git push origin main', { cwd: ROOT_DIR }, (err, stdout) => {
-      if (err) {
-        logSync(`ℹ️ Git CLI: ${err.message.substring(0, 120)}`);
-      } else {
-        logSync('🚀 [GIT CLI PUSH SUKSES] Website raksatravel.github.io sudah ter-update secara online!');
-      }
-    });
+    // 2. Git CLI Auto Push (now both promos.json, promo-posters.json, and images/ are ready on disk)
+    await executeGitPush();
 
     // 4. Cloud Git API backup commit for promos.json
     await commitToGitHubApi(jsonStr);
@@ -578,15 +599,50 @@ async function scanChannelPromos() {
       const mArray = newsletter.msgs ? (newsletter.msgs.getModelsArray ? newsletter.msgs.getModelsArray() : newsletter.msgs.models || []) : [];
       const recent = mArray.slice(-8);
 
-      return {
-        channelName: newsletter.name,
-        messages: recent.map(m => ({
-          id: m.id ? m.id._serialized : null,
+      const messages = [];
+      for (const m of recent) {
+        let imageBase64 = null;
+        if (m.type === 'image') {
+          try {
+            if (m.mediaData && m.mediaData.mediaStage !== 'RESOLVED') {
+              if (typeof m.downloadMedia === 'function') {
+                await m.downloadMedia({ downloadEvenIfExpensive: true, rmrReason: 1 });
+              }
+            }
+
+            const mockQpl = { addAnnotations: function() { return this; }, addPoint: function() { return this; } };
+            const dm = window.require('WAWebDownloadManager');
+            if (dm && dm.downloadManager) {
+              const decrypted = await dm.downloadManager.downloadAndMaybeDecrypt({
+                directPath: m.directPath,
+                encFilehash: m.encFilehash,
+                filehash: m.filehash,
+                mediaKey: m.mediaKey,
+                mediaKeyTimestamp: m.mediaKeyTimestamp,
+                type: m.type,
+                signal: new AbortController().signal,
+                downloadQpl: mockQpl
+              });
+              imageBase64 = await window.WWebJS.arrayBufferToBase64Async(decrypted);
+            }
+          } catch (e) {}
+        }
+
+        const msgIdStr = m.id ? (m.id._serialized || (typeof m.id === 'object' ? m.id.id : m.id)) : String(m.t || Date.now());
+
+        messages.push({
+          id: msgIdStr,
           type: m.type,
           caption: m.caption || '',
           body: m.body || '',
+          imageBase64,
           t: m.t
-        }))
+        });
+      }
+
+      return {
+        channelName: newsletter.name || newsletter.formattedTitle,
+        messages
       };
     }, RAKSA_CHANNEL_ID);
 
@@ -598,10 +654,10 @@ async function scanChannelPromos() {
       if (!msg.id || processedMsgIds.has(msg.id)) continue;
       processedMsgIds.add(msg.id);
 
-      logSync(`📬 [SALURAN WA]: Mendeteksi postingan baru (Tipe: ${msg.type})...`);
+      logSync(`📬 [SALURAN WA]: Postingan baru (Tipe: ${msg.type}) ID: ${msg.id}...`);
 
       let promoData = null;
-      let imageBase64 = null;
+      let finalImageBase64 = msg.imageBase64 || null;
 
       // 1. If message has caption
       if (msg.caption && msg.caption.length > 5) {
@@ -613,20 +669,19 @@ async function scanChannelPromos() {
         promoData = parsePromoText(msg.body);
       }
 
-      // 3. If image message, extract image & run Multimodal Vision / OCR
-      if (msg.type === 'image' && msg.body && typeof msg.body === 'string' && msg.body.length > 50) {
-        imageBase64 = msg.body.replace(/^data:image\/[a-z]+;base64,/, '');
-
+      // 3. If image message with downloaded high-res base64
+      if (msg.type === 'image' && finalImageBase64) {
         if (!promoData) {
-          logSync('🤖 Menganalisa gambar poster via Multimodal AI Vision...');
-          promoData = await analyzeImageWithAiVision(imageBase64);
+          logSync('🤖 Menganalisa poster saluran via Multimodal AI Vision...');
+          promoData = await analyzeImageWithAiVision(finalImageBase64);
         }
 
         if (!promoData) {
-          logSync('ℹ️ Menjalankan Tesseract OCR Engine pada gambar poster...');
+          logSync('ℹ️ Menjalankan Tesseract OCR Engine pada gambar poster saluran...');
           try {
-            const buffer = Buffer.from(imageBase64, 'base64');
+            const buffer = Buffer.from(finalImageBase64, 'base64');
             const { data: { text } } = await Tesseract.recognize(buffer, 'ind+eng');
+            logSync(`📄 Hasil OCR poster: ${text ? text.substring(0, 80).replace(/\n/g, ' ') : 'kosong'}`);
             promoData = parsePromoText(text);
           } catch (ocrErr) {
             console.error('OCR Error:', ocrErr.message);
@@ -635,9 +690,10 @@ async function scanChannelPromos() {
       }
 
       if (promoData) {
-        await updatePromos(promoData, imageBase64);
+        logSync(`✅ [PROMO SALURAN TERVERIFIKASI]: ${promoData.badge} | ${promoData.origin} -> ${promoData.destination} (Rp ${promoData.price})`);
+        await updatePromos(promoData, finalImageBase64);
       } else {
-        logSync('ℹ️ Postingan terdeteksi namun tidak mengandung data promo tiket baru.');
+        logSync('ℹ️ Postingan terdeteksi namun bukan promo tiket perjalanan.');
       }
     }
 
@@ -660,40 +716,51 @@ client.on('ready', async () => {
   setInterval(scanChannelPromos, 6000);
 });
 
-// Incoming message listener for direct chats / group messages
+// Incoming message listener for direct chats / group messages / forwarded stories
 client.on('message_create', async (msg) => {
   try {
     if (!msg) return;
 
     if (msg.hasMedia) {
+      logSync(`📥 [MEDIA DITERIMA]: dari ${msg.from || 'unknown'} (tipe: ${msg.type})...`);
       try {
-        logSync('📥 [DIRECT MEDIA DITERIMA]: Mengunduh gambar poster...');
         const media = await msg.downloadMedia();
         if (media && media.data) {
+          logSync('🤖 Menganalisa gambar poster via Multimodal AI Vision...');
           let promoData = await analyzeImageWithAiVision(media.data);
           if (!promoData) {
+            logSync('ℹ️ Mencoba Tesseract OCR Engine...');
             const buffer = Buffer.from(media.data, 'base64');
             const { data: { text } } = await Tesseract.recognize(buffer, 'ind+eng');
+            logSync(`📄 Hasil OCR: ${text ? text.substring(0, 80).replace(/\n/g, ' ') : 'kosong'}`);
             promoData = parsePromoText(text);
           }
 
           if (promoData) {
-            logSync(`✅ [PROMO DIRECT BERHASIL]: ${promoData.badge} | ${promoData.origin} -> ${promoData.destination}`);
+            logSync(`✅ [PROMO MEDIA DITERIMA]: ${promoData.badge} | ${promoData.origin} -> ${promoData.destination}`);
             await updatePromos(promoData, media.data);
+          } else {
+            logSync('ℹ️ Media diterima bukan poster promo tiket.');
           }
+        } else {
+          logSync('⚠️ Media kosong / tidak dapat diunduh');
         }
-      } catch (e) {}
+      } catch (e) {
+        logSync(`❌ Error download/analisa media: ${e.message}`);
+      }
     }
 
     const bodyText = (msg.body || '').trim();
     if (bodyText.length > 5 && !msg.hasMedia) {
       const promoData = parsePromoText(bodyText);
       if (promoData) {
-        logSync(`📩 [TEKS PROMO DIRECT]: ${bodyText}`);
+        logSync(`📩 [TEKS PROMO DITERIMA]: ${bodyText.substring(0, 60)}...`);
         await updatePromos(promoData, null);
       }
     }
-  } catch (e) {}
+  } catch (e) {
+    logSync(`❌ Error message_create: ${e.message}`);
+  }
 });
 
 // Express Web Dashboard & API
@@ -716,6 +783,90 @@ app.get('/api/sync-channel', async (req, res) => {
     res.json({ success: true, message: 'Sinkronisasi berhasil dijalankan!', lastSyncTime });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.get('/api/diagnose', async (req, res) => {
+  try {
+    if (!isBotReady || !client.pupPage) {
+      return res.json({ isBotReady, message: 'Bot not ready or no pupPage' });
+    }
+
+    const diag = await client.pupPage.evaluate(async (channelId) => {
+      const collections = window.require('WAWebCollections');
+      const allNewsletters = collections && collections.WAWebNewsletterCollection && collections.WAWebNewsletterCollection.getModelsArray ? 
+        collections.WAWebNewsletterCollection.getModelsArray().map(n => ({
+          id: n.id ? (n.id._serialized || n.id) : '',
+          name: n.name || n.formattedTitle,
+          msgsCount: n.msgs ? (n.msgs.length || (n.msgs.models ? n.msgs.models.length : 0)) : 0
+        })) : [];
+
+      let targetNewsletter = collections && collections.WAWebNewsletterCollection ? collections.WAWebNewsletterCollection.get(channelId) : null;
+      if (!targetNewsletter && allNewsletters.length > 0) {
+        targetNewsletter = collections.WAWebNewsletterCollection.get(allNewsletters[0].id);
+      }
+
+      let msgsInfo = [];
+      let testDownload = null;
+      if (targetNewsletter && targetNewsletter.msgs) {
+        const mArray = targetNewsletter.msgs.getModelsArray ? targetNewsletter.msgs.getModelsArray() : (targetNewsletter.msgs.models || []);
+        const lastMsg = mArray[mArray.length - 1];
+
+        // Test downloading full media from lastMsg
+        if (lastMsg) {
+          try {
+            if (lastMsg.mediaData && lastMsg.mediaData.mediaStage !== 'RESOLVED') {
+              if (typeof lastMsg.downloadMedia === 'function') {
+                await lastMsg.downloadMedia({ downloadEvenIfExpensive: true, rmrReason: 1 });
+              }
+            }
+
+            const mockQpl = { addAnnotations: function() { return this; }, addPoint: function() { return this; } };
+            const dm = window.require('WAWebDownloadManager');
+            if (dm && dm.downloadManager) {
+              const decrypted = await dm.downloadManager.downloadAndMaybeDecrypt({
+                directPath: lastMsg.directPath,
+                encFilehash: lastMsg.encFilehash,
+                filehash: lastMsg.filehash,
+                mediaKey: lastMsg.mediaKey,
+                mediaKeyTimestamp: lastMsg.mediaKeyTimestamp,
+                type: lastMsg.type,
+                signal: new AbortController().signal,
+                downloadQpl: mockQpl
+              });
+              const b64 = await window.WWebJS.arrayBufferToBase64Async(decrypted);
+              testDownload = {
+                success: true,
+                b64Len: b64.length,
+                preview: b64.substring(0, 30)
+              };
+            }
+          } catch (e) {
+            testDownload = { error: e.message, stack: e.stack };
+          }
+        }
+
+        msgsInfo = mArray.slice(-5).map(m => ({
+          id: m.id ? (m.id._serialized || (typeof m.id === 'object' ? m.id.id : m.id)) : '',
+          type: m.type,
+          caption: m.caption,
+          mediaStage: m.mediaData ? m.mediaData.mediaStage : null,
+          hasDirectPath: m.mediaData ? !!m.mediaData.directPath : false,
+          t: m.t
+        }));
+      }
+
+      return {
+        allNewsletters,
+        targetNewsletter: targetNewsletter ? { id: targetNewsletter.id ? (targetNewsletter.id._serialized || targetNewsletter.id) : '', name: targetNewsletter.name } : null,
+        testDownload,
+        msgsInfo
+      };
+    }, RAKSA_CHANNEL_ID);
+
+    res.json(diag);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
