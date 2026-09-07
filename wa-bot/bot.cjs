@@ -205,13 +205,30 @@ HANYA KEMBALIKAN JSON VALID TANPA MARKDOWN ATAU PENJELASAN LAIN.`;
 function parsePromoText(text) {
   if (!text || typeof text !== 'string') return null;
   const clean = text.toUpperCase().replace(/\r/g, '\n');
-  
-  const ticketKeywords = ['SRIWIJAYA', 'LION', 'CITILINK', 'GARUDA', 'BATIK', 'PELNI', 'TIKET', 'FLIGHT', 'PROMO', 'BAGASI', 'TRANSIT', 'LANGSUNG', 'SURABAYA', 'JAYAPURA', 'MAKASSAR', 'JAKARTA', 'TIMIKA', 'BIAK', 'SORONG', 'MERAUKE', 'KAPAL', 'DOBONSOLO', 'SINABUNG', 'LABOBAR', 'CIREMAI', 'GUNUNG DEMPO'];
+
+  // 1. Negative filter: disregard natural disasters, volcanic ash, weather, and general non-ticket news
+  const nonTicketKeywords = ['BMKG', 'GEMPA', 'VULKANIK', 'KRAKATAU', 'ERUPSI', 'BANJIR', 'CUACA', 'TSUNAMI', 'KLUSTER'];
+  if (nonTicketKeywords.some(kw => clean.includes(kw))) {
+    return null;
+  }
+
+  // 2. Must contain at least one airline, passenger ship, or ticketing keyword
+  const ticketKeywords = ['SRIWIJAYA', 'LION', 'CITILINK', 'GARUDA', 'BATIK', 'PELNI', 'TIKET', 'FLIGHT', 'PROMO', 'BAGASI', 'TRANSIT', 'LANGSUNG', 'SURABAYA', 'JAYAPURA', 'MAKASSAR', 'JAKARTA', 'TIMIKA', 'BIAK', 'SORONG', 'MERAUKE', 'KAPAL', 'DOBONSOLO', 'SINABUNG', 'LABOBAR', 'CIREMAI', 'GUNUNG DEMPO', 'KM ', 'SUPER AIR JET', 'WINGS'];
   const hasTicketKeyword = ticketKeywords.some(kw => clean.includes(kw));
 
-  const priceMatch = clean.match(/(\d{1,3}[.,]\d{3}[.,]\d{3}|\d{1,3}[.,]\d{3})/);
-  
-  if (!hasTicketKeyword && !priceMatch) {
+  if (!hasTicketKeyword) {
+    return null;
+  }
+
+  // 3. Price match: ignore if immediately followed by non-currency measurement units
+  const priceMatch = clean.match(/(?:RP\.?\s*)?(\d{1,3}[.,]\d{3}[.,]\d{3}|\d{1,3}[.,]\d{3})(?!\s*(?:KAKI|FT|FEET|METER|M\b|KM\b|ORANG|JIWA|WARGA|HEKTAR|TON))/i);
+  if (!priceMatch) {
+    return null;
+  }
+
+  // Check that numeric price is at least Rp 100.000 (air/ship fare sanity check)
+  const numericPrice = parseInt(priceMatch[1].replace(/[.,]/g, ''), 10);
+  if (isNaN(numericPrice) || numericPrice < 100000) {
     return null;
   }
 
@@ -498,13 +515,18 @@ async function updatePromos(newPromo, imageBase64) {
 
     logSync(`✅ [PROMO BARU TERVERIFIKASI]: ${newPromo.origin} -> ${newPromo.destination} (${newPromo.badge}) | Rp ${newPromo.price} | ${newPromo.date}`);
 
-    // Clean index.lock if present
+    // 1. Save poster image & update gallery locally & on GitHub API if image exists
+    if (imageBase64) {
+      await uploadPosterToGitHub(imageBase64, newPromo);
+    }
+
+    // 2. Clean index.lock if present
     const lockPath = path.join(ROOT_DIR, '.git', 'index.lock');
     if (fs.existsSync(lockPath)) {
       try { fs.unlinkSync(lockPath); } catch (e) {}
     }
 
-    // Git CLI Auto Push
+    // 3. Git CLI Auto Push (now both promos.json, promo-posters.json, and images/ are ready on disk)
     logSync('🔄 Mengirim pembaruan langsung ke GitHub raksatravel.github.io...');
     exec('git add promos.json promo-posters.json images/ && git commit -m "auto: live promo & poster update from WhatsApp Channel" && git push origin main', { cwd: ROOT_DIR }, (err, stdout) => {
       if (err) {
@@ -514,13 +536,8 @@ async function updatePromos(newPromo, imageBase64) {
       }
     });
 
-    // Cloud Git API commit
+    // 4. Cloud Git API backup commit for promos.json
     await commitToGitHubApi(jsonStr);
-
-    // Save poster image & update gallery
-    if (imageBase64) {
-      await uploadPosterToGitHub(imageBase64, newPromo);
-    }
 
   } catch (err) {
     console.error('Error updatePromos:', err.message);

@@ -3880,6 +3880,10 @@ button:active,
   justify-content: center;
   font-size: 1.25rem;
 }
+.bento-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.35rem 0.85rem;
   border-radius: var(--radius-full);
   background: rgba(37, 99, 235, 0.12);
