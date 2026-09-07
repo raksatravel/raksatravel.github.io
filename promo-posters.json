@@ -1,15 +1,39 @@
 [
   {
-    "id": "poster-1788811783332",
-    "image": "images/promo-1788811783332.jpeg",
+    "id": "poster-1788811791092",
+    "image": "images/promo-1788811791092.jpeg",
     "badge": "LION AIR",
     "badgeType": "airline",
     "title": "LION AIR Makassar - Jayapura",
-    "desc": "Rp 3.170.000 • Tgl 18, 19, 20, 28 September • Transit • Termasuk Bagasi 10 KG",
+    "desc": "Rp 3.170.000 • Tgl 18, 23, 24, 27, 28, 30 September • Lion Transit • Termasuk Bagasi 10 KG",
     "price": "3.170.000",
-    "date": "Tgl 18, 19, 20, 28 September",
-    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20LION%20AIR%20Makassar%20-%20Jayapura%20Rp%203.170.000%20(Tgl%2018%2C%2019%2C%2020%2C%2028%20September)",
-    "addedAt": "2026-09-07T20:09:43.333Z"
+    "date": "Tgl 18, 23, 24, 27, 28, 30 September",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20LION%20AIR%20Makassar%20-%20Jayapura%20Rp%203.170.000%20(Tgl%2018%2C%2023%2C%2024%2C%2027%2C%2028%2C%2030%20September)",
+    "addedAt": "2026-09-07T20:09:51.093Z"
+  },
+  {
+    "id": "poster-1788811790721",
+    "image": "images/promo-1788811790721.jpeg",
+    "badge": "SRIWIJAYA AIR",
+    "badgeType": "airline",
+    "title": "SRIWIJAYA AIR Jayapura - Makassar",
+    "desc": "Rp 2.395.000 • Tgl 8,9,10,11,13 September • Penerbangan Langsung • Bagasi 15 Kg",
+    "price": "2.395.000",
+    "date": "Tgl 8,9,10,11,13 September",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20SRIWIJAYA%20AIR%20Jayapura%20-%20Makassar%20Rp%202.395.000%20(Tgl%208%2C9%2C10%2C11%2C13%20September)",
+    "addedAt": "2026-09-07T20:09:50.722Z"
+  },
+  {
+    "id": "poster-1788811788762",
+    "image": "images/promo-1788811788762.jpeg",
+    "badge": "BATIK AIR",
+    "badgeType": "airline",
+    "title": "BATIK AIR Jayapura - Makassar",
+    "desc": "Rp 2.290.000 • Tgl 10 September • Penerbangan Langsung • Termasuk Bagasi 20 KG",
+    "price": "2.290.000",
+    "date": "Tgl 10 September",
+    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20BATIK%20AIR%20Jayapura%20-%20Makassar%20Rp%202.290.000%20(Tgl%2010%20September)",
+    "addedAt": "2026-09-07T20:09:48.763Z"
   },
   {
     "id": "poster-1788811781418",
@@ -22,30 +46,6 @@
     "date": "Tgl 8, 10, 12 September",
     "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20LION%20AIR%20Jayapura%20-%20Makassar%20Rp%202.090.000%20(Tgl%208%2C%2010%2C%2012%20September)",
     "addedAt": "2026-09-07T20:09:41.419Z"
-  },
-  {
-    "id": "poster-1788811580969",
-    "image": "images/promo-1788811580969.jpeg",
-    "badge": "BATIK AIR",
-    "badgeType": "airline",
-    "title": "BATIK AIR Jayapura - Makassar",
-    "desc": "Rp 2.290.000 • Tgl 8, 10 September • Penerbangan Langsung • Termasuk Bagasi 20 KG",
-    "price": "2.290.000",
-    "date": "Tgl 8, 10 September",
-    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20BATIK%20AIR%20Jayapura%20-%20Makassar%20Rp%202.290.000%20(Tgl%208%2C%2010%20September)",
-    "addedAt": "2026-09-07T20:06:20.970Z"
-  },
-  {
-    "id": "poster-1788811573323",
-    "image": "images/promo-1788811573323.jpeg",
-    "badge": "SRIWIJAYA AIR",
-    "badgeType": "airline",
-    "title": "SRIWIJAYA AIR Jayapura - Makassar",
-    "desc": "Rp 2.395.000 • Tgl 8,9,10,11,13 September • Penerbangan Langsung • Bagasi 15 Kg",
-    "price": "2.395.000",
-    "date": "Tgl 8,9,10,11,13 September",
-    "waText": "Halo%20RaksaTravel%2C%20saya%20mau%20ambil%20tiket%20promo%20SRIWIJAYA%20AIR%20Jayapura%20-%20Makassar%20Rp%202.395.000%20(Tgl%208%2C9%2C10%2C11%2C13%20September)",
-    "addedAt": "2026-09-07T20:06:13.324Z"
   },
   {
     "id": "poster-sriwijaya-sept",
