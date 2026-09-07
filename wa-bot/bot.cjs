@@ -110,6 +110,34 @@ client.on('authenticated', () => {
   logSync('🎉 Autentikasi WhatsApp Berhasil!');
 });
 
+client.on('disconnected', (reason) => {
+  logSync(`⚠️ WhatsApp terputus: ${reason}. Watchdog akan me-restart bot dalam 5 detik...`);
+  isBotReady = false;
+  authStatus = `Terputus: ${reason}`;
+  setTimeout(() => {
+    process.exit(1);
+  }, 5000);
+});
+
+client.on('auth_failure', (msg) => {
+  logSync(`❌ Autentikasi WhatsApp gagal: ${msg}. Me-restart bot...`);
+  isBotReady = false;
+  authStatus = `Gagal Autentikasi: ${msg}`;
+  setTimeout(() => {
+    process.exit(1);
+  }, 5000);
+});
+
+process.on('uncaughtException', (err) => {
+  logSync(`⚠️ Uncaught Exception: ${err.message}`);
+  console.error('Uncaught Exception:', err);
+});
+
+process.on('unhandledRejection', (reason) => {
+  const msg = reason ? (reason.message || String(reason)) : 'unknown';
+  logSync(`⚠️ Unhandled Rejection: ${msg.substring(0, 100)}`);
+});
+
 // AI Multimodal Vision via 9Router (Gemini 3.7 Flash)
 async function analyzeImageWithAiVision(base64Data) {
   if (!base64Data || base64Data.length < 50) return null;
